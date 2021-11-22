@@ -1,4 +1,3 @@
-
 <?php
 Class News {
   protected id;
@@ -6,11 +5,11 @@ Class News {
   protected description;
   protected title;
   protected author;
-  protected picture;
+  protected pictures;
 
   require_once("User.php");
 
-  function __construct(int $id, string date, string $description, string $title, User $author, string $picture="") {
+  function __construct(int $id, string date, string $description, string $title, User $author, string $picture=array()) {
     $this->id=$id;
     $this->picture=$picture;
     $this->description=$description;

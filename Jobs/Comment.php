@@ -1,5 +1,5 @@
 <?php
-Class Commentaire {
+Class Comment {
   protected id;
   protected date;
   protected text;
