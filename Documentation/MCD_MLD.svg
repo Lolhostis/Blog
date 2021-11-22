@@ -1,0 +1,188 @@
+<svg height="653" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="699" viewBox="0 0 699 653">
+    <style type="text/css"><![CDATA[
+.st1 {fill:#000000;font-family:Arial;font-size:10pt}
+.st3 {fill:#303030;font-family:Arial;font-size:10pt}
+.st2 {fill:#ffffff}
+.st5 {font-family:MS Shell Dlg 2}
+.st6 {font-weight:bold}
+.st4 {text-decoration:underline}
+]]></style>
+    <defs>
+        <linearGradient x2="0%" y1="0%" y2="100%" id="lg1" x1="0%">
+            <stop offset="0" stop-color="#fafbfd"/>
+            <stop offset="1" stop-color="#e8eff8"/>
+        </linearGradient>
+    </defs>
+    <g transform="translate(-162,-61)">
+        <g transform="translate(162,233.6)" id="table1">
+            <g>
+                <path d="M0,0L223,0L223,28.4L0,28.4L0,0z" fill="#3498db" stroke="#2d85c1"/>
+                <text class="st1">
+                    <tspan x="92.2" class="st2" y="18.2">TNews</tspan>
+                </text>
+            </g>
+            <g>
+                <path d="M0,28.4L223,28.4L223,136.8L0,136.8L0,28.4z" fill="#ffffff" stroke="#2d85c1"/>
+                <text class="st3">
+                    <tspan x="11.4" class="st4" y="46.6">id </tspan>
+                    <tspan x="11.4" y="62.6">title [UNIQUE, NOT NULL]</tspan>
+                    <tspan x="11.4" y="78.6">description [NOT NULL]</tspan>
+                    <tspan x="11.4" y="94.6">date [NOT NULL]</tspan>
+                </text>
+            </g>
+        </g>
+        <g transform="translate(604,274)" id="table2">
+            <g>
+                <path d="M0,0L199,0L199,30.7L0,30.7L0,0z" fill="#3498db" stroke="#2d85c1"/>
+                <text class="st1">
+                    <tspan x="82.6" class="st2" y="19.4">TUser</tspan>
+                </text>
+            </g>
+            <g>
+                <path d="M0,30.7L199,30.7L199,109L0,109L0,30.7z" fill="#ffffff" stroke="#2d85c1"/>
+                <text class="st3">
+                    <tspan x="11.4" class="st4" y="48.9">login</tspan>
+                    <tspan x="11.4" y="64.9">password [NOT NULL]</tspan>
+                    <tspan x="11.4" y="80.9">email [UNIQUE]</tspan>
+                </text>
+            </g>
+        </g>
+        <g transform="translate(402,472.1)" id="table3">
+            <g>
+                <path d="M0,0L155,0L155,30L0,30L0,0z" fill="#3498db" stroke="#2d85c1"/>
+                <text class="st1">
+                    <tspan x="46.6" class="st2" y="19">TComment</tspan>
+                </text>
+            </g>
+            <g>
+                <path d="M0,30L155,30L155,106.4L0,106.4L0,30z" fill="#ffffff" stroke="#2d85c1"/>
+                <text class="st3">
+                    <tspan x="11.4" class="st4" y="48.2">id</tspan>
+                    <tspan x="11.4" y="64.2">date [NOT NULL]</tspan>
+                    <tspan x="11.4" y="80.2">content [NOT NULL]</tspan>
+                </text>
+            </g>
+        </g>
+        <g transform="translate(216.5,487.3)" id="shape4">
+            <path d="M2,40C2,19,27.5,2,59,2C90.5,2,116,19,116,40C116,61,90.5,78,59,78C27.5,78,2,61,2,40z" fill="#000000" fill-opacity="0.08"/>
+            <path d="M0,38C0,17,25.5,0,57,0C88.5,0,114,17,114,38C114,59,88.5,76,57,76C25.5,76,0,59,0,38z" fill="url(#lg1)"/>
+            <path d="M0,38C0,17,25.5,0,57,0C88.5,0,114,17,114,38C114,59,88.5,76,57,76C25.5,76,0,59,0,38zM0,38L114,38" fill="none" stroke="#236ea1"/>
+            <text class="st3">
+                <tspan x="42.4" y="23">Have</tspan>
+            </text>
+        </g>
+        <g transform="matrix(0,1,-1,0,273.5,370.4)" id="shape5">
+            <path d="M0,0L113.9,0" fill="none" stroke="#1e768c"/>
+            <path stroke-linecap="round" stroke-linejoin="round" d="M119.9,0C119.9,1.7,118.6,3,116.9,3C115.2,3,113.9,1.7,113.9,0C113.9,-1.7,115.2,-3,116.9,-3C118.6,-3,119.9,-1.7,119.9,0" stroke-width="1" fill="none" stroke="#1e768c"/>
+            <rect x="51.8" height="16" y="-8" transform="matrix(0,-1,1,0,58.5,58.5)" fill="#fefefe" width="18.8"/>
+            <text class="st3" transform="matrix(0,-1,1,0,58.5,58.5)">
+                <tspan x="51.7" y="4">0,n</tspan>
+            </text>
+        </g>
+        <g transform="translate(330.5,525.3)" id="shape6">
+            <path d="M0,0L68.5,0" fill="none" stroke="#1e768c"/>
+            <path stroke-linecap="round" stroke-linejoin="round" d="M74.5,0C74.5,1.7,73.2,3,71.5,3C69.8,3,68.5,1.7,68.5,0C68.5,-1.7,69.8,-3,71.5,-3C73.2,-3,74.5,-1.7,74.5,0" stroke-width="1" fill="none" stroke="#1e768c"/>
+            <rect x="46" height="16" y="-9.2" fill="#fefefe" width="18.8"/>
+            <text class="st3">
+                <tspan x="45.8" y="2.8">1,1</tspan>
+            </text>
+        </g>
+        <g transform="translate(557,525.3)" id="shape7">
+            <path d="M0,0L89.5,0" fill="none" stroke="#236ea1"/>
+            <rect x="13.3" height="16" y="-8" fill="#ffffff" width="18.8"/>
+            <text class="st3">
+                <tspan x="13.2" y="4">1,1</tspan>
+            </text>
+        </g>
+        <g transform="translate(703.5,487.3)" id="shape8">
+            <path d="M0,0L0,-104.3" fill="none" stroke="#236ea1"/>
+            <rect x="-6.2" height="16" y="-75.3" fill="#ffffff" width="18.8"/>
+            <text class="st3">
+                <tspan x="-6.3" y="-63.3">0,n</tspan>
+            </text>
+        </g>
+        <g transform="translate(443,61)" id="table9">
+            <g>
+                <path d="M0,0L114,0L114,30L0,30L0,0z" fill="#3498db" stroke="#2d85c1"/>
+                <text class="st1">
+                    <tspan x="33" class="st2" y="19">TPicture</tspan>
+                </text>
+            </g>
+            <g>
+                <path d="M0,30L114,30L114,91.2L0,91.2L0,30z" fill="#ffffff" stroke="#2d85c1"/>
+                <text class="st3">
+                    <tspan x="11.4" class="st4" y="48.2">id</tspan>
+                    <tspan x="11.4" y="64.2">uri [NOT NULL]</tspan>
+                    <tspan x="11.4" class="st5" y="81">alt [NOT NULL]</tspan>
+                </text>
+            </g>
+        </g>
+        <g transform="translate(216.5,68.6)" id="shape10">
+            <path d="M2,40C2,19,27.5,2,59,2C90.5,2,116,19,116,40C116,61,90.5,78,59,78C27.5,78,2,61,2,40z" fill="#000000" fill-opacity="0.08"/>
+            <path d="M0,38C0,17,25.5,0,57,0C88.5,0,114,17,114,38C114,59,88.5,76,57,76C25.5,76,0,59,0,38z" fill="url(#lg1)"/>
+            <path d="M0,38C0,17,25.5,0,57,0C88.5,0,114,17,114,38C114,59,88.5,76,57,76C25.5,76,0,59,0,38zM0,38L114,38" fill="none" stroke="#236ea1"/>
+            <text class="st3">
+                <tspan x="36" y="23">Include</tspan>
+            </text>
+        </g>
+        <g transform="translate(273.5,144.6)" id="shape11">
+            <path d="M0,0L0,89" fill="none" stroke="#236ea1"/>
+            <rect x="-6.7" height="16" y="61" fill="#ffffff" width="18.8"/>
+            <text class="st3">
+                <tspan x="-6.8" y="73">1,n</tspan>
+            </text>
+        </g>
+        <g transform="translate(443,106.2)" id="shape12">
+            <path d="M0,0L-61,0L-112.5,.4" fill="none" stroke="#236ea1"/>
+            <rect x="-26.7" height="16" y="-8" fill="#ffffff" width="18.8"/>
+            <text class="st3">
+                <tspan x="-26.8" y="4">0,1</tspan>
+            </text>
+        </g>
+        <g transform="translate(703.5,119.6)" id="shape13">
+            <path d="M0,0L0,154.4" fill="none" stroke="#236ea1"/>
+            <rect x="-6.7" height="16" y="126.4" fill="#ffffff" width="18.8"/>
+            <text class="st3">
+                <tspan x="-6.8" y="138.4">1,1</tspan>
+            </text>
+        </g>
+        <g transform="translate(326,605)" id="shape14">
+            <text class="st3">
+                <tspan x="3.2" class="st6" y="15.2">MLD</tspan>
+                <tspan> </tspan>
+                <tspan x="3.2" y="31.2">TNews(id, title, description, date); </tspan>
+                <tspan x="3.2" y="47.2">TUser(id, login, password, email, id_profile_picture); </tspan>
+                <tspan x="3.2" y="63.2">TPicture(id, uri, alt, id_news, login_user); </tspan>
+                <tspan x="3.2" y="79.2">TComment(id_comment, date, content, id_news, id_user);</tspan>
+            </text>
+        </g>
+        <g transform="translate(646.5,487.3)" id="shape15">
+            <path d="M2,40C2,19,27.5,2,59,2C90.5,2,116,19,116,40C116,61,90.5,78,59,78C27.5,78,2,61,2,40z" fill="#000000" fill-opacity="0.08"/>
+            <path d="M0,38C0,17,25.5,0,57,0C88.5,0,114,17,114,38C114,59,88.5,76,57,76C25.5,76,0,59,0,38z" fill="url(#lg1)"/>
+            <path d="M0,38C0,17,25.5,0,57,0C88.5,0,114,17,114,38C114,59,88.5,76,57,76C25.5,76,0,59,0,38zM0,38L114,38" fill="none" stroke="#236ea1"/>
+            <text class="st3">
+                <tspan x="21.6" y="23">Have posted</tspan>
+            </text>
+        </g>
+        <g transform="translate(690.5,93.6)" id="shape16">
+            <path d="M2,15C2,7.8,7.8,2,15,2C22.2,2,28,7.8,28,15C28,22.2,22.2,28,15,28C7.8,28,2,22.2,2,15z" fill="#000000" fill-opacity="0.08"/>
+            <path d="M0,13C0,5.8,5.8,0,13,0C20.2,0,26,5.8,26,13C26,20.2,20.2,26,13,26C5.8,26,0,20.2,0,13z" fill="url(#lg1)" stroke="#236ea1"/>
+        </g>
+        <g transform="matrix(-1,-0,0,-1,690.5,106.6)" id="shape17">
+            <path d="M0,0L130.5,0" fill="none" stroke="#1e768c"/>
+            <path stroke-linecap="round" stroke-linejoin="round" d="M136.5,0C136.5,1.7,135.2,3,133.5,3C131.8,3,130.5,1.7,130.5,0C130.5,-1.7,131.8,-3,133.5,-3C135.2,-3,136.5,-1.7,136.5,0" stroke-width="1" fill="none" stroke="#1e768c"/>
+            <rect x="92.8" height="16" y="-5.7" transform="matrix(-1,0,-0,-1,199,4.3)" fill="#fefefe" width="18.8"/>
+            <text class="st3" transform="matrix(-1,0,-0,-1,199,4.3)">
+                <tspan x="92.7" y="6.3">0,1</tspan>
+            </text>
+        </g>
+        <g transform="translate(684.5,605)" id="shape18">
+            <path d="M134.5,78L134.5,2L2,2L2,78L134.5,78z" fill="#000000" fill-opacity="0.08"/>
+            <path d="M132.5,76L132.5,0L0,0L0,76L132.5,76z" fill="url(#lg1)" stroke="#236ea1"/>
+            <text class="st3">
+                <tspan x="9.1" y="34">login_user peut être </tspan>
+                <tspan x="45" y="50">à NULL</tspan>
+            </text>
+        </g>
+    </g>
+</svg>
