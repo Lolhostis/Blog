@@ -1,27 +1,39 @@
 <?php
 Class Comment {
-  protected id;
-  protected date;
-  protected text;
-  protected hour;
-  protected author;
+  private id;
+  private text;
+  private date;
+  private hour;
+  private author;
 
   require_once("User.php");
 
-  function __construct(int $id, string $date, string $text, string $hour, User $author) {
+  public function __construct(int $id, string $text, string $date, string $hour, User $author) {
     $this->id=$id;
-    $this->date=$date;
     $this->text=$text;
+    $this->date=$date;
     $this->hour=$hour;
     $this->author=$author;
   }
 
-  function get_id(): int {
+  public function getId():int {
     return $this->id;
   }
-  function get_date(): string => $this->date;
-  function get_text(): string => $this->text;
-  function get_hour(): string => $this->hour;
-  function get_author(): User => $this->author;
+  
+  public function getDate():string {
+    return $this->date;
+  }
+
+  public function getText():string {
+    return $this->text;
+  }
+
+  public function getHour():string {
+    return $this->hour;
+  }
+
+  public function getAuthor():User {
+    return $this->author;
+  }
 }
 ?>
