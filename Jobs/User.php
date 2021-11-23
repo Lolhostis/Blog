@@ -14,20 +14,20 @@ Class User {
     $this->email=$email;
   }
 
-  public function get_pseudo(): string{
+  public function getPseudo(): string{
     return $this->pseudo;
   }
 
-  public function get_password(): string{
+  public function getPassword(): string{
     return $this->password;
   }
-  public function get_isAdmin(): bool{
+  public function getIsAdmin(): bool{
     return $this->isAdmin;
   }
-  public function get_email(): string{
+  public function getEmail(): string{
     return $this->email;
   }
-  public function get_picture(): Picture{
+  public function getPicture(): Picture{
     return $this->picture;
   }
 }

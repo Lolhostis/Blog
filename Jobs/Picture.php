@@ -10,15 +10,15 @@ Class Picture {
     $this->alt=$ALT;
   }
 
-  public function get_id(): int {
+  public function getId(): int {
     return $this->id;
   }
 
-  public function get_uri(): string{
+  public function getUri(): string{
     return $this->uri;
   }
 
-  public function get_alt(): string{
+  public function getAlt(): string{
     return $this->alt;
   }
 }

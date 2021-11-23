@@ -29,26 +29,26 @@ Class News {
 
   }
 
-  public function get_id(): int {
+  public function getId(): int {
     return $this->id;
   }
-  public function get_description(): string{
+  public function getDescription(): string{
     return $this->description;
   }
-  public function get_date(): string{
+  public function getDate(): string{
     return $this->date;
   }
-  public function get_title(): string{
+  public function getTitle(): string{
     return $this->title;
   }
-  public function get_author(): User{
+  public function getAuthor(): User{
     return $this->author;
   }
 
-  public function get_pictures(): Array{
+  public function getPictures(): Array{
     return $this->pictures;
   }
-  public function get_commentList(): Array{
+  public function getCommentList(): Array{
     return $this->commentList;
   }
 }
