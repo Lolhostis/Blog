@@ -1,9 +1,9 @@
 <?php
 Class News {
   protected id;
-  protected date;
-  protected description;
   protected title;
+  protected description;
+  protected date;
   protected author;
   protected pictures;
 
