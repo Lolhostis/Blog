@@ -135,7 +135,7 @@
 											"top": 230,
 											"width": 134.37353515625,
 											"height": 13,
-											"text": "#Id: int {id}",
+											"text": "-Id: int {id}",
 											"horizontalAlignment": 0
 										},
 										{
@@ -152,7 +152,7 @@
 											"top": 245,
 											"width": 134.37353515625,
 											"height": 13,
-											"text": "#/Description: string",
+											"text": "-/Description: string",
 											"horizontalAlignment": 0
 										},
 										{
@@ -169,7 +169,7 @@
 											"top": 260,
 											"width": 134.37353515625,
 											"height": 13,
-											"text": "#/Date: string",
+											"text": "-/Date: string",
 											"horizontalAlignment": 0
 										},
 										{
@@ -186,7 +186,7 @@
 											"top": 275,
 											"width": 134.37353515625,
 											"height": 13,
-											"text": "#/Title: string {unique}",
+											"text": "-/Title: string {unique}",
 											"horizontalAlignment": 0
 										}
 									],
@@ -378,7 +378,7 @@
 											"top": 238,
 											"width": 162.6015625,
 											"height": 13,
-											"text": "#/Pseudo: string {id}",
+											"text": "-/Pseudo: string {id}",
 											"horizontalAlignment": 0
 										},
 										{
@@ -395,7 +395,7 @@
 											"top": 253,
 											"width": 162.6015625,
 											"height": 13,
-											"text": "#/Password: string",
+											"text": "-/Password: string",
 											"horizontalAlignment": 0
 										},
 										{
@@ -412,7 +412,24 @@
 											"top": 268,
 											"width": 162.6015625,
 											"height": 13,
-											"text": "#/Email: string[0..1] {unique}",
+											"text": "-/Email: string[0..1] {unique}",
+											"horizontalAlignment": 0
+										},
+										{
+											"_type": "UMLAttributeView",
+											"_id": "AAAAAAF9TWhva+f2kSE=",
+											"_parent": {
+												"$ref": "AAAAAAF9SU3qfBDdmQg="
+											},
+											"model": {
+												"$ref": "AAAAAAF9TWhvV+fzftM="
+											},
+											"font": "Arial;13;0",
+											"left": 573,
+											"top": 283,
+											"width": 162.6015625,
+											"height": 13,
+											"text": "-/isAdmin: boolean",
 											"horizontalAlignment": 0
 										}
 									],
@@ -420,7 +437,7 @@
 									"left": 568,
 									"top": 233,
 									"width": 172.6015625,
-									"height": 53
+									"height": 68
 								},
 								{
 									"_type": "UMLOperationCompartmentView",
@@ -433,7 +450,7 @@
 									},
 									"font": "Arial;13;0",
 									"left": 568,
-									"top": 286,
+									"top": 301,
 									"width": 172.6015625,
 									"height": 10
 								},
@@ -602,7 +619,7 @@
 											"top": 414,
 											"width": 83.814453125,
 											"height": 13,
-											"text": "#Id: int {id}",
+											"text": "-Id: int {id}",
 											"horizontalAlignment": 0
 										},
 										{
@@ -619,7 +636,7 @@
 											"top": 429,
 											"width": 83.814453125,
 											"height": 13,
-											"text": "#/Text: string",
+											"text": "-/Text: string",
 											"horizontalAlignment": 0
 										},
 										{
@@ -636,7 +653,7 @@
 											"top": 444,
 											"width": 83.814453125,
 											"height": 13,
-											"text": "#/Date: string",
+											"text": "-/Date: string",
 											"horizontalAlignment": 0
 										},
 										{
@@ -653,7 +670,7 @@
 											"top": 459,
 											"width": 83.814453125,
 											"height": 13,
-											"text": "#/Hour: string",
+											"text": "-/Hour: string",
 											"horizontalAlignment": 0
 										}
 									],
@@ -888,7 +905,7 @@
 									"hostEdge": {
 										"$ref": "AAAAAAF9SYqqLBHGU1A="
 									},
-									"text": "#/CommentList"
+									"text": "-/CommentList"
 								},
 								{
 									"_type": "EdgeLabelView",
@@ -920,9 +937,9 @@
 										"$ref": "AAAAAAF9SYqqKxHEs4E="
 									},
 									"font": "Arial;13;0",
-									"left": 375,
+									"left": 374,
 									"top": 355,
-									"width": 5.05908203125,
+									"width": 6.5,
 									"height": 13,
 									"alpha": 0.5235987755982988,
 									"distance": 25,
@@ -1159,7 +1176,7 @@
 									"hostEdge": {
 										"$ref": "AAAAAAF9SYwj6xJ/Pu8="
 									},
-									"text": "#/Author"
+									"text": "-/Author"
 								},
 								{
 									"_type": "EdgeLabelView",
@@ -1429,7 +1446,7 @@
 									"hostEdge": {
 										"$ref": "AAAAAAF9SYyNixMqmg8="
 									},
-									"text": "#/Author"
+									"text": "-/Author"
 								},
 								{
 									"_type": "EdgeLabelView",
@@ -1656,7 +1673,7 @@
 											"top": 110,
 											"width": 303.4052734375,
 											"height": 13,
-											"text": "#Id: int",
+											"text": "-Id: int",
 											"horizontalAlignment": 0
 										},
 										{
@@ -1673,7 +1690,7 @@
 											"top": 125,
 											"width": 303.4052734375,
 											"height": 13,
-											"text": "#/URI: string = \"../Views/Resources/Pictures/img.jpg\"",
+											"text": "-/URI: string = \"../Views/Resources/Pictures/img.jpg\"",
 											"horizontalAlignment": 0
 										},
 										{
@@ -1690,7 +1707,7 @@
 											"top": 140,
 											"width": 303.4052734375,
 											"height": 13,
-											"text": "#/alt: string",
+											"text": "-/alt: string",
 											"horizontalAlignment": 0
 										}
 									],
@@ -1923,7 +1940,7 @@
 									"hostEdge": {
 										"$ref": "AAAAAAF9SZRv1RhS4eg="
 									},
-									"text": "#/Pictures"
+									"text": "-/Pictures"
 								},
 								{
 									"_type": "EdgeLabelView",
@@ -2194,7 +2211,7 @@
 									"hostEdge": {
 										"$ref": "AAAAAAF9SZl3qxoacU0="
 									},
-									"text": "#/Picture"
+									"text": "-/Picture"
 								},
 								{
 									"_type": "EdgeLabelView",
@@ -2377,7 +2394,7 @@
 								"reference": {
 									"$ref": "AAAAAAF9SU4HHRD/s2I="
 								},
-								"visibility": "protected",
+								"visibility": "private",
 								"multiplicity": "*"
 							},
 							"visibility": "protected"
@@ -2409,7 +2426,7 @@
 								"reference": {
 									"$ref": "AAAAAAF9SU3qexDVnhw="
 								},
-								"visibility": "protected"
+								"visibility": "private"
 							}
 						},
 						{
@@ -2439,7 +2456,7 @@
 								"reference": {
 									"$ref": "AAAAAAF9SZH7JBUs3xE="
 								},
-								"visibility": "protected",
+								"visibility": "private",
 								"multiplicity": "1..*"
 							}
 						}
@@ -2452,7 +2469,7 @@
 								"$ref": "AAAAAAF9SU0r4BCrqcI="
 							},
 							"name": "Id",
-							"visibility": "protected",
+							"visibility": "private",
 							"type": "int",
 							"isID": true
 						},
@@ -2463,7 +2480,7 @@
 								"$ref": "AAAAAAF9SU0r4BCrqcI="
 							},
 							"name": "/Description",
-							"visibility": "protected",
+							"visibility": "private",
 							"type": "string"
 						},
 						{
@@ -2473,7 +2490,7 @@
 								"$ref": "AAAAAAF9SU0r4BCrqcI="
 							},
 							"name": "/Date",
-							"visibility": "protected",
+							"visibility": "private",
 							"type": "string"
 						},
 						{
@@ -2483,7 +2500,7 @@
 								"$ref": "AAAAAAF9SU0r4BCrqcI="
 							},
 							"name": "/Title",
-							"visibility": "protected",
+							"visibility": "private",
 							"type": "string",
 							"isUnique": true
 						}
@@ -2524,7 +2541,7 @@
 								"reference": {
 									"$ref": "AAAAAAF9SZH7JBUs3xE="
 								},
-								"visibility": "protected"
+								"visibility": "private"
 							}
 						}
 					],
@@ -2536,7 +2553,7 @@
 								"$ref": "AAAAAAF9SU3qexDVnhw="
 							},
 							"name": "/Pseudo",
-							"visibility": "protected",
+							"visibility": "private",
 							"type": "string",
 							"isID": true
 						},
@@ -2547,7 +2564,7 @@
 								"$ref": "AAAAAAF9SU3qexDVnhw="
 							},
 							"name": "/Password",
-							"visibility": "protected",
+							"visibility": "private",
 							"type": "string"
 						},
 						{
@@ -2557,10 +2574,20 @@
 								"$ref": "AAAAAAF9SU3qexDVnhw="
 							},
 							"name": "/Email",
-							"visibility": "protected",
+							"visibility": "private",
 							"type": "string",
 							"multiplicity": "0..1",
 							"isUnique": true
+						},
+						{
+							"_type": "UMLAttribute",
+							"_id": "AAAAAAF9TWhvV+fzftM=",
+							"_parent": {
+								"$ref": "AAAAAAF9SU3qexDVnhw="
+							},
+							"name": "/isAdmin",
+							"visibility": "private",
+							"type": "boolean"
 						}
 					]
 				},
@@ -2599,7 +2626,7 @@
 								"reference": {
 									"$ref": "AAAAAAF9SU3qexDVnhw="
 								},
-								"visibility": "protected"
+								"visibility": "private"
 							}
 						}
 					],
@@ -2611,7 +2638,7 @@
 								"$ref": "AAAAAAF9SU4HHRD/s2I="
 							},
 							"name": "Id",
-							"visibility": "protected",
+							"visibility": "private",
 							"type": "int",
 							"isID": true
 						},
@@ -2622,7 +2649,7 @@
 								"$ref": "AAAAAAF9SU4HHRD/s2I="
 							},
 							"name": "/Text",
-							"visibility": "protected",
+							"visibility": "private",
 							"type": "string"
 						},
 						{
@@ -2632,7 +2659,7 @@
 								"$ref": "AAAAAAF9SU4HHRD/s2I="
 							},
 							"name": "/Date",
-							"visibility": "protected",
+							"visibility": "private",
 							"type": "string"
 						},
 						{
@@ -2642,7 +2669,7 @@
 								"$ref": "AAAAAAF9SU4HHRD/s2I="
 							},
 							"name": "/Hour",
-							"visibility": "protected",
+							"visibility": "private",
 							"type": "string"
 						}
 					]
@@ -2662,7 +2689,7 @@
 								"$ref": "AAAAAAF9SZH7JBUs3xE="
 							},
 							"name": "Id",
-							"visibility": "protected",
+							"visibility": "private",
 							"type": "int"
 						},
 						{
@@ -2672,7 +2699,7 @@
 								"$ref": "AAAAAAF9SZH7JBUs3xE="
 							},
 							"name": "/URI",
-							"visibility": "protected",
+							"visibility": "private",
 							"type": "string",
 							"defaultValue": "\"../Views/Resources/Pictures/img.jpg\""
 						},
@@ -2683,7 +2710,7 @@
 								"$ref": "AAAAAAF9SZH7JBUs3xE="
 							},
 							"name": "/alt",
-							"visibility": "protected",
+							"visibility": "private",
 							"type": "string"
 						}
 					]
