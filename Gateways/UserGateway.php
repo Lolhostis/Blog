@@ -5,81 +5,43 @@
       $this->con = $con;
     }
 
-    private function existe(string $id) : bool{
-      $query= 'SELECT * FROM Personne WHERE ID = :ID';
+    public function insert(User $newUser, Picture $profile_picture) : Array{
+      $query= 'INSERT INTO tUser VALUES (:Pseudo, :Password, :Email, :Is_admin, :Picture)';
 
-      if($this->con->executeQuery($query, array(':ID' => array($id, PDO::PARAM_STR)) )==true){
-        if($this->con->getResults()==NULL){
-          return false;
-        }
-      }
-      return true;
+      $this->con->executeQuery($query, array(':Pseudo' => array($newUser->getPseudo(), PDO::PARAM_STR) ,
+                                            ':Password' => array($newUser->getPassword(), PDO::PARAM_STR) ,
+                                            ':Email' => array($newUser->getEmail(), PDO::PARAM_STR) ,
+                                            ':Is_admin' => array($newUser->getIsAdmin(), PDO::PARAM_BOOL),
+                                            ':Picture' => array($profile_picture->getId(), PDO::PARAM_INT)
+                                            )
+                              );
+       return $results=$this->con->getResults();
     }
 
-    //méthodes qui font appel à la classe Connection
-    public function insert(string $id, string $nom, string $prenom, string $ddn, string $email) : string{
-      if($this->existe($id)==true){
-        return 'NULL';
-      }
+    public function update(string $login, User $newUser, Picture $profile_picture) : Array{
+      $query= "UPDATE tUser SET login = :Pseudo, password = :Password, email = :Email, is_admin = :Is_admin, id_picture = :Picture  WHERE login = :Login";
 
-      $query= 'INSERT INTO Personne VALUES (:ID, :Nom, :Prenom, :Ddn, :Email)';
-
-      if($this->con->executeQuery($query, array(':ID' => array($id, PDO::PARAM_STR) ,
-                        ':Nom' => array($nom, PDO::PARAM_STR) ,
-                        ':Prenom' => array($prenom, PDO::PARAM_STR) ,
-                        ':Ddn' => array($ddn, PDO::PARAM_STR) ,
-                        ':Email' => array($email, PDO::PARAM_STR))
-                 )==true){
-        return $this->con->lastInsertId();
-      }
-
-      return 'NULL';
+      $this->con->executeQuery($query, array(':Pseudo' => array($newUser->getPseudo(), PDO::PARAM_STR) ,
+                                            ':Password' => array($newUser->getPassword(), PDO::PARAM_STR) ,
+                                            ':Email' => array($newUser->getEmail(), PDO::PARAM_STR) ,
+                                            ':Is_admin' => array($newUser->getIsAdmin(), PDO::PARAM_BOOL),
+                                            ':Picture' => array($profile_picture->getId(), PDO::PARAM_INT),
+                                            ':Login' => array($id, PDO::PARAM_STR)
+                                            )
+                              );
+       return $results=$this->con->getResults();
     }
 
-    public function update(string $id, string $nom, string $prenom, string $ddn, string $email) : string{
-      if($this->existe($id)==false){
-        return 'NULL';
-      }
+    public function delete(string $id) : Array{
+      $query= "DELETE FROM tUser WHERE login = :ID";
 
-      $query= "UPDATE Personne SET Nom = :Nom, Prenom = :Prenom, Ddn = :Ddn, Email = :Email WHERE ID = :ID";
-
-      if($this->con->executeQuery($query, array(':ID' => array($id, PDO::PARAM_STR) ,
-                        ':Nom' => array($nom, PDO::PARAM_STR) ,
-                        ':Prenom' => array($prenom, PDO::PARAM_STR) ,
-                        ':Ddn' => array($ddn, PDO::PARAM_STR) ,
-                        ':Email' => array($email, PDO::PARAM_STR))
-                 )==true){
-        return $this->con->lastInsertId();
-      }
-      return 'NULL';
+      return $this->con->executeQuery($query, array(':ID' => array($id, PDO::PARAM_STR)) );
     }
 
-    public function delete(string $id){
-      if($this->existe($id)==false){
-        return 'NULL';
-      }
-
-      $query= "DELETE FROM Personne WHERE ID = :ID";
-
-      if($this->con->executeQuery($query, array(':ID' => array($id, PDO::PARAM_STR)) )==true){
-        echo "Personne d'id $id supprimée";
-      }
-
-      return $this->con->lastInsertId();
-    }
-
-    public function FindByName(string $nom){
-      //préparation + execution requètes sql
-      $query='SELECT * FROM Personne WHERE Nom=:nom';
-      $this->$con->executeQuery($query, array( ':nom' => array($nom,PDO::PARAM_STR)) );
-      $results=$this->con->getResults();
-      print("<br/>");
-      foreach($results as $row){
-        foreach($row as $col){
-          echo "$col\t";
-        }
-        print("<p></p>"); //Saut de ligne
-      }
+    public function FindByName(string $login) : Array{
+      $query='SELECT * FROM tUser WHERE login=:Login';
+      $this->$con->executeQuery($query, array( ':Login' => array($login,PDO::PARAM_STR)) );
+      return $results=$this->con->getResults();
     }
   }
 
