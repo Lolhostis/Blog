@@ -12,7 +12,7 @@ Class News {
   require_once("Picture.php");
   require_once("Comment.php");
 
-  public function __construct(int $id, string $description, string $date, string $title, User $author, Picture $pictures=array(), Comment $commentList=array()) {
+  public function __construct(int $id, string $description, string $date, string $title, User $author, array $pictures=array(), array $commentList=array()) {
     $this->id=$id;
     $this->description=$description;
     $this->date=$date;
