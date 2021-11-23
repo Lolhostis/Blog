@@ -1,2 +1,2 @@
-# Blog
-Création d'un blog de news informatiques en PHP
+# Description
+Creation of a health/medical news blog in php
