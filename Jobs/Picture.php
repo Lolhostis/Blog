@@ -13,7 +13,13 @@ Class Picture {
   public function get_id(): int {
     return $this->id;
   }
-  public function get_uri(): string => $this->uri;
-  public function get_alt(): string => $this->alt;
+
+  public function get_uri(): string{
+    return $this->uri;
+  }
+
+  public function get_alt(): string{
+    return $this->alt;
+  }
 }
 ?>

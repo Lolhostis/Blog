@@ -1,31 +1,56 @@
 <?php
 Class News {
-  protected id;
-  protected title;
-  protected description;
-  protected date;
-  protected author;
-  protected pictures;
+  private id;
+  private description;
+  private date;
+  private title;
+  private author;
+  private pictures;
+  private commentList;
 
   require_once("User.php");
+  require_once("Picture.php");
+  require_once("Comment.php");
 
-  function __construct(int $id, string date, string $description, string $title, User $author, string $picture=array()) {
+  function __construct(int $id, string $description, string $date, string $title, User $author, Picture $pictures=array(), Comment $commentList=array()) {
     $this->id=$id;
     $this->picture=$picture;
     $this->description=$description;
+    $this->date=$date;
     $this->title=$title;
     $this->author=$author;
-    $this->date=$date;
+
+    foreach ($pictures as $my) {
+      $this->picture.add(my);
+    }
+
+    foreach ($commentList as $my) {
+      $this->commentList.add(my);
+    }
+
   }
 
-  function get_id(): int {
+  public function get_id(): int {
     return $this->id;
   }
-  function get_date(): string => $this->date;
-  function get_picture(): string => $this->picture;
-  function get_description(): string => $this->description;
-  function get_title(): string => $this->title;
-  function get_author(): User => $this->author;
-  function get_date(): string => $this->date;
+  public function get_description(): string{
+    return $this->description;
+  }
+  public function get_date(): string{
+    return $this->date;
+  }
+  public function get_title(): string{
+    return $this->title;
+  }
+  public function get_author(): User{
+    return $this->author;
+  }
+
+  public function get_pictures(): Array{
+    return $this->pictures;
+  }
+  public function get_commentList(): Array{
+    return $this->commentList;
+  }
 }
 ?>
