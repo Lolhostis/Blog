@@ -1,22 +1,22 @@
 <?php
 Class User {
-  protected id;
-  protected pseudo;
-  protected password;
-  protected email;
+  private pseudo;
+  private password;
+  private email;
+  private isAdmin;
 
-  function __construct(int $id, string $pseudo, string $password, string $email="") {
+  public function __construct(int $id, string $pseudo, string $password, string $email="") {
     $this->id=$id;
     $this->pseudo=$pseudo;
     $this->password=$password;
     $this->email=$email;
   }
 
-  function get_id(): int {
+  public function get_id(): int {
     return $this->id;
   }
-  function get_pseudo(): string => $this->pseudo;
-  function get_password(): string => $this->password;
-  function get_email(): string => $this->email;
+  public function get_pseudo(): string => $this->pseudo;
+  public function get_password(): string => $this->password;
+  public function get_email(): string => $this->email;
 }
 ?>
