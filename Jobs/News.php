@@ -12,20 +12,19 @@ Class News {
   require_once("Picture.php");
   require_once("Comment.php");
 
-  function __construct(int $id, string $description, string $date, string $title, User $author, Picture $pictures=array(), Comment $commentList=array()) {
+  public function __construct(int $id, string $description, string $date, string $title, User $author, Picture $pictures=array(), Comment $commentList=array()) {
     $this->id=$id;
-    $this->picture=$picture;
     $this->description=$description;
     $this->date=$date;
     $this->title=$title;
     $this->author=$author;
 
     foreach ($pictures as $my) {
-      $this->picture.add(my);
+      $this->pictures[] = $my;
     }
 
     foreach ($commentList as $my) {
-      $this->commentList.add(my);
+      $this->commentList[] = $my;
     }
 
   }
