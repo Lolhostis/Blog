@@ -1,10 +1,10 @@
 <?php
 Class User {
-  private pseudo;
-  private password;
-  private email;
-  private isAdmin;
-  private picture;
+  private $pseudo;
+  private $password;
+  private $email;
+  private $isAdmin;
+  private $picture;
 
   public function __construct(string $pseudo, string $password, Picture $picture, bool $isAdmin=false, string $email="") {
     $this->pseudo=$pseudo;

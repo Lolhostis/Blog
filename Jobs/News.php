@@ -1,16 +1,16 @@
 <?php
-Class News {
-  private id;
-  private description;
-  private date;
-  private title;
-  private author;
-  private pictures;
-  private commentList;
+require_once("User.php");
+require_once("Picture.php");
+require_once("Comment.php");
 
-  require_once("User.php");
-  require_once("Picture.php");
-  require_once("Comment.php");
+Class News {
+  private $id;
+  private $description;
+  private $date;
+  private $title;
+  private $author;
+  private $pictures;
+  private $commentList;
 
   public function __construct(int $id, string $description, string $date, string $title, User $author, array $pictures=array(), array $commentList=array()) {
     $this->id=$id;

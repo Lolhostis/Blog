@@ -1,12 +1,12 @@
 <?php
-Class Comment {
-  private id;
-  private text;
-  private date;
-  private hour;
-  private author;
+require_once("User.php");
 
-  require_once("User.php");
+Class Comment {
+  private $id;
+  private $text;
+  private $date;
+  private $hour;
+  private $author;
 
   public function __construct(int $id, string $text, string $date, string $hour, User $author) {
     $this->id=$id;
