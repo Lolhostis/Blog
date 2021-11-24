@@ -1,12 +1,9 @@
 <?php
 Class CommentGateway {
     private $con;
-    private $user='root';
-    private $pass='';
-    private $dsn='mysql:host=localhost;dbname=dbsynapse';
 
-    public function __construct() {
-        $this->con=new Connection($this->dsn, $this->user, $this->pass);
+    public function __construct(Connection $con) {
+        $this->con=$con;
     }
 
     public function insert_comment(Comment $c, News $n):bool {
@@ -39,8 +36,8 @@ Class CommentGateway {
 
         $this->con->executeQuery($query, [':id'=>array($id, PDO::PARAM_INT)]);
         $comment=$this->con->getResults();
-        
-        return ( $comment[0] );
+		
+		return $comment;
     }
 
     /*

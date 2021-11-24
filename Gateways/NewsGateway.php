@@ -2,12 +2,9 @@
 <?php
 Class NewsGateway {
     private $con;
-    private $user='root';
-    private $pass='';
-    private $dsn='mysql:host=localhost;dbname=dbsynapse';
 
-    public function __construct() {
-        $this->con=new Connection($this->dsn, $this->user, $this->pass);
+    public function __construct(Connection $con) {
+        $this->con=$con;
     }
 
     public function insert_news(News $n, User $u):bool {
@@ -41,7 +38,7 @@ Class NewsGateway {
         $this->con->executeQuery($query, [':id'=>array($id, PDO::PARAM_INT)]);
         $news=$this->con->getResults();
         
-        return ( $news[0] );
+		return $news;
     }
 
     /*

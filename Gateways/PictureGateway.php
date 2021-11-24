@@ -8,12 +8,11 @@
     public function insert(Picture $newPicture) : Array{
       $query= 'INSERT INTO tPicture VALUES (:Id, :URI, :ALT)';
 
-      $this->con->executeQuery($query, array(':Id' => array($newUser->getId(), PDO::PARAM_INT) ,
+      return $this->con->executeQuery($query, array(':Id' => array($newUser->getId(), PDO::PARAM_INT) ,
                                             ':URI' => array($newUser->getUri(), PDO::PARAM_STR) ,
                                             ':ALT' => array($newUser->getAlt(), PDO::PARAM_STR)
                                             )
                               );
-       return $results=$this->con->getResults();
     }
 
     public function update(int $id, Picture $newPicture) : Array{
@@ -38,6 +37,12 @@
       $query='SELECT * FROM tPicture WHERE uri = :URI';
       $this->$con->executeQuery($query, array( ':URI' => array($uri,PDO::PARAM_STR)) );
       return $results=$this->con->getResults();
+    }
+	
+	public function FindById(int $id) : Array{
+      $query='SELECT * FROM tPicture WHERE id=:id';
+      $this->$con->executeQuery($query, array( ':id' => array($id,PDO::PARAM_INT)) );
+      return $this->con->getResults();
     }
   }
 
