@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le : mar. 23 nov. 2021 à 21:44
+-- Généré le : mer. 24 nov. 2021 à 15:18
 -- Version du serveur :  5.7.31
 -- Version de PHP : 7.3.21
 
@@ -37,7 +37,7 @@ CREATE TABLE IF NOT EXISTS `tcomment` (
   PRIMARY KEY (`id`),
   KEY `id_news` (`id_news`),
   KEY `login_user` (`login_user`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
 

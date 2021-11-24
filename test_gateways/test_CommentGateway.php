@@ -4,8 +4,8 @@
     require_once('../Jobs/News.php');
     require_once('../Jobs/Picture.php');
     require_once('../Jobs/User.php');
-    require_once('../Gateway/CommentGateway.php');
-    require_once('../Config/Connection.php');
+    require_once('../Gateways/CommentGateway.php');
+    require_once('../Config/Connexion.php');
 ?>
 <!DOCTYPE html>
 <html>
@@ -13,7 +13,7 @@
         <title>Testing CommentGateway</title>
     </head>
     <body>
-        <form method="POST" action="index.php">
+        <form method="POST" action="test_CommentGateway.php">
             <p>id : <input type="TEXT" name="id" value=""/></p>
             <p>Date : <input type="TEXT" name="date" value=""/></p>
             <p>Content : <input type="TEXT" name="content" value=""/></p>
@@ -29,10 +29,10 @@
             var_dump($_POST);
             echo "</br>";
             */
-            if( isset($_POST['ref']) ) {
+            if( isset($_POST['id']) ) {
 				$cgw = new CommentGateway();
 				if( $_POST['action']=="Create instance" ) {
-					$p = new Picture(1);
+					$p = new Picture($_POST['id_picture']);
 					$u = new User("panda_masque", "chatonchaton", $p);
 					$c = new Comment($_POST['id'], $_POST['content'], $_POST['date'], "", $u);
 					$n = new News("1", "news de test 1", $_POST['date'], "titre de la news 1", $u);

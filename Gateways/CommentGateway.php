@@ -10,13 +10,13 @@ Class CommentGateway {
     }
 
     public function insert_comment(Comment $c, News $n):bool {
-        $query="INSERT INTO TComment(id, date, content, id_news, id_picture) VALUES(:id, :date, :content, :id_news, :id_picture);";
+        $query="INSERT INTO TComment(id, date, content, id_news, login_user) VALUES(:id, :date, :content, :id_news, :login_user);";
 
         $params[':id']=array($c->getId(), PDO::PARAM_INT);
         $params[':date']=array($c->getDate(), PDO::PARAM_STR);
         $params[':content']=array($c->getText(), PDO::PARAM_STR);
         $params[':id_news']=array($n->getId(), PDO::PARAM_INT);
-        $params[':id_picture']=array($c->getAuthor()->getPseudo(), PDO::PARAM_STR);
+        $params[':login_user']=array($c->getAuthor()->getPseudo(), PDO::PARAM_STR);
 
         return ( $this->con->executeQuery($query, $params) );
     }
