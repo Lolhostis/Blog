@@ -39,6 +39,15 @@ Class CommentGateway {
 		
 		return $comment;
     }
+	
+	public function getHourById(int $id):array {
+		$query="SELECT TO_CHAR(date, 'HH:MI') AS hour FROM TComment WHERE id=:id;";
+
+        $this->con->executeQuery($query, [':id'=>array($id, PDO::PARAM_INT)]);
+        $hour=$this->con->getResults();
+		
+		return $hour;
+	}
 
     /*
     public function show_all_comments() {

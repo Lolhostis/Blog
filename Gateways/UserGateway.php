@@ -43,6 +43,16 @@
       $this->$con->executeQuery($query, array( ':Login' => array($login,PDO::PARAM_STR)) );
       return $results=$this->con->getResults();
     }
+	
+	public function strIsAdminByLogin(string $login):array {
+		$query="SELECT Case
+					When is_admin Then 'True'
+					Else 'False' 
+					AS is_admin_str
+				FROM tUser WHERE login=:Login";
+		$this->$con->executeQuery($query, array( ':Login' => array($login,PDO::PARAM_STR)) );
+		return $this->con->getResults();
+	}
   }
 
 ?>
