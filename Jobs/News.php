@@ -51,5 +51,27 @@ Class News {
   public function getCommentList(): Array{
     return $this->commentList;
   }
+
+  public function toString():string {
+    $result = "id : ".$this->id;
+    $result = $result.", description : ".$this->description;
+    $result = $result.", date : ".$this->date;
+    $result = $result.", title : ".$this->title;
+    $result = $result.", author : ".$this->author;
+
+    $result = $result.", pictures : ";
+    foreach(pictures as p){
+         $result = $result .$this->p . "\t";
+    }
+
+    $result = $result.", commentList : ";
+    foreach(commentList as cl){
+         $result = $result .$this->cl . "\t";
+    }
+
+    $result = $result."</br>";
+
+    return $result;
+  }
 }
 ?>

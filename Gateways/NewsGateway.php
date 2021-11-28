@@ -2,15 +2,12 @@
 <?php
 Class NewsGateway {
     private $con;
-    private $user='root';
-    private $pass='';
-    private $dsn='mysql:host=localhost;dbname=dbsynapse';
 
-    public function __construct() {
-        $this->con=new Connection($this->dsn, $this->user, $this->pass);
+    public function __construct(Connection $con) {
+        $this->con=$con;
     }
 
-    public function insert_news(News $n, User $u):bool {
+   public function insert_news(News $n, User $u):bool {
         $query="INSERT INTO TNews(id, title, description, date, login_user) VALUES(:id, :title, :description, :date, :login_user);";
 
         $params[':id']=array($n->getId(), PDO::PARAM_INT);
@@ -39,18 +36,14 @@ Class NewsGateway {
         $query="SELECT * FROM TNews WHERE id=:id;";
 
         $this->con->executeQuery($query, [':id'=>array($id, PDO::PARAM_INT)]);
-        $news=$this->con->getResults();
-        
-        return ( $news[0] );
+        return $this->con->getResults();
     }
 
     /*
     public function show_all_comments() {
         $query="SELECT * FROM TComment;";
-
         $this->con->executeQuery($query, array());
         $results=$this->con->getResults();
-
         Foreach($results as $row) {
             Foreach($row as $key=>$value) {
                 echo $key." : ".$value."</br>";
