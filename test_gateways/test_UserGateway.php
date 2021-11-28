@@ -1,7 +1,59 @@
 <?php
   require_once('../Jobs/Picture.php');
   require_once('../Jobs/User.php');
-  require_once('../Gateway/UserGateway.php');
+  require_once('../Gateways/UserGateway.php');
+?>
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Testing UserGateway</title>
+        </style>
+    </head>
+    <body>
+        <form method="POST" action="test_CommentGateway.php">
+            <p>Pseudo : <input type="TEXT" name="id" value=""/></p>
+            <p>Password : <input type="password" name="date" value=""/></p>
+            <p>Email : <input type="email" name="content" value=""/></p>
+            <p>Is_admin :
+              <div class="myStyle">
+                <input name="isAdmin" type="radio">
+                  <label>Yes</label><br>
+                  <input name="isAdmin" type="radio" checked>
+                  <label>No</label><br>
+                  <br><br>
+                </input>
+              </div>
+            </p>
+
+
+            <p><input type="SUBMIT" name="action" value="Create instance"/></p>
+            <p><input type="SUBMIT" name="action" value="Consult BDD"/></p>
+            <input type="reset">
+        </form>
+
+
+        <?php
+            if( isset($_POST['id']) ) {
+            $cgw = new CommentGateway();
+            if( $_POST['action']=="Create instance" ) {
+              $p = new Picture($_POST['id_picture']);
+              $u = new User("panda_masque", "chatonchaton", $p);
+              $c = new Comment($_POST['id'], $_POST['content'], $_POST['date'], "", $u);
+              $n = new News("1", "news de test 1", $_POST['date'], "titre de la news 1", $u);
+              $cgw->insert_comment($c, $n);
+        }
+        if( $_POST['action']=="Consulter BDD" ) {
+          //require('consultation.php');
+        }
+        $_POST = [];
+            }
+        ?>
+    </body>
+</html>
+
+
+
 
  public function showListUsers(){
     echo "Users list : \n"

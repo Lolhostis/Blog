@@ -23,7 +23,6 @@
             <p><input type="SUBMIT" name="action" value="Consult BDD"/></p>
         </form>
 
-
         <?php 
 			/* Debug
             var_dump($_POST);
