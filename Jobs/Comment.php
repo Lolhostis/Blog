@@ -41,7 +41,7 @@ Class Comment {
 	  $result = $result.", text : ".$this->text;
 	  $result = $result.", date : ".$this->date;
 	  $result = $result.", hour : ".$this->hour;
-	  $result = $result.", author : ".$this->author;
+	  $result = $result.", author : ".$this->author->getPseudo();
 	  $result = $result."</br>";
 	  
 	  return $result;

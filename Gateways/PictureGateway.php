@@ -41,7 +41,7 @@
 	
 	public function FindById(int $id) : Array{
       $query='SELECT * FROM tPicture WHERE id=:id';
-      $this->$con->executeQuery($query, array( ':id' => array($id,PDO::PARAM_INT)) );
+      $this->con->executeQuery($query, array( ':id' => array($id,PDO::PARAM_INT)) );
       return $this->con->getResults();
     }
   }

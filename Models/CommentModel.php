@@ -14,7 +14,7 @@ class CommentModel {
 	private $con;
 	private $user='root';
 	private $pass='';
-	private $dsn='msql:host=localhost;dbname=dbsynapse';
+	private $dsn='mysql:host=localhost;dbname=dbsynapse';
 
 	public function __construct() {
 		$this->con=new Connection($this->dsn, $this->user, $this->pass);
@@ -39,14 +39,14 @@ class CommentModel {
 		}
 		$raw_comment = $raw_comment[0];
 		$raw_comment_hour = $this->comment_gw->getHourById($id);
-		$raw_comment_hour = $row_comment_hour[0];
+		$raw_comment_hour = $raw_comment_hour[0];
 
 		//Getting the raw data concerning the user who has posted the comment
 		$raw_user = $this->user_gw->FindByName($raw_comment['login_user']);
 		$raw_user = $raw_user[0];
 		//Getting the raw data concerning the role of the user
 		$raw_user_isadmin = $this->user_gw->strIsAdminByLogin($raw_comment['login_user']);
-		$raw_user_isadmin = $raw_user_is_admin[0];
+		$raw_user_isadmin = $raw_user_isadmin[0];
 
 		//Getting the raw data concerning the profile picture of the user
 		$raw_picture = $this->picture_gw->FindById($raw_user['id_picture']);

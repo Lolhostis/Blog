@@ -40,17 +40,18 @@
 
     public function FindByName(string $login) : Array{
       $query='SELECT * FROM tUser WHERE login=:Login';
-      $this->$con->executeQuery($query, array( ':Login' => array($login,PDO::PARAM_STR)) );
+      $this->con->executeQuery($query, array( ':Login' => array($login,PDO::PARAM_STR)) );
       return $results=$this->con->getResults();
     }
 	
 	public function strIsAdminByLogin(string $login):array {
-		$query="SELECT Case
-					When is_admin Then 'True'
-					Else 'False' 
+		$query="SELECT CASE
+					WHEN is_admin Then 'True'
+					ELSE 'False' 
+					END
 					AS is_admin_str
 				FROM tUser WHERE login=:Login";
-		$this->$con->executeQuery($query, array( ':Login' => array($login,PDO::PARAM_STR)) );
+		$this->con->executeQuery($query, array( ':Login' => array($login,PDO::PARAM_STR)) );
 		return $this->con->getResults();
 	}
   }
