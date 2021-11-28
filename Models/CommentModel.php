@@ -10,7 +10,7 @@ require_once('../Gateways/NewsGateway.php');
 class CommentModel {
 	private $comment_gw;
 	private $user_gw;
-	private $news_gx;
+	private $news_gw;
 
 	private $con;
 	private $user='root';
@@ -25,9 +25,6 @@ class CommentModel {
 		$this->news_gw = new NewsGateway($this->con);
 	}
 
-	//Returns NULL if
-	//	- no comment found
-	//	- multiple comments on the same id
 	function findByIdBis(int $id):Comment {
 		$raw_comment = $this->comment_gw->getFullCommentById($id);
 		if( empty($raw_comment) ) {

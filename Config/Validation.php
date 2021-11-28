@@ -17,7 +17,7 @@ class Validation {
             $errors = $errors."No valid id</br>";
             $id="";
         }
-     }
+    }
 
      static function val_form_news_add(int $id, string $title, string $description, string $date, string $login_user, string $errors) {
 
@@ -145,6 +145,35 @@ class Validation {
         }
     }
 
+    static function val_form_picture_consult(string &$id, string &$errors) {
+        if (!isset($id)||$id==""||!filter_var($id, FILTER_VALIDATE_INT)) {
+            $errors = $errors."No valid id</br>";
+            $id="";
+        }
+    }
+
+    static function val_form_picture_add(string &$id, string &$uri, string &$alt) {
+        if (!isset($id)||$id==""||!filter_var($id, FILTER_VALIDATE_INT)) {
+            $errors = $errors."No valid id</br>";
+            $id="";
+        }
+
+        if (!isset($uri)||$uri=="") {
+            $errors = $errors."No valid uri</br>";
+            $uri="";
+        }
+        else {
+            $uri = filter_var($uri, FILTER_SANITIZE_STRING);
+        }
+
+        if (!isset($alt)||$alt=="") {
+            $errors = $errors."No valid alt</br>";
+            $alt="";
+        }
+        else {
+            $alt = filter_var($alt, FILTER_SANITIZE_STRING);
+        }
+    }
 }
 ?>
 

@@ -23,9 +23,6 @@ class UserModel {
 		$this->picture_gw = new PictureGateway($this->con);
 	}
 
-	//Returns NULL if
-	//	- no comment found
-	//	- multiple comments on the same id
 	function findByLogin(string $login):User {
 		$raw_user = $this->user_gw->FindFullByName($login);
 		if( empty($raw_user) ) {

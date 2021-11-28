@@ -16,6 +16,16 @@
                               );
     }
 
+    public function insert_raw_picture(int $id, string $uri, string $alt) : bool{
+      $query= 'INSERT INTO tPicture VALUES (:Id, :URI, :ALT)';
+
+      return $this->con->executeQuery($query, array(':Id' => array($id, PDO::PARAM_INT) ,
+                                            ':URI' => array($uri, PDO::PARAM_STR) ,
+                                            ':ALT' => array($alt, PDO::PARAM_STR)
+                                            )
+                              );
+    }
+
     public function update(int $id, Picture $newPicture) : bool{
       $query= "UPDATE tPicture SET id = :NewId, uri = :URI, alt = :ALT  WHERE id = :OldId";
 
