@@ -20,15 +20,13 @@ class CommentModel {
 		$this->con=new Connection($this->dsn, $this->user, $this->pass);
 
 		$this->comment_gw = new CommentGateway($this->con);
-		$this->user_gw = new UserGateway($this->con);
-		$this->picture_gw = new PictureGateway($this->con);
 	}
 
 	//Returns NULL if
 	//	- no comment found
 	//	- multiple comments on the same id
-	function findById(int $id):Comment {
-		$raw_comment = $this->comment_gw->getCommentById($id);
+	function findByIdBis(int $id):Comment {
+		$raw_comment = $this->comment_gw->getFullCommentById($id);
 		if( empty($raw_comment) ) {
 			//Error, no comment matching this id
 			return NULL;
@@ -40,29 +38,18 @@ class CommentModel {
 		$raw_comment = $raw_comment[0];
 		$raw_comment_hour = $this->comment_gw->getHourById($id);
 		$raw_comment_hour = $raw_comment_hour[0];
-
-		//Getting the raw data concerning the user who has posted the comment
-		$raw_user = $this->user_gw->FindByName($raw_comment['login_user']);
-		$raw_user = $raw_user[0];
-		//Getting the raw data concerning the role of the user
-		$raw_user_isadmin = $this->user_gw->strIsAdminByLogin($raw_comment['login_user']);
-		$raw_user_isadmin = $raw_user_isadmin[0];
-
-		//Getting the raw data concerning the profile picture of the user
-		$raw_picture = $this->picture_gw->FindById($raw_user['id_picture']);
-		$raw_picture = $raw_picture[0];
-
+		
 		//Instantiating the picture from raw data
-		$picture = new Picture($raw_picture['id'], $raw_picture['uri'], $raw_picture['alt']);
+		$picture = new Picture($raw_comment['id_picture'], $raw_comment['uri'], $raw_comment['alt']);
 
 		//Instantiating the user from raw data
-		if($raw_user_isadmin['is_admin_str'] == 'True') {
+		if($raw_comment['is_admin'] == 1) {
 			//Case 1 : the user is an admin
-			$user = new User($raw_user['login'], $raw_user['password'], $picture, true, $raw_user['email']);
+			$user = new User($raw_comment['login_user'], $raw_comment['password'], $picture, true, $raw_comment['email']);
 		}
 		else {
 			//Case 2 : the user is not an admin
-			$user = new User($raw_user['login'], $raw_user['password'], $picture, false, $raw_user['email']);
+			$user = new User($raw_comment['login_user'], $raw_comment['password'], $picture, false, $raw_comment['email']);
 		}
 
 		//Instantiating the comment from raw data

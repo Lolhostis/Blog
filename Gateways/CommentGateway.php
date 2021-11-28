@@ -38,6 +38,18 @@ Class CommentGateway {
         return $this->con->getResults();
     }
 	
+	public function getFullCommentById(int $id):array {
+        $query="SELECT *
+				FROM TComment, TUser, TPicture, TNews
+				WHERE TComment.login_user = TUser.login
+					AND TUser.id_picture = TPicture.id
+					AND TComment.id_news = TNews.id
+					AND TComment.id=:id;";
+
+        $this->con->executeQuery($query, [':id'=>array($id, PDO::PARAM_INT)]);
+        return $this->con->getResults();
+    }
+	
 	public function getHourById(int $id):array {
 		$query="SELECT DATE_FORMAT(date, '%H:%i') AS hour FROM TComment WHERE id=:id;";
 

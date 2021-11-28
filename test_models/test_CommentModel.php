@@ -27,7 +27,7 @@
             if( isset($_POST['id_comment']) ) {
 				$cmodel = new CommentModel();
 				if( $_POST['action']=="Get comment" ) {
-					$comment = $cmodel->findById($_POST['id_comment']);
+					$comment = $cmodel->findByIdBis($_POST['id_comment']);
 					echo "Resulting Comment : ".$comment->toString()."</br>";
 				}
 				if( $_POST['action']=="Consulter BDD" ) {
