@@ -6,6 +6,7 @@
     require_once('../Jobs/User.php');
     require_once('../Models/CommentModel.php');
     require_once('../Config/Connexion.php');
+	require_once('../Config/Validation.php');
 ?>
 <!DOCTYPE html>
 <html>
@@ -22,7 +23,7 @@
 		   <h1>Add Comment</h1>
             <p>id : <input type="TEXT" name="id_comment" value=""/></p>
 		   <p>text : <input type="TEXT" name="text" value=""/></p>
-		   <p>date : <input type="TEXT" name="date" value=""/></p>
+		   <p>date : <input type="DATE" name="date" value=""/></p>
 		   <p>login of the user : <input type="TEXT" name="login_user" value=""/></p>
 		   <p>id of the corresponding news : <input type="TEXT" name="id_news" value=""/></p>
             <p><input type="SUBMIT" name="action" value="Add comment"/></p>
@@ -35,20 +36,45 @@
             echo "</br>";
             */
             if( isset($_POST['action']) ) {
+				$errors = "";
 				$cmodel = new CommentModel();
 				
 				if( $_POST['action']=="Get comment" ) {
-					$comment = $cmodel->findByIdBis($_POST['id_comment']);
-					echo "Resulting Comment : ".$comment->toString()."</br>";
+					$comment="";
+					Validation::val_form_comment_consult($_POST['id_comment'], $errors);
+					if( !empty($errors) ) {
+						echo "NO VALID FORM !</br>".$errors."</br>";
+					}
+					try {
+						$comment = $cmodel->findByIdBis($_POST['id_comment']);
+					}
+					catch (Exception $exception) {
+						echo $exception->getMessage().'</br>'.$exception->getLine().'</br>'.$exception->getFile() . "<br/>";
+					}
+					
+					if( $comment!="" ) {
+						echo "Resulting Comment : ".$comment->toString()."</br>";
+					}
 				}
 				
 				if( $_POST['action']=="Add comment" ) {
-
-					if( $cmodel->addComment($_POST['id_comment'], $_POST['text'], $_POST['date'], $_POST['login_user'], $_POST['id_news']) ) {
-						echo "Success</br>";
+					
+					Validation::val_form_comment_add($_POST['id_comment'], $_POST['text'], $_POST['date'], $_POST['login_user'], $_POST['id_news'],$errors);
+					if( !empty($errors) ) {
+						echo "NO VALID FORM !</br>".$errors."</br>";
 					}
 					else {
-						echo "Failure</br>";
+						try {
+							if( $cmodel->addComment($_POST['id_comment'], $_POST['text'], $_POST['date'], $_POST['login_user'], $_POST['id_news']) ) {
+								echo "Success</br>";
+							}
+							else {
+								echo "Failure</br>";
+							}
+						}
+						catch (Exception $exception) {
+							echo $exception->getMessage().'</br>'.$exception->getLine().'</br>'.$exception->getFile() . "<br/>";
+						}
 					}
 					$_POST = [];
 				}

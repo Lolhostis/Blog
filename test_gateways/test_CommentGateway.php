@@ -6,6 +6,7 @@
     require_once('../Jobs/User.php');
     require_once('../Gateways/CommentGateway.php');
     require_once('../Config/Connexion.php');
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -14,8 +15,8 @@
     </head>
     <body>
         <form method="POST" action="test_CommentGateway.php">
-            <p>id : <input type="TEXT" name="id" value=""/></p>
-            <p>Date : <input type="TEXT" name="date" value=""/></p>
+            <p>id : <input type="INT" name="id" value=""/></p>
+            <p>Date : <input type="DATE" name="date" value=""/></p>
             <p>Content : <input type="TEXT" name="content" value=""/></p>
             <p>Id_news : <input type="TEXT" name="id_news" value=""/></p>
             <p>Id_picture : <input type="TEXT" name="id_picture" value=""/></p>
