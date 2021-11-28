@@ -41,6 +41,7 @@
       $this->$con->executeQuery($query, array( ':Login' => array($login,PDO::PARAM_STR)) );
       return $results=$this->con->getResults();
     }
+<<<<<<< HEAD
 
     public function FindAdmins() : Array{
       $query='SELECT * FROM tUser WHERE is_admin=true';
@@ -53,5 +54,18 @@
       return $this->$con->executeQuery($query, array( ':Login' => array($login,PDO::PARAM_STR)) );
     }
  }
+=======
+	
+	public function strIsAdminByLogin(string $login):array {
+		$query="SELECT Case
+					When is_admin Then 'True'
+					Else 'False' 
+					AS is_admin_str
+				FROM tUser WHERE login=:Login";
+		$this->$con->executeQuery($query, array( ':Login' => array($login,PDO::PARAM_STR)) );
+		return $this->con->getResults();
+	}
+  }
+>>>>>>> aed33857936f7965948d157673b8d2955c56babe
 
 ?>

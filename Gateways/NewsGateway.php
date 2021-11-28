@@ -36,7 +36,13 @@ Class NewsGateway {
         $query="SELECT * FROM TNews WHERE id=:id;";
 
         $this->con->executeQuery($query, [':id'=>array($id, PDO::PARAM_INT)]);
+<<<<<<< HEAD
         return $this->con->getResults();
+=======
+        $news=$this->con->getResults();
+        
+		return $news;
+>>>>>>> aed33857936f7965948d157673b8d2955c56babe
     }
 
     /*

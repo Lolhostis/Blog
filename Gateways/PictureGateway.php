@@ -38,11 +38,19 @@
       $this->$con->executeQuery($query, array( ':URI' => array($uri,PDO::PARAM_STR)) );
       return $results=$this->con->getResults();
     }
+<<<<<<< HEAD
 
     public function FindByID(string $id) : Array{
       $query='SELECT * FROM tPicture WHERE id = :ID';
       $this->$con->executeQuery($query, array( ':ID' => array($id,PDO::PARAM_STR)) );
       return $results=$this->con->getResults();
+=======
+	
+	public function FindById(int $id) : Array{
+      $query='SELECT * FROM tPicture WHERE id=:id';
+      $this->$con->executeQuery($query, array( ':id' => array($id,PDO::PARAM_INT)) );
+      return $this->con->getResults();
+>>>>>>> aed33857936f7965948d157673b8d2955c56babe
     }
   }
 

@@ -1,0 +1,2 @@
+Does a model can call another model inside one of its functions ?
+	Exemple : UserModel->isAdminById in CommentModel->FindById
