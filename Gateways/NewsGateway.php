@@ -7,7 +7,7 @@ Class NewsGateway {
         $this->con=$con;
     }
 
-    public function insert_news(News $n, User $u):bool {
+   public function insert_news(News $n, User $u):bool {
         $query="INSERT INTO TNews(id, title, description, date, login_user) VALUES(:id, :title, :description, :date, :login_user);";
 
         $params[':id']=array($n->getId(), PDO::PARAM_INT);
@@ -36,18 +36,20 @@ Class NewsGateway {
         $query="SELECT * FROM TNews WHERE id=:id;";
 
         $this->con->executeQuery($query, [':id'=>array($id, PDO::PARAM_INT)]);
+<<<<<<< HEAD
+        return $this->con->getResults();
+=======
         $news=$this->con->getResults();
         
 		return $news;
+>>>>>>> aed33857936f7965948d157673b8d2955c56babe
     }
 
     /*
     public function show_all_comments() {
         $query="SELECT * FROM TComment;";
-
         $this->con->executeQuery($query, array());
         $results=$this->con->getResults();
-
         Foreach($results as $row) {
             Foreach($row as $key=>$value) {
                 echo $key." : ".$value."</br>";

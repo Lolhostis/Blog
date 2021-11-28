@@ -35,6 +35,18 @@ Class Comment {
   public function getAuthor():User {
     return $this->author;
   }
+<<<<<<< HEAD
+
+  public function toString():string {
+    $result = "id : ".$this->id;
+    $result = $result.", text : ".$this->text;
+    $result = $result.", date : ".$this->date;
+    $result = $result.", hour : ".$this->hour;
+    $result = $result.", author : ".$this->author;
+    $result = $result."</br>";
+
+    return $result;
+=======
   
   public function toString():string {
 	  $result = "id : ".$this->id;
@@ -45,6 +57,7 @@ Class Comment {
 	  $result = $result."</br>";
 	  
 	  return $result;
+>>>>>>> aed33857936f7965948d157673b8d2955c56babe
   }
 }
 ?>

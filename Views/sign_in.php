@@ -25,11 +25,11 @@
 
       <p>If you have already an account, please sign in</p>
 
-      <form class="form-signin">
+      <form class="form-signin"  method="post" name="myform">
 
         <div class="form-floating">
           <input type="text" class="form-control" id="floatingInput" placeholder="Login">
-          <label for="floatingInput">Login</label>
+          <label for="floatingInput" name="txtNom" value="<?= $dVue['nom']  ?>" type="text" size="30">Login</label>
         </div>
         <div class="form-floating">
           <input type="password" class="form-control" id="floatingPassword" placeholder="Password">

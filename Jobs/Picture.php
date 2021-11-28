@@ -13,13 +13,21 @@ Class Picture {
   public function getId(): int {
     return $this->id;
   }
-
   public function getUri(): string{
     return $this->uri;
   }
-
   public function getAlt(): string{
     return $this->alt;
+  }
+
+  public function setId(int $id) {
+    $this->id = $id;
+  }
+  public function setUri(string $URI) {
+    $this->uri = $URI;
+  }
+  public function setAlt(string $ALT) {
+    $this->alt = $ALT;
   }
 }
 ?>

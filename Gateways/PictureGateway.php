@@ -1,11 +1,12 @@
 <?php
   class PictureGateway{
     private $con;
+
     public function __construct(Connection $con){
       $this->con = $con;
     }
 
-    public function insert(Picture $newPicture) : Array{
+    public function insert(Picture $newPicture) : bool{
       $query= 'INSERT INTO tPicture VALUES (:Id, :URI, :ALT)';
 
       return $this->con->executeQuery($query, array(':Id' => array($newUser->getId(), PDO::PARAM_INT) ,
@@ -15,19 +16,18 @@
                               );
     }
 
-    public function update(int $id, Picture $newPicture) : Array{
+    public function update(int $id, Picture $newPicture) : bool{
       $query= "UPDATE tPicture SET id = :NewId, uri = :URI, alt = :ALT  WHERE id = :OldId";
 
-      $this->con->executeQuery($query, array(':NewId' => array($newUser->getId(), PDO::PARAM_INT) ,
+      return $this->con->executeQuery($query, array(':NewId' => array($newUser->getId(), PDO::PARAM_INT) ,
                                             ':URI' => array($newUser->getUri(), PDO::PARAM_STR) ,
                                             ':ALT' => array($newUser->getAlt(), PDO::PARAM_STR),
                                             ':OldId' => array($id, PDO::PARAM_INT)
                                             )
                               );
-      return $results=$this->con->getResults();
     }
 
-    public function delete(int $id) : Array{
+    public function delete(int $id) : bool{
       $query= "DELETE FROM tPicture WHERE id = :ID";
 
       return $this->con->executeQuery($query, array(':ID' => array($id, PDO::PARAM_INT)) );
@@ -38,11 +38,19 @@
       $this->$con->executeQuery($query, array( ':URI' => array($uri,PDO::PARAM_STR)) );
       return $results=$this->con->getResults();
     }
+<<<<<<< HEAD
+
+    public function FindByID(string $id) : Array{
+      $query='SELECT * FROM tPicture WHERE id = :ID';
+      $this->$con->executeQuery($query, array( ':ID' => array($id,PDO::PARAM_STR)) );
+      return $results=$this->con->getResults();
+=======
 	
 	public function FindById(int $id) : Array{
       $query='SELECT * FROM tPicture WHERE id=:id';
       $this->con->executeQuery($query, array( ':id' => array($id,PDO::PARAM_INT)) );
       return $this->con->getResults();
+>>>>>>> aed33857936f7965948d157673b8d2955c56babe
     }
   }
 

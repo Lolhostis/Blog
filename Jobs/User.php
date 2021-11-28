@@ -17,7 +17,6 @@ Class User {
   public function getPseudo(): string{
     return $this->pseudo;
   }
-
   public function getPassword(): string{
     return $this->password;
   }
@@ -29,6 +28,33 @@ Class User {
   }
   public function getPicture(): Picture{
     return $this->picture;
+  }
+
+  public function setPseudo(string $login){
+    $this->pseudo = $login;
+  }
+  public function setPassword(string $password){
+    $this->password = $password;
+  }
+  public function setIsAdmin(bool $isAdmin){
+    $this->isAdmin = $isAdmin;
+  }
+  public function setEmail(string $email){
+    $this->email = $email;
+  }
+  public function setPicture(Picture $profile_picture){
+    $this->picture = $profile_picture;
+  }
+
+    public function toString():string {
+    $result = "pseudo : ".$this->pseudo;
+    $result = $result.", password : ".$this->password;
+    $result = $result.", email : ".$this->email;
+    $result = $result.", isAdmin : ".$this->isAdmin;
+    $result = $result.", picture : ".$this->picture;
+    $result = $result."</br>";
+
+    return $result;
   }
 }
 ?>
