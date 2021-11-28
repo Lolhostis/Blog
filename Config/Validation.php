@@ -2,18 +2,17 @@
 
 class Validation {
 
-static function val_action($action) {
-
-	if (!isset($action)) {
-		throw new Exception('pas d\'action');
-		//on pourrait aussi utiliser
-		//$action = $_GET['action'] ?? 'no';
+	static function val_action($action) {
+		if (!isset($action)) {
+		throw new Exception('No action');
 		// This is equivalent to:
 		//$action =  if (isset($_GET['action'])) $action=$_GET['action']  else $action='no';
+		//or to :
+		//$action = $_GET['action'] ?? 'no';
 		}
 	}
-
-	static function val_form_comment_consult(string &$id, string &$errors) {
+	
+	 static function val_form_comment_consult(string &$id, string &$errors) {
         if (!isset($id)||$id==""||!filter_var($id, FILTER_VALIDATE_INT)) {
             $errors = $errors."No valid id</br>";
             $id="";
