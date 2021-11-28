@@ -17,6 +17,18 @@
                               );
     }
 
+    public function insert_raw_user(string $login, string $password, string $email, bool $is_admin, int $id_picture):bool {
+        $query="INSERT INTO TUser(login, password, email, is_admin, id_picture) VALUES(:login, :password, :email, :is_admin, :id_picture);";
+
+        $params[':login']=array($login, PDO::PARAM_STR);
+        $params[':password']=array($password, PDO::PARAM_STR);
+        $params[':email']=array($email, PDO::PARAM_STR);
+        $params[':is_admin']=array($is_admin, PDO::PARAM_INT);
+        $params[':id_picture']=array($id_picture, PDO::PARAM_INT);
+
+        return ( $this->con->executeQuery($query, $params) );
+    }
+
     public function update(string $login, User $newUser) : bool{
       $query= "UPDATE tUser SET login = :Pseudo, password = :Password, email = :Email, is_admin = :Is_admin, id_picture = :Picture  WHERE login = :Login";
 
@@ -64,5 +76,5 @@
 		$this->con->executeQuery($query, array( ':Login' => array($login,PDO::PARAM_STR)) );
 		return $this->con->getResults();
 	}
-  }
+}
 ?>

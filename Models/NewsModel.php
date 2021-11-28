@@ -7,7 +7,7 @@ require_once('../Gateways/PictureGateway.php');
 require_once('../Gateways/CommentGateway.php');
 require_once('../Gateways/NewsGateway.php');
 
-class CommentModel {
+class NewsModel {
 	private $comment_gw;
 	private $user_gw;
 	private $news_gx;
@@ -28,7 +28,7 @@ class CommentModel {
 	//Returns NULL if
 	//	- no comment found
 	//	- multiple comments on the same id
-	function findByIdBis(int $id):Comment {
+	function findById(int $id):News {
 		$raw_comment = $this->comment_gw->getFullCommentById($id);
 		if( empty($raw_comment) ) {
 			//Error, no comment matching this id

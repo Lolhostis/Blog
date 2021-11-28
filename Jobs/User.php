@@ -51,7 +51,7 @@ Class User {
     $result = $result.", password : ".$this->password;
     $result = $result.", email : ".$this->email;
     $result = $result.", isAdmin : ".$this->isAdmin;
-    $result = $result.", picture : ".$this->picture;
+    $result = $result.", picture : ".$this->picture->getId();
     $result = $result."</br>";
 
     return $result;

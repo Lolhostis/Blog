@@ -11,8 +11,50 @@ class Validation {
 		//$action = $_GET['action'] ?? 'no';
 		}
 	}
+
+    static function val_form_user_consult(string &$login_user, string &$errors) {
+        if (!isset($login_user)||$login_user=="") {
+            $errors = $errors."No valid login</br>";
+            $login_user="";
+        }
+        else {
+            $login_user = filter_var($login_user, FILTER_SANITIZE_STRING);
+        }
+     }
+
+    static function val_form_user_add(string $login_user, string $password, string $email, string $id_picture, string $errors) {
+        if (!isset($login_user)||$login_user=="") {
+            $errors = $errors."No valid login</br>";
+            $login_user="";
+        }
+        else {
+            $login_user = filter_var($login_user, FILTER_SANITIZE_STRING);
+        }
+
+        if (!isset($password)||$password=="") {
+            $errors = $errors."No valid password</br>";
+            $password="";
+        }
+        else {
+            $password = filter_var($password, FILTER_SANITIZE_STRING);
+        }
+
+        if (!isset($email)||$email==""||!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+            $errors = $errors."No valid email</br>";
+            $email="";
+        }
+        else {
+            $email = filter_var($email, FILTER_SANITIZE_EMAIL);
+        }
+
+        if (!isset($id_picture)||$id_picture==""||!filter_var($id_picture, FILTER_VALIDATE_INT)) {
+            $errors = $errors."No valid id_picture</br>";
+            $id_picture="";
+        }
+    }
+
 	
-	 static function val_form_comment_consult(string &$id, string &$errors) {
+	static function val_form_comment_consult(string &$id, string &$errors) {
         if (!isset($id)||$id==""||!filter_var($id, FILTER_VALIDATE_INT)) {
             $errors = $errors."No valid id</br>";
             $id="";

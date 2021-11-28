@@ -37,16 +37,16 @@
             */
             if( isset($_POST['action']) ) {
 				$errors = "";
-				$cmodel = new CommentModel();
+				$nmodel = new NewsModel();
 				
-				if( $_POST['action']=="Get comment" ) {
-					$comment="";
-					Validation::val_form_comment_consult($_POST['id_comment'], $errors);
+				if( $_POST['action']=="Get news" ) {
+					$news="";
+					Validation::val_form_news_consult($_POST['id_news'], $errors);
 					if( !empty($errors) ) {
 						echo "NO VALID FORM !</br>".$errors."</br>";
 					}
 					try {
-						$comment = $cmodel->findByIdBis($_POST['id_comment']);
+						$news = $nmodel->findByIdBis($_POST['id_comment']);
 					}
 					catch (Exception $exception) {
 						echo $exception->getMessage().'</br>'.$exception->getLine().'</br>'.$exception->getFile() . "<br/>";
