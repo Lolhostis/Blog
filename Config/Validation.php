@@ -12,6 +12,54 @@ class Validation {
 		}
 	}
 
+    static function val_form_news_consult(string &$id, string &$errors) {
+        if (!isset($id)||$id==""||!filter_var($id, FILTER_VALIDATE_INT)) {
+            $errors = $errors."No valid id</br>";
+            $id="";
+        }
+     }
+
+     static function val_form_news_add(int $id, string $title, string $description, string $date, string $login_user, string $errors) {
+
+        if (!isset($id)||$id==""||!filter_var($id, FILTER_VALIDATE_INT)) {
+            $errors = $errors."No valid id</br>";
+            $id="";
+        }
+
+        if (!isset($title)||$title=="") {
+            $errors = $errors."No valid title</br>";
+            $title="";
+        }
+        else {
+            $title = filter_var($title, FILTER_SANITIZE_STRING);
+        }
+
+
+        if (!isset($description)||$description=="") {
+            $errors = $errors."No valid description</br>";
+            $description="";
+        }
+        else {
+            $description = filter_var($description, FILTER_SANITIZE_STRING);
+        }
+
+        if (!isset($date)||$date=="") {
+            $errors = $errors."No valid date</br>";
+            $date="";
+        }
+        else {
+            $date = filter_var($date, FILTER_SANITIZE_STRING);
+        }
+
+        if (!isset($login_user)||$login_user=="") {
+            $errors = $errors."No valid login</br>";
+            $login_user="";
+        }
+        else {
+            $login_user = filter_var($login_user, FILTER_SANITIZE_STRING);
+        }
+    }
+
     static function val_form_user_consult(string &$login_user, string &$errors) {
         if (!isset($login_user)||$login_user=="") {
             $errors = $errors."No valid login</br>";

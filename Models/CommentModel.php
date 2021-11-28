@@ -36,7 +36,7 @@ class CommentModel {
 		}
 		if( count($raw_comment) != 1) {
 			//Error, multiple comments matching this id
-			throw new Exception("No comment matching this id");
+			throw new Exception("Multiples comments matching this id");
 		}
 		$raw_comment = $raw_comment[0];
 		$raw_comment_hour = $this->comment_gw->getHourById($id);

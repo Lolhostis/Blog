@@ -19,10 +19,12 @@ Class News {
     $this->title=$title;
     $this->author=$author;
 
+    $this->pictures = [];
     foreach ($pictures as $my) {
       $this->pictures[] = $my;
     }
 
+    $this->commentList = [];
     foreach ($commentList as $my) {
       $this->commentList[] = $my;
     }
@@ -57,16 +59,16 @@ Class News {
     $result = $result.", description : ".$this->description;
     $result = $result.", date : ".$this->date;
     $result = $result.", title : ".$this->title;
-    $result = $result.", author : ".$this->author;
+    $result = $result.", author : ".$this->author->getPseudo();
 
     $result = $result.", pictures : ";
-    foreach($pictures as $p){
-         $result = $result .$this->p . "\t";
+    foreach($this->pictures as $p){
+         $result = $result .$p . "\t";
     }
 
     $result = $result.", commentList : ";
-    foreach($commentList as $cl){
-         $result = $result .$this->cl . "\t";
+    foreach($this->commentList as $cl){
+         $result = $result .$cl . "\t";
     }
 
     $result = $result."</br>";

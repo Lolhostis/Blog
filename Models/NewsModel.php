@@ -8,9 +8,10 @@ require_once('../Gateways/CommentGateway.php');
 require_once('../Gateways/NewsGateway.php');
 
 class NewsModel {
-	private $comment_gw;
+	private $news_gw;
 	private $user_gw;
-	private $news_gx;
+	private $picture_gw;
+
 
 	private $con;
 	private $user='root';
@@ -20,62 +21,67 @@ class NewsModel {
 	public function __construct() {
 		$this->con=new Connection($this->dsn, $this->user, $this->pass);
 
-		$this->comment_gw = new CommentGateway($this->con);
-		$this->user_gw = new UserGateway($this->con);
 		$this->news_gw = new NewsGateway($this->con);
+		$this->user_gw = new UserGateway($this->con);
+		$this->picture_gw = new PictureGateway($this->con);
 	}
 
-	//Returns NULL if
-	//	- no comment found
-	//	- multiple comments on the same id
+
 	function findById(int $id):News {
-		$raw_comment = $this->comment_gw->getFullCommentById($id);
-		if( empty($raw_comment) ) {
+		$raw_news = $this->news_gw->getFullNewsById($id);
+		if( empty($raw_news) ) {
 			//Error, no comment matching this id
-			throw new Exception("No comment matching this id");
+			throw new Exception("No news matching this id");
 		}
-		if( count($raw_comment) != 1) {
+		if( count($raw_news) != 1) {
 			//Error, multiple comments matching this id
-			throw new Exception("No comment matching this id");
+			throw new Exception("Multiple news matching this id");
 		}
-		$raw_comment = $raw_comment[0];
-		$raw_comment_hour = $this->comment_gw->getHourById($id);
-		$raw_comment_hour = $raw_comment_hour[0];
+		$raw_news = $raw_news[0];
 		
 		//Instantiating the picture from raw data
-		$picture = new Picture($raw_comment['id_picture'], $raw_comment['uri'], $raw_comment['alt']);
+		$picture_user = new Picture($raw_news['id_picture'], $raw_news['uri'], $raw_news['alt']);
 
 		//Instantiating the user from raw data
-		if($raw_comment['is_admin'] == 1) {
+		if($raw_news['is_admin'] == 1) {
 			//Case 1 : the user is an admin
-			$user = new User($raw_comment['login_user'], $raw_comment['password'], $picture, true, $raw_comment['email']);
+			$user = new User($raw_news['login_user'], $raw_news['password'], $picture_user, true, $raw_news['email']);
 		}
 		else {
 			//Case 2 : the user is not an admin
-			$user = new User($raw_comment['login_user'], $raw_comment['password'], $picture, false, $raw_comment['email']);
+			$user = new User($raw_news['login_user'], $raw_news['password'], $picture_user, false, $raw_news['email']);
+		}
+  
+  		// public function __construct(int $id, string $description, string $date, string $title, User $author, array $pictures=array(), array $commentList=array())
+
+		$raw_news_pictures = $this->news_gw->getFullPicturesById($id);
+		$news_pictures = [];
+		foreach ($raw_news_pictures as $value) {
+			$news_pictures[] = $value['id_picture'];
 		}
 
-		//Instantiating the comment from raw data
-		$comment = new Comment($raw_comment['id'], $raw_comment['content'], $raw_comment['date'], $raw_comment_hour['hour'] , $user);
+		$raw_news_comments = $this->news_gw->getFullCommentsById($id);
+		$news_comments = [];
+		foreach ($raw_news_comments as $value) {
+			$news_comments[] = $value['id_comment'];
+		}
 
-		return $comment;
+		//Instantiating the news from raw data
+		$news = new News($raw_news['id'], $raw_news['description'], $raw_news['date'], $raw_news['title'], $user, $news_pictures, $news_comments);
+
+		return $news;
 	}
 	
-	function addComment(int $id, string $text, string $date, string $login_user, string $id_news):bool {
-		
+	function addNews(int $id, string $title, string $description, string $date, string $login_user):bool {
+
+		if( !empty($this->news_gw->getNewsById($id)) ) {
+			throw new Exception("the news ID already exists");
+		}
 		if( empty($this->user_gw->FindByName($login_user)) ) {
 			throw new Exception("Unknown user login");
 		}
-		
-		if( empty($this->news_gw->getNewsById($id_news)) ) {
-			throw new Exception("Unknown news's ID ");
-		}
-		
-		if( !empty($this->comment_gw->getCommentById($id)) ) {
-			throw new Exception("ID Comment already exists");
-		}
 
-		return $this->comment_gw->insert_raw_comment($id, $date, $text, $id_news, $login_user);
+		return $this->news_gw->insert_raw_news($id, $title, $description, $date, $login_user);
 	}
 }
 ?> 

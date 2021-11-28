@@ -19,6 +19,18 @@ Class NewsGateway {
         return ( $this->con->executeQuery($query, $params) );
     }
 
+    public function insert_raw_news(int $id, string $title, string $description, string $date, string $login_user):bool {
+        $query="INSERT INTO TNews(id, title, description, date, login_user) VALUES(:id, :title, :description, :date, :login_user);";
+
+        $params[':id']=array($id, PDO::PARAM_INT);
+        $params[':title']=array($title, PDO::PARAM_STR);
+        $params[':description']=array($description, PDO::PARAM_STR);
+        $params[':date']=array($date, PDO::PARAM_STR);
+        $params[':login_user']=array($login_user, PDO::PARAM_STR);
+
+        return ( $this->con->executeQuery($query, $params) );
+    }
+
     public function delete_news(News $n):bool {
         $query="DELETE FROM TNews WHERE id=:id";
 
@@ -42,6 +54,22 @@ Class NewsGateway {
 
 	public function getFullNewsById(int $id):array {
         $query="SELECT * FROM TNews, TUser, TPicture WHERE TNews.login_user=TUser.login AND TUser.id_picture = TPicture.id AND TNews.id=:id;";
+
+        $this->con->executeQuery($query, [':id'=>array($id, PDO::PARAM_INT)]);
+
+        return $this->con->getResults();
+    }
+
+    public function getFullPicturesById(int $id):array {
+        $query="SELECT id_picture FROM TNewsIncludePicture WHERE id_news=:id;";
+
+        $this->con->executeQuery($query, [':id'=>array($id, PDO::PARAM_INT)]);
+
+        return $this->con->getResults();
+    }
+
+    public function getFullCommentsById(int $id):array {
+        $query="SELECT id AS id_comment FROM TComment WHERE id_news=:id;";
 
         $this->con->executeQuery($query, [':id'=>array($id, PDO::PARAM_INT)]);
 
