@@ -5,11 +5,12 @@ require_once('../Jobs/Comment.php');
 require_once('../Gateways/UserGateway.php');
 require_once('../Gateways/PictureGateway.php');
 require_once('../Gateways/CommentGateway.php');
+require_once('../Gateways/NewsGateway.php');
 
 class CommentModel {
 	private $comment_gw;
 	private $user_gw;
-	private $picture_gw;
+	private $news_gx;
 
 	private $con;
 	private $user='root';
@@ -20,6 +21,8 @@ class CommentModel {
 		$this->con=new Connection($this->dsn, $this->user, $this->pass);
 
 		$this->comment_gw = new CommentGateway($this->con);
+		$this->user_gw = new UserGateway($this->con);
+		$this->news_gw = new NewsGateway($this->con);
 	}
 
 	//Returns NULL if
@@ -58,5 +61,20 @@ class CommentModel {
 		return $comment;
 	}
 	//end of model
+	
+	function addComment(int $id, string $text, string $date, string $login_user, string $id_news):bool {
+		
+		if( empty($this->user_gw->FindByName($login_user)) ) {
+			//No user matching the given id
+			return false;
+		}
+		
+		if( empty($this->news_gw->getNewsById($id_news)) ) {
+			//No user matching the given id
+			return false;
+		}
+		
+		return $this->comment_gw->insert_raw_comment($id, $date, $text, $id_news, $login_user);
+	}
 }
 ?> 

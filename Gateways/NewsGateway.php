@@ -36,15 +36,18 @@ Class NewsGateway {
         $query="SELECT * FROM TNews WHERE id=:id;";
 
         $this->con->executeQuery($query, [':id'=>array($id, PDO::PARAM_INT)]);
-<<<<<<< HEAD
+
         return $this->con->getResults();
-=======
-        $news=$this->con->getResults();
-        
-		return $news;
->>>>>>> aed33857936f7965948d157673b8d2955c56babe
     }
 
+	public function getFullNewsById(int $id):array {
+        $query="SELECT * FROM TNews, TUser, TPicture WHERE TNews.login_user=TUser.login AND TUser.id_picture = TPicture.id AND TNews.id=:id;";
+
+        $this->con->executeQuery($query, [':id'=>array($id, PDO::PARAM_INT)]);
+
+        return $this->con->getResults();
+    }
+	
     /*
     public function show_all_comments() {
         $query="SELECT * FROM TComment;";

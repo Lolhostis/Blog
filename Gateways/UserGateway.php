@@ -42,6 +42,12 @@
       return $results=$this->con->getResults();
     }
 	
+	public function FindFullByName(string $login) : Array{
+      $query='SELECT * FROM TUser,TPicture WHERE TUser.id_picture=TPicture.id AND login=:Login';
+      $this->con->executeQuery($query, array( ':Login' => array($login,PDO::PARAM_STR)) );
+      return $results=$this->con->getResults();
+    }
+	
     public function FindAdmins() : Array{
       $query='SELECT * FROM tUser WHERE is_admin';
       $this->con->executeQuery($query);

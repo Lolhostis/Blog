@@ -18,6 +18,18 @@ Class CommentGateway {
         return ( $this->con->executeQuery($query, $params) );
     }
 
+	public function insert_raw_comment(string $id, string $date, string $content, string $id_news, string $login_user):bool {
+        $query="INSERT INTO TComment(id, date, content, id_news, login_user) VALUES(:id, :date, :content, :id_news, :login_user);";
+
+        $params[':id']=array($id, PDO::PARAM_INT);
+        $params[':date']=array($date, PDO::PARAM_STR);
+        $params[':content']=array($content, PDO::PARAM_STR);
+        $params[':id_news']=array($id_news, PDO::PARAM_INT);
+        $params[':login_user']=array($login_user, PDO::PARAM_STR);
+
+        return ( $this->con->executeQuery($query, $params) );
+    }
+
     public function delete_comment(Comment $c):bool {
         $query="DELETE FROM TComment WHERE id=:id";
 
