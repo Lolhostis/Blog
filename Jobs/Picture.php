@@ -29,5 +29,14 @@ Class Picture {
   public function setAlt(string $ALT) {
     $this->alt = $ALT;
   }
+
+  public function toString():string {
+    $result = "id : ".$this->id;
+    $result = $result.", uri : ".$this->uri;
+    $result = $result.", alt : ".$this->alt;
+    $result = $result."</br>";
+
+    return $result;
+  }
 }
 ?>

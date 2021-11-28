@@ -8,7 +8,6 @@
 <?php
   include('menu.php');
 ?>
-
     <main>
       <section class="py-5 text-center container">
         <div class="row py-lg-5">
