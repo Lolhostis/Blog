@@ -60,12 +60,12 @@ Class News {
     $result = $result.", author : ".$this->author;
 
     $result = $result.", pictures : ";
-    foreach(pictures as p){
+    foreach($pictures as $p){
          $result = $result .$this->p . "\t";
     }
 
     $result = $result.", commentList : ";
-    foreach(commentList as cl){
+    foreach($commentList as $cl){
          $result = $result .$this->cl . "\t";
     }
 

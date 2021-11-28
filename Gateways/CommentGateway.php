@@ -2,14 +2,9 @@
 Class CommentGateway {
     private $con;
 
-<<<<<<< HEAD
     public function __construct(Connection $con){
       $this->con = $con;
-=======
-    public function __construct(Connection $con) {
-        $this->con=$con;
->>>>>>> aed33857936f7965948d157673b8d2955c56babe
-    }
+	}
 
     public function insert_comment(Comment $c, News $n):bool {
         $query="INSERT INTO TComment(id, date, content, id_news, login_user) VALUES(:id, :date, :content, :id_news, :login_user);";
@@ -40,23 +35,7 @@ Class CommentGateway {
         $query="SELECT * FROM TComment WHERE id=:id;";
 
         $this->con->executeQuery($query, [':id'=>array($id, PDO::PARAM_INT)]);
-        $comment=$this->con->getResults();
-<<<<<<< HEAD
-        
-        return $comment;
-    }
-
-    public function getHourById(int $id):array {
-        $query="SELECT TO_CHAR(date, 'HH:MI') AS hour FROM TComment WHERE id=:id;";
-
-        $this->con->executeQuery($query, [':id'=>array($id, PDO::PARAM_INT)]);
-        $hour=$this->con->getResults();
-
-        return $hour;
-=======
-		
-		return $comment;
->>>>>>> aed33857936f7965948d157673b8d2955c56babe
+        return $this->con->getResults();
     }
 	
 	public function getHourById(int $id):array {
