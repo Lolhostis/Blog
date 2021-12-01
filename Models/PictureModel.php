@@ -30,18 +30,15 @@ class PictureModel {
 		$raw_picture = $raw_picture[0];
 		
 		//Instantiating the picture from raw data
-		$picture = new Picture($raw_picture['id'], $raw_picture['uri'], $raw_picture['alt']);
-
-		return $picture;
+		return new Picture($raw_picture['id'], $raw_picture['uri'], $raw_picture['alt']);
 	}
 	
-	function addPicture(int $id, string $uri, string $alt):bool {
-		
-		if( !empty($this->picture_gw->FindByID($id)) ) {
+	function addPicture(Picture $p):bool {
+		if( !empty($this->picture_gw->FindByID($p->getId())) ) {
 			throw new Exception("the picture ID already exists");
 		}
 
-		return $this->picture_gw->insert_raw_picture($id, $uri, $alt);
+		return $this->picture_gw->insert_raw_picture($p->getId(), $p->getUri(), $p->getAlt());
 	}
 }
 ?> 

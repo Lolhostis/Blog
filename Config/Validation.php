@@ -145,9 +145,9 @@ class Validation {
         }
     }
 
-    static function val_form_picture_consult(string &$id, string &$errors) {
+    static function val_form_picture_consult(string &$id, array &$tErrors) {
         if (!isset($id)||$id==""||!filter_var($id, FILTER_VALIDATE_INT)) {
-            $errors = $errors."No valid id</br>";
+            $tErrors[] = "No valid id</br>";
             $id="";
         }
     }

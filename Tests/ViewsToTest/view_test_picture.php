@@ -1,20 +1,25 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Testing PictureModel</title>
+        <title>Testing Picture's form</title>
     </head>
     <body>
-        <form method="POST" action="test_PictureModel.php">
-		   <h1>Consult Picture</h1>
-            <p>id of the picture : <input type="INT" name="id_picture" value=""/></p>
-            <p><input type="SUBMIT" name="action" value="Get picture"/></p>
+		<form method="POST" action="../picture_controler.php">
+           <p>Id : <input type="INT" name="id_picture" value="<?php=$_POST['id_picture']??""?>" required/></p>
+		   <p>Uri : <input type="TEXT" name="uri_picture" value="<?php=$_POST['uri_picture']??""?>"/></p>
+		   <p>Alt : <input type="TEXT" name="alt_picture" value="<?php=$_POST['alt_picture']??"Picture"?>"/></p>
+           <p><input type="SUBMIT" name="action" value="get_picture"/></p>
+           <p><input type="SUBMIT" name="action" value="add_picture"/></p>
+            <p><input type="SUBMIT" name="action" value="delete_picture"/></p>
+           <p><input type="RESET" /></p>
         </form>
-		<form method="POST" action="test_PictureModel.php">
-		   <h1>Add Picture</h1>
-           <p>Id : <input type="INT" name="id_picture" value=""/></p>
-		   <p>Uri : <input type="TEXT" name="uri" value=""/></p>
-		   <p>Alt : <input type="TEXT" name="alt" value=""/></p>
-           <p><input type="SUBMIT" name="action" value="Add picture"/></p>
-        </form>
+
+        <div>
+            <p>Résultats :</p>
+            <p>Id : <?php=$row_picture['res_id_picture']?></p>
+           <p>Uri : <?php=$row_picture['res_uri_picture']?></p>
+           <p>Alt : <?php=$row_picture['res_alt_picture']?></p>
+           <img src="source_uri_picture" placeholder="placeholder_alt_picture"/>
+        </div>
     </body>
 </html>

@@ -6,9 +6,9 @@
     require_once('../Jobs/User.php');
     require_once('../Models/UserModel.php');
     require_once('../Config/Connexion.php');
-  require_once('../Config/Validation.php');
+    require_once('../Config/Validation.php');
 
-  /* Debug
+    /* Debug
     var_dump($_POST);
     echo "</br>";
     */
@@ -53,6 +53,7 @@
                     echo $exception->getMessage().'</br>'.$exception->getLine().'</br>'.$exception->getFile() . "<br/>";
                 }
             }
-            $_POST = [];
+           // $_POST = [];
         }
     }
+?>

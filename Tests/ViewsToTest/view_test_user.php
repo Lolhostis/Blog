@@ -1,26 +1,34 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Testing UserModel</title>
+        <title>Testing User's form'</title>
     </head>
     <body>
-        <form method="POST" action="test_UserModel.php">
-		   <h1>Consult User</h1>
-            <p>Login of the user : <input type="TEXT" name="login_user" value=""/></p>
-            <p><input type="SUBMIT" name="action" value="Get user"/></p>
-        </form>
-		<form method="POST" action="test_UserModel.php">
-		   <h1>Add User</h1>
-           <p>Login : <input type="TEXT" name="login_user" value=""/></p>
-		   <p>Password : <input type="PASSWORD" name="password" value=""/></p>
-		   <p>Email : <input type="EMAIL" name="email" value=""/></p>
+        <form method="POST" action="../user_controler.php">
+           <p>Login : <input type="TEXT" name="login_user" value="<?php=$_POST['login_user']??""?>" required/></p>
+		   <p>Password : <input type="PASSWORD" name="password_user" value=""/></p>
+		   <p>Email : <input type="EMAIL" name="email_user" value="<?php=$_POST['email_user']??""?>"/></p>
 		   <p>
 		   	Is an admin :</br>
-		   	<label><input type="RADIO" name="isadmin" value=1/>Yes</label>
-		   	<label><input type="RADIO" name="isadmin" value=0 checked/>No</label>
+		   	<label><input type="RADIO" name="isadmin_user" value=1/>Yes</label>
+		   	<label><input type="RADIO" name="isadmin_user" value=0 checked/>No</label>
 		   </p>
-		   <p>Id of the profile picture : <input type="TEXT" name="id_picture" value=""/></p>
-           <p><input type="SUBMIT" name="action" value="Add user"/></p>
+		   <p>Id of the profile picture : <input type="INT" name="id_picture_user" value="<?php=$_POST['id_picture_user']??""?>"/></p>
+           <p><input type="SUBMIT" name="action" value="get_user"/></p>
+           <p><input type="SUBMIT" name="action" value="add_user"/></p>
+           <p><input type="SUBMIT" name="action" value="delete_user"/></p>
+           <p><input type="RESET" /></p>
+
+        <div>
+            <p>Login : <?php=$row_user['res_login_user']??""?> </p>
+           <p>Password : <?php=$row_user['res_password_user']??""?></p>
+           <p>Email : <?php=$row_user['res_email_user']??""?></p>
+           <p> Is an admin :</br>
+            <label><input type="RADIO" name="isadmin_user" value=<?php=if($row_user['res_isadmin_user']==true)??""?>/>Yes</label>
+            <label><input type="RADIO" name="isadmin_user" value=<?php=if($row_user['res_isadmin_user']==false)??""?> />No</label>
+           </p>
+           <p>Id of the profile picture : <?php=$row_user['res_id_picture_user']??""?>></p>
+        </div>
         </form>
     </body>
 </html>
