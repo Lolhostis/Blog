@@ -48,19 +48,19 @@
       return $this->con->executeQuery($query, array(':ID' => array($id, PDO::PARAM_STR)) );
     }
 
-    public function FindByName(string $login) : Array{
+    public function FindByName(string $login) : array{
       $query='SELECT * FROM tUser WHERE login=:Login';
       $this->con->executeQuery($query, array( ':Login' => array($login,PDO::PARAM_STR)) );
       return $results=$this->con->getResults();
     }
 	
-	public function FindFullByName(string $login) : Array{
+	public function FindFullByName(string $login) : array{
       $query='SELECT * FROM TUser,TPicture WHERE TUser.id_picture=TPicture.id AND login=:Login';
       $this->con->executeQuery($query, array( ':Login' => array($login,PDO::PARAM_STR)) );
       return $results=$this->con->getResults();
     }
 	
-    public function FindAdmins() : Array{
+    public function FindAdmins() : array{
       $query='SELECT * FROM tUser WHERE is_admin';
       $this->con->executeQuery($query);
       return $results=$this->con->getResults();

@@ -50,15 +50,21 @@ class UserModel {
 	}
 
 	function existLogin(string $login):bool {
+		$query= 'SELECT login FROM tUser WHERE login=:Login';
+
+    return $this->con->executeQuery($query, array(':Login' => array($login->getPseudo(), PDO::PARAM_STR)));
 	}
 
 	function existPicture(string $login):bool {
+		$query= 'SELECT picture FROM tUser WHERE login=:Login';
+
+    return $this->con->executeQuery($query, array(':Login' => array($login->getPseudo(), PDO::PARAM_STR)));
 	}
 	
 	function addUser(string $login, string $password, string $email, bool $isadmin, int $id_picture):bool {
 
 		if( !empty($this->user_gw->FindByName($login)) ) {
-			throw new Exception("Login already exist <3");
+			throw new Exception("Login already existing");
 		}
 
 		if( empty($this->picture_gw->FindById($id_picture)) ) {
