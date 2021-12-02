@@ -102,9 +102,9 @@ class Validation {
     }
 
 	
-	static function val_form_comment_consult(string &$id, string &$errors) {
+	static function val_form_comment_consult(string &$id, array &$TErrors) {
         if (!isset($id)||$id==""||!filter_var($id, FILTER_VALIDATE_INT)) {
-            $errors = $errors."No valid id</br>";
+            $TErrors[] = "No valid id</br>";
             $id="";
 		}
 	 }
@@ -152,14 +152,14 @@ class Validation {
         }
     }
 
-    static function val_form_picture_add(string &$id, string &$uri, string &$alt) {
+    static function val_form_picture_add(string &$id, string &$uri, string &$alt, array &$tErrors) {
         if (!isset($id)||$id==""||!filter_var($id, FILTER_VALIDATE_INT)) {
-            $errors = $errors."No valid id</br>";
+            $tErrors[] = "No valid id</br>";
             $id="";
         }
 
         if (!isset($uri)||$uri=="") {
-            $errors = $errors."No valid uri</br>";
+            $tErrors[] = "No valid uri</br>";
             $uri="";
         }
         else {
@@ -167,7 +167,7 @@ class Validation {
         }
 
         if (!isset($alt)||$alt=="") {
-            $errors = $errors."No valid alt</br>";
+            $tErrors[] = "No valid alt</br>";
             $alt="";
         }
         else {

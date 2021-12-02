@@ -9,7 +9,7 @@
 
 //namespace controleur;
 
-class PictureControleur {
+class PictureControler {
 
   function __construct() {
     //global $rep,$vues;
@@ -27,7 +27,7 @@ class PictureControleur {
         break;
 
         case "get_picture":
-          $this->get_picture($Terrors);
+          $this->get_picture($TErrors);
         break;
 
         case "add_picture":
@@ -72,13 +72,13 @@ class PictureControleur {
     if(tErrors.count()==0){
       $model_picture = new \models\PictureModel();
       try{
-        $data=$model_picture->findById();
+        $data=$model_picture->findById($id_picture);
       }catch(Exception e){
-        tErrors[]= echo $exception->getMessage().'</br>'.$exception->getLine().'</br>'.$exception->getFile() . "<br/>";
+        tErrors[] = $exception->getMessage().'</br>'.$exception->getLine().'</br>'.$exception->getFile() . "<br/>";
         //error view
       }
 
-      $row_Picture = array (
+      $row_picture = array (
         'res_id_picture' => $id_picture,
         'res_uri_picture' => $data->getUri(),
         'res_alt_picture' => $data->getAlt(),
@@ -96,43 +96,44 @@ class PictureControleur {
     $uri_picture=$_POST['uri_picture'];
     $alt_picture=$_POST['alt_picture'];
     // \config\Validation::val_form($nom,$age,$tViewError);
-    ..\Config\Validation::val_form_picture_add($id_picture, $tErrors);
+    ..\Config\Validation::val_form_picture_add($id_picture, $uri_picture, $alt_picture, $tErrors);
 
     if(tErrors.count()==0){
       $model_picture = new \models\PictureModel();
+
       try{
-        $data=$model_picture->findById();
+        $result_insert=$model_picture->addPicture(new Picture($id_picture, $uri_picture, $alt_picture));
       }catch(Exception e){
         tErrors[]= echo $exception->getMessage().'</br>'.$exception->getLine().'</br>'.$exception->getFile() . "<br/>";
         //error view
       }
 
-      try{
-        $data=$model_picture->addPicture();
-      }catch(Exception e){
-        tErrors[]= echo $exception->getMessage().'</br>'.$exception->getLine().'</br>'.$exception->getFile() . "<br/>";
-        //error view
-      }
-
-      if($data==true){
+      if($result_insert==true){
         $row_Picture = array (
-          'res_id_picture' => $id_picture,
-          'res_uri_picture' => $data->getUri(),
-          'res_alt_picture' => $data->getAlt(),
-          'data' => $data,
+          'res_id_picture' => "",
+          'res_uri_picture' => "",
+          'res_alt_picture' => "",
+          'res_insert' => "Success"
         );
-      }else{
+      }
+      else{
+        $row_Picture = array (
+          'res_id_picture' => "",
+          'res_uri_picture' => "",
+          'res_alt_picture' => "",
+          'res_insert' => "Failure"
+        );
         tErrors[]="Can't add this picture";
         //error view
       }
 
       //require ($rep.$vues['vuephp1']);
     }
-    //error view
+    else {
+      //error view
+    }
   }
-
-  }//fin class
-
+}//fin class
 ?>
 
 

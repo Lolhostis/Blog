@@ -15,5 +15,15 @@
             <p><input type="SUBMIT" name="action" value="add_comment"/></p>
             <p><input type="SUBMIT" name="action" value="delete_comment"/></p>
         </form>
+
+        <div>
+            <p>Results :</p>
+            <p>Id of the comment : <?php=$row_comment['res_id_comment']?></p>
+            <p>Text : <?php=$row_comment['res_uri_picture']?></p>
+            <p>Date : <?php=$row_comment['res_alt_picture']?></p>
+            <p>Login of the user : <?php=$row_comment['res_alt_picture']?></p>
+            <p>Id of the corresponding news : <?php=$row_comment['res_alt_picture']?></p>
+            <img src="source_uri_picture" placeholder="placeholder_alt_picture"/>
+        </div>
     </body>
 </html>
