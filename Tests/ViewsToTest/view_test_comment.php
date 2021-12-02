@@ -1,22 +1,19 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Testing CommentModel</title>
+        <title>Testing Comment's form</title>
     </head>
     <body>
-        <form method="POST" action="test_CommentModel.php">
-		   <h1>Consult comment</h1>
-            <p>id of the comment: <input type="TEXT" name="id_comment" value=""/></p>
-            <p><input type="SUBMIT" name="action" value="Get comment"/></p>
-        </form>
-		<form method="POST" action="test_CommentModel.php">
-		   <h1>Add Comment</h1>
-            <p>id : <input type="TEXT" name="id_comment" value=""/></p>
-		   <p>text : <input type="TEXT" name="text" value=""/></p>
-		   <p>date : <input type="DATE" name="date" value=""/></p>
-		   <p>login of the user : <input type="TEXT" name="login_user" value=""/></p>
-		   <p>id of the corresponding news : <input type="TEXT" name="id_news" value=""/></p>
-            <p><input type="SUBMIT" name="action" value="Add comment"/></p>
+        <form method="POST" action="../comment_controler.php">
+		   <h1>consult & add comment</h1>
+            <p>id of the comment: <input type="INT" name="id_comment" value="<?php=$_POST['id_comment']?>" required/></p>
+            <p>text : <input type="TEXT" name="text_comment" value="<?php=$_POST['text_comment']?>"/></p>
+            <p>date : <input type="DATE" name="date_comment" value="<?php=$_POST['date_comment']?>"/></p>
+            <p>login of the user : <input type="TEXT" name="login_user_comment" value="<?php=$_POST['login_user_comment']?>"/></p>
+            <p>id of the corresponding news : <input type="INT" name="id_news_comment" value="<?php=$_POST['id_news_comment']?>"/></p>
+            <p><input type="SUBMIT" name="action" value="get_comment"/></p>
+            <p><input type="SUBMIT" name="action" value="add_comment"/></p>
+            <p><input type="SUBMIT" name="action" value="delete_comment"/></p>
         </form>
     </body>
 </html>
