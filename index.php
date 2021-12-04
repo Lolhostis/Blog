@@ -1,41 +1,30 @@
 <?php
-    require('Jobs/Comment.php');
-    require('Gateway/CommentGateway.php');
-    require('Config/Connexion.php');
-    require('Config/Validation.php')
+//  header('Location: controller/controller.php');
+
+//chargement config
+require_once(__DIR__.'/Config/Config.php');
+
+//require_once(__DIR__.'/config/Autoload.php');
+//Autoload::charger();
+
+//autoloader norm PSR-0
+require_once(__DIR__.'/Config/SplClassLoader.php');
+$myLibLoader = new SplClassLoader('Config', './');
+$myLibLoader->register();
+$myLibLoader = new SplClassLoader('Controllers', './');
+$myLibLoader->register();
+$myLibLoader = new SplClassLoader('Gateways', './');
+$myLibLoader->register();
+$myLibLoader = new SplClassLoader('Jobs', './');
+$myLibLoader->register();
+$myLibLoader = new SplClassLoader('Models', './');
+$myLibLoader->register();
+$myLibLoader = new SplClassLoader('Tests', './');
+$myLibLoader->register();
+
+$commentCont = new \Tests\comment_controler();
+$newsCont = new \Tests\news_controler();
+$pictureCont = new \Tests\picture_controler();
+$userCont = new \Tests\user_controler();
+
 ?>
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Creation of an instance of Comment</title>
-</head>
-<body>
-<form method="POST" action="index.php">
-    <p>id : <input type="TEXT" name="ref" value=""/></p>
-    <p>date : <input type="TEXT" name="titre" value=""/></p>
-    <p>content : <input type="TEXT" name="date" value=""/></p>
-    <p><input type="SUBMIT" name="validate" value="Create instance"/></p>
-</form>
-
-<?php
-    /* Debug
-    var_dump($_POST);
-    echo "</br>";
-    */
-    if( isset($_POST['id']) ) {
-        $commentgw = new CommentGateway();
-        if( $_POST['validate']=="Create instance" ) {
-            $_POST['id'] = Validation::cleanString($_POST['id']);
-            $_POST['date'] = Validation::cleanString($_POST['date']);
-            $_POST['content'] = Validation::cleanString($_POST['content']);
-
-            if( !empty($_POST['id']) && !empty($_POST['date']) && !empty($_POST['content']) ) {
-                $c1 = new Comment();
-            }
-        }
-        $_POST = [];
-    }
-?>
-</body>
-</html>
-

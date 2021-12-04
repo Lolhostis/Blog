@@ -1,9 +1,13 @@
 <?php
+/*
 require_once('../Jobs/User.php');
 require_once('../Jobs/Picture.php');
 require_once('../Jobs/Comment.php');
 require_once('../Gateways/PictureGateway.php');
 require_once('../Gateways/NewsGateway.php');
+*/
+
+namespace Models;
 
 class PictureModel {
 	private $picture_gw;

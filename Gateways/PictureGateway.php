@@ -1,4 +1,6 @@
 <?php
+namespace Gateways;
+
   class PictureGateway{
     private $con;
 
