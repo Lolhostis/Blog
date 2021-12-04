@@ -1,24 +1,23 @@
-  <?php
-  /*
-  require_once('../Jobs/Comment.php');
-  require_once('../Jobs/News.php');
-  require_once('../Jobs/Picture.php');
-  require_once('../Jobs/User.php');
-  require_once('../Models/PictureModel.php');
-  require_once('../Config/Connexion.php');
-  require_once('../Config/Validation.php');
+<?php
+namespace Tests;
+/*
+require_once('../Jobs/Comment.php');
+require_once('../Jobs/News.php');
+require_once('../Jobs/Picture.php');
+require_once('../Jobs/User.php');
+require_once('../Models/PictureModel.php');
+require_once('../Config/Connexion.php');
+require_once('../Config/Validation.php');
 */
 
-namespace Tests;
-
-class PictureControler {
+class PictureController {
 
   function __construct() {
     global $rep,$tViews;
     session_start();
 
     //initialization of an array of errors
-    $TErrors = array();
+    $tErrors = array();
 
     try{
       $action=$_REQUEST['action'];
@@ -29,28 +28,28 @@ class PictureControler {
         break;
 
         case "get_picture":
-          $this->get_picture($TErrors);
+          $this->get_picture($tErrors);
         break;
 
         case "add_picture":
-          $this->add_picture($Terrors);
+          $this->add_picture($tErrors);
         break;
 
         case "delete_picture":
-          $this->delete_picture($Terrors);
+          $this->delete_picture($tErrors);
         break;
 
         default:
-          $Terrors[] =  "No php view";
-          require ($rep.$tViews['view_test_picture']);
+          $tErrors[] =  "No php view";
+          require ($rep.$tViews['article']);
           break;
       }
 
     } catch (PDOException $e){
-      $Terrors[] =  "Unexpected error";
+      $tErrors[] =  "Unexpected error";
        require ($rep.$tViews['error']);
     }catch (Exception $e2){
-      $Terrors[] =  "Unexpected error";
+      $tErrors[] =  "Unexpected error";
       require ($rep.$tViews['error']);
     }
 
@@ -84,7 +83,7 @@ class PictureControler {
   }
 
   function add_picture(array $tErrors) {
-   // global $rep,$tViews;
+    global $rep,$tViews;
 
     $id_picture=$_POST['id_picture'];
     $uri_picture=$_POST['uri_picture'];
@@ -98,7 +97,7 @@ class PictureControler {
     if($result_insert==true){
       $notification="Picture added";
     }else{
-      tErrors[]="Can't add this picture";
+     // tErrors[]="Can't add this picture";
       //error view
     }
 

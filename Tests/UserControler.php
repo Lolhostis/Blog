@@ -1,17 +1,7 @@
 <?php
-    require_once('../Config/Validation.php');
-    require_once('../Jobs/Comment.php');
-    require_once('../Jobs/News.php');
-    require_once('../Jobs/Picture.php');
-    require_once('../Jobs/User.php');
-    require_once('../Models/UserModel.php');
-    require_once('../Config/Connexion.php');
-    require_once('../Config/Validation.php');
 
-    /* Debug
-    var_dump($_POST);
-    echo "</br>";
-    */
+namespace Tests;
+
     if( isset($_POST['action']) ) {
         $errors = "";
         $umodel = new UserModel();

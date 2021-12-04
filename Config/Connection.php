@@ -1,4 +1,6 @@
 <?php
+namespace Config;
+
 class Connection extends PDO {
   private $stmt;
 

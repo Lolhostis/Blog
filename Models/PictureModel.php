@@ -1,4 +1,6 @@
 <?php
+namespace Models;
+
 /*
 require_once('../Jobs/User.php');
 require_once('../Jobs/Picture.php');
@@ -6,8 +8,6 @@ require_once('../Jobs/Comment.php');
 require_once('../Gateways/PictureGateway.php');
 require_once('../Gateways/NewsGateway.php');
 */
-
-namespace Models;
 
 class PictureModel {
 	private $picture_gw;
@@ -18,9 +18,9 @@ class PictureModel {
 	private $dsn='mysql:host=localhost;dbname=dbsynapse';
 
 	public function __construct() {
-		$this->con=new Connection($this->dsn, $this->user, $this->pass);
+		$this->con=new \Config\Connection($this->dsn, $this->user, $this->pass);
 
-		$this->picture_gw = new PictureGateway($this->con);
+		$this->picture_gw = new \Gateways\PictureGateway($this->con);
 	}
 
 	function findById(int $id):Picture {
