@@ -1,12 +1,5 @@
 <?php
-  $path = dirname(__DIR__);
-  if(!isset($path)){
-    if(!empty($path)){
-        $path = $path . "\\";
-    }
-  }
-   require_once($path . "Views\\head.php");
-  $src = $path . "Resources\Pictures\\error.png";
+  include('head.php');
 ?>
 
   </head>
@@ -14,12 +7,12 @@
 
   <main class="px-3">
       <p></br></br></p>
-      <img height="25%" src="<?php echo "$src" ?>"/>
+      <img height="25%" src="Resources/Pictures/error.png"/>
 
  <p class="lead">
 <?php
-  if( isset($TMessage) ) {
-    foreach($TMessage as $key => $value) {
+  if( isset($tErrors) ) {
+    foreach($tErrors as $key => $value) {
       echo $key." :</br>";
       foreach($value as $msg) {
         echo "\t".$msg."</br>";

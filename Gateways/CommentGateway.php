@@ -1,4 +1,14 @@
 <?php
+namespace Gateways;
+/**
+  /** \author L'HOSTIS Loriane & ALLEMAND Arnaud
+  /** \date 05/12/2021
+  /** \file CommentGateway.php
+  /** \namespace Gateways
+*/
+
+/** \class Gateway of the comments CommentGateway.php
+*/
 Class CommentGateway {
     private $con;
 
@@ -6,6 +16,12 @@ Class CommentGateway {
       $this->con = $con;
 	}
 
+    /**
+     * Insert a comment into a database
+     * @param  Comment $c Comment to add
+     * @param  News    $n News associated with the comment to add
+     * @return [bool]     true if it's right ; false if there is a problem
+     */
     public function insert_comment(Comment $c, News $n):bool {
         $query="INSERT INTO TComment(id, date, content, id_news, login_user) VALUES(:id, :date, :content, :id_news, :login_user);";
 
@@ -18,6 +34,15 @@ Class CommentGateway {
         return ( $this->con->executeQuery($query, $params) );
     }
 
+    /**
+     * Insert a comment into a database
+     * @param  string $id         Id of the comment to insert
+     * @param  string $date       Date of the comment to insert
+     * @param  string $content    Description of the comment to insert
+     * @param  string $id_news    Id of the news, associate to the comment to insert
+     * @param  string $login_user Id of the login of the user who wants to add a comment
+     * @return [bool]             true if it's right ; false if there is a problem
+     */
 	public function insert_raw_comment(string $id, string $date, string $content, string $id_news, string $login_user):bool {
         $query="INSERT INTO TComment(id, date, content, id_news, login_user) VALUES(:id, :date, :content, :id_news, :login_user);";
 
@@ -30,12 +55,21 @@ Class CommentGateway {
         return ( $this->con->executeQuery($query, $params) );
     }
 
+    /**
+     * Delete a comment from a database
+     * @param  Comment $c Comment to delete
+     * @return [bool]     true if it's right ; false if there is a problem
+     */
     public function delete_comment(Comment $c):bool {
         $query="DELETE FROM TComment WHERE id=:id";
 
         return ( $this->con->executeQuery($query, array(':id'=>array($c->getId(), PDO::PARAM_INT))) );
     }
 
+    /**
+     * Get all comments
+     * @return [array] All the comments from the database
+     */
     public function getAllComment():array {
         $query="SELECT * FROM TComment;";
         $this->con->executeQuery($query, array());
@@ -43,6 +77,11 @@ Class CommentGateway {
         return ( $this->con->getResults() );
     }
 
+    /**
+     * Get comments by Id
+     * @param  int    $id Filter Id
+     * @return [array]    All the comments from the database with the good Id
+     */
     public function getCommentById(int $id):array {
         $query="SELECT * FROM TComment WHERE id=:id;";
 
@@ -50,6 +89,11 @@ Class CommentGateway {
         return $this->con->getResults();
     }
 	
+    /**
+     * Get full comments by id
+     * @param  int    $id Filter Id
+     * @return [type]     All the comments from the database with the good Id
+     */
 	public function getFullCommentById(int $id):array {
         $query="SELECT *
 				FROM TComment, TUser, TPicture, TNews
@@ -62,6 +106,11 @@ Class CommentGateway {
         return $this->con->getResults();
     }
 	
+    /**
+     * Get hour by Id
+     * @param  int    $id Filter Id
+     * @return [array]    All the hours from comments filter by Id
+     */
 	public function getHourById(int $id):array {
 		$query="SELECT DATE_FORMAT(date, '%H:%i') AS hour FROM TComment WHERE id=:id;";
 

@@ -1,4 +1,14 @@
 <?php
+namespace Jobs;
+/**
+  /** \author L'HOSTIS Loriane
+  /** \date 05/12/2021
+  /** \file User.php
+  /** \namespace Jobs
+*/
+
+/** \class job class of users User.php
+*/
 Class User {
   private $pseudo;
   private $password;

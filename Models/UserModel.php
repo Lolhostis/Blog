@@ -1,4 +1,6 @@
 <?php
+namespace Models;
+/*
 require_once('../Jobs/User.php');
 require_once('../Jobs/Picture.php');
 require_once('../Jobs/Comment.php');
@@ -6,7 +8,17 @@ require_once('../Gateways/UserGateway.php');
 require_once('../Gateways/PictureGateway.php');
 require_once('../Gateways/CommentGateway.php');
 require_once('../Gateways/NewsGateway.php');
+*/
 
+/**
+  /** \author L'HOSTIS Loriane & ALLEMAND Arnaud
+  /** \date 05/12/2021
+  /** \file UserModel.php
+  /** \namespace Models
+*/
+
+/** \class model class of comments UserModel.php
+*/
 class UserModel {
 	private $user_gw;
 	private $picture_gw;
@@ -23,6 +35,11 @@ class UserModel {
 		$this->picture_gw = new PictureGateway($this->con);
 	}
 
+	/**
+	 * Find a user with his login
+	 * @param  string $login Login of the user to find
+	 * @return [User]        User to find
+	 */
 	function findByLogin(string $login):User {
 		$raw_user = $this->user_gw->FindFullByName($login);
 		if( empty($raw_user) ) {
@@ -49,18 +66,36 @@ class UserModel {
 		return $user;
 	}
 
+	/**
+	 * Find if a user exists or no
+	 * @param  string $login Login of the user to find
+	 * @return [bool]        true if he exists; else false
+	 */
 	function existLogin(string $login):bool {
 		$query= 'SELECT login FROM tUser WHERE login=:Login';
 
     return $this->con->executeQuery($query, array(':Login' => array($login->getPseudo(), PDO::PARAM_STR)));
 	}
 
+	/**
+	 *  Find if a picture exists or no
+	 * @param  string $login Login of the picture to find
+	 * @return [bool]        true if it exists; else false
+	 */
 	function existPicture(string $login):bool {
 		$query= 'SELECT picture FROM tUser WHERE login=:Login';
 
     return $this->con->executeQuery($query, array(':Login' => array($login->getPseudo(), PDO::PARAM_STR)));
 	}
 	
+	/**
+	 * Add a new user
+	 * @param string $login      Login of the new user
+	 * @param string $password   Password of the new user
+	 * @param string $email      Email of the new user
+	 * @param bool   $isadmin    true if it is an administrator ; else false
+	 * @param int    $id_picture Id of the picture associated with the new user to add
+	 */
 	function addUser(string $login, string $password, string $email, bool $isadmin, int $id_picture):bool {
 
 		if( !empty($this->user_gw->FindByName($login)) ) {

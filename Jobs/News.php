@@ -1,8 +1,20 @@
 <?php
+namespace Jobs;
+/*
 require_once("User.php");
 require_once("Picture.php");
 require_once("Comment.php");
+*/
 
+/**
+  /** \author ALLEMAND Arnaud
+  /** \date 05/12/2021
+  /** \file News.php
+  /** \namespace Jobs
+*/
+
+/** \class job class of news News.php
+*/
 Class News {
   private $id;
   private $description;

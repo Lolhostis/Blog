@@ -1,4 +1,6 @@
 <?php
+namespace Models;
+/*
 require_once('../Jobs/User.php');
 require_once('../Jobs/Picture.php');
 require_once('../Jobs/Comment.php');
@@ -6,12 +8,21 @@ require_once('../Gateways/UserGateway.php');
 require_once('../Gateways/PictureGateway.php');
 require_once('../Gateways/CommentGateway.php');
 require_once('../Gateways/NewsGateway.php');
+*/
 
+/**
+  /** \author L'HOSTIS Loriane & ALLEMAND Arnaud
+  /** \date 05/12/2021
+  /** \file NewsModel.php
+  /** \namespace Models
+*/
+
+/** \class model class of comments NewsModel.php
+*/
 class NewsModel {
 	private $news_gw;
 	private $user_gw;
 	private $picture_gw;
-
 
 	private $con;
 	private $user='root';
@@ -26,7 +37,11 @@ class NewsModel {
 		$this->picture_gw = new PictureGateway($this->con);
 	}
 
-
+	/**
+	 * Find a news with its ID
+	 * @param  int    $id Id of the news to find
+	 * @return [News]     News to find
+	 */
 	function findById(int $id):News {
 		$raw_news = $this->news_gw->getFullNewsById($id);
 		if( empty($raw_news) ) {
@@ -72,6 +87,15 @@ class NewsModel {
 		return $news;
 	}
 	
+	/**
+	 * Add a new news
+	 * @param int    $id          Id of the news to add
+	 * @param string $title       Title of the news to add
+	 * @param string $description Description of the news to add
+	 * @param string $date        Date of the news to add
+	 * @param string $login_user  Login of the author who wants to add the news
+   * @return [bool]    true if it's right ; false if there is a problem
+	 */
 	function addNews(int $id, string $title, string $description, string $date, string $login_user):bool {
 
 		if( !empty($this->news_gw->getNewsById($id)) ) {

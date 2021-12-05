@@ -1,6 +1,16 @@
 <?php
-require_once("User.php");
+namespace Jobs;
+//require_once("User.php");
 
+/**
+  /** \author ALLEMAND Arnaud
+  /** \date 05/12/2021
+  /** \file Comment.php
+  /** \namespace Jobs
+*/
+
+/** \class job class of comments Comment.php
+*/
 Class Comment {
   private $id;
   private $text;
@@ -8,6 +18,8 @@ Class Comment {
   private $hour;
   private $author;
 
+  /** Constructor of the Comment job class
+    */
   public function __construct(int $id, string $text, string $date, string $hour, User $author) {
     $this->id=$id;
     $this->text=$text;

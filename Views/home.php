@@ -28,9 +28,11 @@
                 <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>
                 -->
 
-                 <button type="button" class="btn  btn-outline-light">
-                    <img  width="100%" height="225" src="Resources/Pictures/heart.jpg"/>
-                </button>
+                 <a  href="article.php">
+                   <button type="button" class="btn  btn-outline-light">
+                      <img  width="100%" height="225" src="Resources/Pictures/heart.jpg"/>
+                  </button>
+                </a>
 
                 <!-- https://bmcmedinformdecismak.biomedcentral.com/articles -->
 
@@ -49,9 +51,11 @@
 
             <div class="col">
               <div class="card shadow-sm">
-                <button type="button" class="btn btn-sm btn-outline-light">
-                    <img  width="100%" height="225" src="Resources/Pictures/woman-working.jpg"/>
-                </button>
+                <a  href="article.php">
+                  <button type="button" class="btn btn-sm btn-outline-light">
+                      <img  width="100%" height="225" src="Resources/Pictures/woman-working.jpg"/>
+                  </button>
+                </a>
 
                 <div class="card-body">
                   <p class="card-text">As the vast majority of women who present in threatened preterm labour (TPTL) will not deliver early, clinicians need to balance the risks of over-medicalising the majority of women, against the potential risk... </p>

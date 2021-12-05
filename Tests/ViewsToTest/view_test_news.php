@@ -14,6 +14,16 @@
             <p><input type="SUBMIT" name="action" value="get_news"/></p>
             <p><input type="SUBMIT" name="action" value="add_news"/></p>
             <p><input type="SUBMIT" name="action" value="delete_news"/></p>
+            <p><input type="RESET" /></p>
         </form>
+
+        <div>
+            <p>Results :</p>
+            <p><?php=$notification?></p>
+            <p>id of the news: <?php=$row_news['res_id_news']?></p>
+            <p>title : <?php=$row_news['res_title_news']?></p>
+            <p>description : <?php=$_POST['res_description_news']?></p>
+            <p>date : <?php=$row_news['res_date_news']?></p>
+            <p>login of the user : <?php=$row_news['res_login_user_news']?></p>
     </body>
 </html>

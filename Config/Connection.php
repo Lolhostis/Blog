@@ -1,6 +1,14 @@
 <?php
 namespace Config;
+/**
+  /** \author L'HOSTIS Loriane & ALLEMAND Arnaud
+  /** \date 05/12/2021
+  /** \file Connection.php
+  /** \namespace Config
+*/
 
+/** \class Connection of the databases
+*/
 class Connection extends PDO {
   private $stmt;
 
@@ -13,7 +21,6 @@ class Connection extends PDO {
          * @param array $parameters *
          * @return bool Returns `true` on success, `false` otherwise
   */
-
   public function executeQuery(string $query, array $parameters = []) : bool{
     $this->stmt = parent::prepare($query);
     foreach ($parameters as $name => $value) {

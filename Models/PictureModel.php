@@ -9,6 +9,15 @@ require_once('../Gateways/PictureGateway.php');
 require_once('../Gateways/NewsGateway.php');
 */
 
+/**
+  /** \author L'HOSTIS Loriane & ALLEMAND Arnaud
+  /** \date 05/12/2021
+  /** \file PictureModel.php
+  /** \namespace Models
+*/
+
+/** \class model class of comments PictureModel.php
+*/
 class PictureModel {
 	private $picture_gw;
 
@@ -23,6 +32,11 @@ class PictureModel {
 		$this->picture_gw = new \Gateways\PictureGateway($this->con);
 	}
 
+	/**
+	 * Find a picture with a specific Id
+	 * @param  int    $id Specific Id to find
+	 * @return [Picture]  Picture to find
+	 */
 	function findById(int $id):Picture {
 		$raw_picture = $this->picture_gw->FindById($id);
 		if( empty($raw_picture) ) {
@@ -37,6 +51,11 @@ class PictureModel {
 		return new Picture($raw_picture['id'], $raw_picture['uri'], $raw_picture['alt']);
 	}
 	
+	/**
+	 * Add a new picture
+	 * @param Picture $p Picture to add
+   * @return [bool]    true if it's right ; false if there is a problem
+	 */
 	function addPicture(Picture $p):bool {
 		if( !empty($this->picture_gw->FindByID($p->getId())) ) {
 			throw new Exception("the picture ID already exists");

@@ -12,7 +12,6 @@
       <a  href="home.php">
           <button class="btn btn-success" type="button">Home</button>
       </a>
-      <p/>
 
       <div class="d-grid gap-2 col-6 mx-auto">
         <img src="Resources/Pictures/heart.jpg" alt="" width="330" height="auto">
@@ -29,7 +28,7 @@
 
         <div class="form-floating">
           <input type="text" class="form-control" id="floatingInput" placeholder="Login">
-          <label for="floatingInput" name="txtNom" value="<?= $dVue['nom']  ?>" type="text" size="30">Login</label>
+          <label for="floatingInput" name="txtNom" value="<?php echo $_POST['txtNom']??""?>" type="text" size="30">Login</label>
         </div>
         <div class="form-floating">
           <input type="password" class="form-control" id="floatingPassword" placeholder="Password">

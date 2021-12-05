@@ -1,4 +1,6 @@
 <?php
+namespace Models;
+/*
 require_once('../Jobs/User.php');
 require_once('../Jobs/Picture.php');
 require_once('../Jobs/Comment.php');
@@ -6,7 +8,17 @@ require_once('../Gateways/UserGateway.php');
 require_once('../Gateways/PictureGateway.php');
 require_once('../Gateways/CommentGateway.php');
 require_once('../Gateways/NewsGateway.php');
+*/
 
+/**
+  /** \author L'HOSTIS Loriane & ALLEMAND Arnaud
+  /** \date 05/12/2021
+  /** \file CommentModel.php
+  /** \namespace Models
+*/
+
+/** \class model class of comments CommentModel.php
+*/
 class CommentModel {
 	private $comment_gw;
 	private $user_gw;
@@ -25,7 +37,12 @@ class CommentModel {
 		$this->news_gw = new NewsGateway($this->con);
 	}
 
-	function findByIdBis(int $id):Comment {
+	/**
+	 * Find a comment by Id
+	 * @param  int    $id Id to find
+	 * @return [Comment]  Comment to find
+	 */
+	function findById(int $id):Comment {
 		$raw_comment = $this->comment_gw->getFullCommentById($id);
 		if( empty($raw_comment) ) {
 			//Error, no comment matching this id
@@ -58,6 +75,15 @@ class CommentModel {
 		return $comment;
 	}
 	
+	/**
+	 * Add a comment
+	 * @param int    $id         Id of the comment to add
+	 * @param string $text       Description of the comment to add
+	 * @param string $date       Date of the comment to add
+	 * @param string $login_user Login of the user associated with the comment to add
+	 * @param string $id_news    Id of the news associated with the comment to add
+   * @return [bool]    true if it's right ; false if there is a problem
+	 */
 	function addComment(int $id, string $text, string $date, string $login_user, string $id_news):bool {
 		
 		if( empty($this->user_gw->FindByName($login_user)) ) {

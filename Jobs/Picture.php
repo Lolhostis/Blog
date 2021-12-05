@@ -1,4 +1,14 @@
 <?php
+namespace Jobs;
+/**
+  /** \author L'HOSTIS Loriane
+  /** \date 05/12/2021
+  /** \file Picture.php
+  /** \namespace Jobs
+*/
+
+/** \class job class of pictures Picture.php
+*/
 Class Picture {
   private $id;
   private $uri;

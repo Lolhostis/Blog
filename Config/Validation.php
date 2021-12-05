@@ -1,5 +1,4 @@
 <?php
-
 namespace Config;
 
 class Validation {
@@ -14,22 +13,22 @@ class Validation {
 		}
 	}
 
-    static function val_form_news_consult(string &$id, string &$errors) {
+    static function val_form_news_consult(string &$id, &$tErrors) {
         if (!isset($id)||$id==""||!filter_var($id, FILTER_VALIDATE_INT)) {
-            $errors = $errors."No valid id</br>";
+            $tErrors[] = "No valid id</br>";
             $id="";
         }
     }
 
-     static function val_form_news_add(int $id, string $title, string $description, string $date, string $login_user, string $errors) {
+     static function val_form_news_add(int &$id, string &$title, string &$description, string &$date, string &$login_user, &$tErrors) {
 
         if (!isset($id)||$id==""||!filter_var($id, FILTER_VALIDATE_INT)) {
-            $errors = $errors."No valid id</br>";
+            $tErrors[] = "No valid id</br>";
             $id="";
         }
 
         if (!isset($title)||$title=="") {
-            $errors = $errors."No valid title</br>";
+            $tErrors[] = "No valid title</br>";
             $title="";
         }
         else {
@@ -38,7 +37,7 @@ class Validation {
 
 
         if (!isset($description)||$description=="") {
-            $errors = $errors."No valid description</br>";
+            $tErrors[] = "No valid description</br>";
             $description="";
         }
         else {
@@ -46,7 +45,7 @@ class Validation {
         }
 
         if (!isset($date)||$date=="") {
-            $errors = $errors."No valid date</br>";
+            $tErrors[] = "No valid date</br>";
             $date="";
         }
         else {
@@ -54,7 +53,7 @@ class Validation {
         }
 
         if (!isset($login_user)||$login_user=="") {
-            $errors = $errors."No valid login</br>";
+            $tErrors[] = "No valid login</br>";
             $login_user="";
         }
         else {
@@ -62,9 +61,9 @@ class Validation {
         }
     }
 
-    static function val_form_user_consult(string &$login_user, string &$errors) {
+    static function val_form_user_consult(string &$login_user, &$errors) {
         if (!isset($login_user)||$login_user=="") {
-            $errors = $errors."No valid login</br>";
+            $tErrors[] = "No valid login</br>";
             $login_user="";
         }
         else {
@@ -72,9 +71,9 @@ class Validation {
         }
      }
 
-    static function val_form_user_add(string $login_user, string $password, string $email, string $id_picture, string $errors) {
+    static function val_form_user_add(string &$login_user, string &$password, string &$email, string &$id_picture, &$tErrors) {
         if (!isset($login_user)||$login_user=="") {
-            $errors = $errors."No valid login</br>";
+            $tErrors[] = "No valid login</br>";
             $login_user="";
         }
         else {
@@ -82,7 +81,7 @@ class Validation {
         }
 
         if (!isset($password)||$password=="") {
-            $errors = $errors."No valid password</br>";
+            $tErrors[] = "No valid password</br>";
             $password="";
         }
         else {
@@ -90,7 +89,7 @@ class Validation {
         }
 
         if (!isset($email)||$email==""||!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-            $errors = $errors."No valid email</br>";
+            $tErrors[] = "No valid email</br>";
             $email="";
         }
         else {
@@ -98,27 +97,27 @@ class Validation {
         }
 
         if (!isset($id_picture)||$id_picture==""||!filter_var($id_picture, FILTER_VALIDATE_INT)) {
-            $errors = $errors."No valid id_picture</br>";
+            $tErrors[] = "No valid id_picture</br>";
             $id_picture="";
         }
     }
 
 	
-	static function val_form_comment_consult(string &$id, array &$TErrors) {
+	static function val_form_comment_consult(string &$id, &$tErrors) {
         if (!isset($id)||$id==""||!filter_var($id, FILTER_VALIDATE_INT)) {
-            $TErrors[] = "No valid id</br>";
+            $tErrors[] = "No valid id</br>";
             $id="";
 		}
 	 }
 
-    static function val_form_comment_add(string &$id, string &$text, string &$date, string &$login_user, string &$id_news,string &$errors) {
+    static function val_form_comment_add(string &$id, string &$text, string &$date, string &$login_user, string &$id_news, &$tErrors) {
         if (!isset($id)||$id==""||!filter_var($id, FILTER_VALIDATE_INT)) {
-            $errors = $errors."No valid id</br>";
+            $tErrors[] = "No valid id</br>";
             $id="";
         }
 
     	if (!isset($text)||$text=="") {
-            $errors = $errors."No valid text</br>";
+            $tErrors[] = "No valid text</br>";
             $text="";
         }
     	else {
@@ -126,7 +125,7 @@ class Validation {
     	}
 
         if (!isset($date)||$date=="") {
-            $errors = $errors."No valid date</br>";
+            $tErrors[] = "No valid date</br>";
             $date="";
         }
     	else {
@@ -134,7 +133,7 @@ class Validation {
     	}
 
     	if (!isset($login_user)||$login_user=="") {
-            $errors = $errors."No valid login</br>";
+            $tErrors[] = "No valid login</br>";
             $login_user="";
         }
     	else {
@@ -142,19 +141,19 @@ class Validation {
     	}
 
     	if (!isset($id_news)||$id_news==""||!filter_var($id_news, FILTER_VALIDATE_INT)) {
-            $errors = $errors."No valid id_news</br>";
+            $tErrors[] = "No valid id_news</br>";
             $id_news="";
         }
     }
 
-    static function val_form_picture_consult(string &$id, array &$tErrors) {
+    static function val_form_picture_consult(string &$id, &$tErrors) {
         if (!isset($id)||$id==""||!filter_var($id, FILTER_VALIDATE_INT)) {
             $tErrors[] = "No valid id</br>";
             $id="";
         }
     }
 
-    static function val_form_picture_add(string &$id, string &$uri, string &$alt, array &$tErrors) {
+    static function val_form_picture_add(string &$id, string &$uri, string &$alt, &$tErrors) {
         if (!isset($id)||$id==""||!filter_var($id, FILTER_VALIDATE_INT)) {
             $tErrors[] = "No valid id</br>";
             $id="";

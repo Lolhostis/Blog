@@ -1,5 +1,13 @@
 <?php
 namespace Tests;
+
+/**
+  /** \author L'HOSTIS Loriane
+  /** \date 05/12/2021
+  /** \file PictureController.php
+  /** \namespace Tests
+*/
+
 /*
 require_once('../Jobs/Comment.php');
 require_once('../Jobs/News.php');
@@ -10,8 +18,13 @@ require_once('../Config/Connexion.php');
 require_once('../Config/Validation.php');
 */
 
+
+/** \class Controller of pictures PictureController.php
+*/
 class PictureController {
 
+   /** Constructor of the Picture controller
+    */
   function __construct() {
     global $rep,$tViews;
     session_start();
@@ -41,7 +54,7 @@ class PictureController {
 
         default:
           $tErrors[] =  "No php view";
-          require ($rep.$tViews['article']);
+          require ($rep.$tViews['view_test_picture']);
           break;
       }
 
@@ -56,6 +69,8 @@ class PictureController {
     exit(0);
   }
 
+ /** This function loads the page
+  */
   function Reinit() {
   global $rep,$tViews;
 
@@ -63,6 +78,9 @@ class PictureController {
     require ($rep.$tViews['view_test_picture']);
   }
 
+   /** This function return informations about a picture from the database
+    * \param[in, out] tErrors Array of errors
+    */
   function get_picture(array $tErrors) {
     global $rep,$tViews;
 
@@ -82,6 +100,9 @@ class PictureController {
     require ($rep.$tViews['view_test_picture']);
   }
 
+   /** This function add a picture into the database
+    * \param[in, out] tErrors Array of errors
+    */
   function add_picture(array $tErrors) {
     global $rep,$tViews;
 
@@ -105,29 +126,3 @@ class PictureController {
   }
 }
 ?>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
