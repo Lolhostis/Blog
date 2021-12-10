@@ -1,5 +1,10 @@
 <?php
 namespace Tests;
+use \Config\Connection;
+use \Gateways\PictureGateway;
+use \Jobs\Picture;
+use \Config\Validation;
+use \Models\PictureModel;
 
 /**
   /** \author L'HOSTIS Loriane
@@ -33,7 +38,8 @@ class PictureController {
     $tErrors = array();
 
     try{
-      $action=$_REQUEST['action'];
+      $action= isset($_REQUEST['action']) ? $_REQUEST['action'] : NULL;
+    //  $action=$_REQUEST['action'];
 
       switch($action) {
         case NULL:
@@ -58,10 +64,10 @@ class PictureController {
           break;
       }
 
-    } catch (PDOException $e){
+    } catch (\PDOException $e){
       $tErrors[] =  "Unexpected error";
        require ($rep.$tViews['error']);
-    }catch (Exception $e2){
+    }catch (\Exception $e2){
       $tErrors[] =  "Unexpected error";
       require ($rep.$tViews['error']);
     }
@@ -82,13 +88,12 @@ class PictureController {
     * \param[in, out] tErrors Array of errors
     */
   function get_picture(array $tErrors) {
-    global $rep,$tViews;
+    global $rep, $tViews;
 
     $id_picture=$_POST['id_picture'];
-    // \config\Validation::val_form($nom,$age,$tViewError);
-    \Config\Validation::val_form_picture_consult($id_picture, $tErrors); //if there is an exception, it is catched by the case exception in the 'case try'
+    Validation::val_form_picture_consult($id_picture, $tErrors); //if there is an exception, it is catched by the case exception in the 'case try'
 
-    $model_picture = new \Models\PictureModel();
+    $model_picture = new PictureModel();
 
     $data=$model_picture->findById($id_picture); //if there is an exception, it is catched by the case exception in the 'case try'
 
@@ -109,9 +114,9 @@ class PictureController {
     $id_picture=$_POST['id_picture'];
     $uri_picture=$_POST['uri_picture'];
     $alt_picture=$_POST['alt_picture'];
-    \Config\Validation::val_form_picture_add($id_picture, $uri_picture, $alt_picture, $tErrors);
+    Validation::val_form_picture_add($id_picture, $uri_picture, $alt_picture, $tErrors);
 
-    $model_picture = new \Models\PictureModel();
+    $model_picture = new PictureModel();
 
     $result_insert=$model_picture->addPicture(new Picture($id_picture, $uri_picture, $alt_picture));
 

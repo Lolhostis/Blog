@@ -5,7 +5,6 @@
     </head>
     <body>
 
-
 		<form method="POST">
            <p>Id : <input type="INT" name="id_picture" value="<?php echo $_POST['id_picture']??""?>" required/></p>
 		   <p>Uri : <input type="TEXT" name="uri_picture" value="<?php echo $_POST['uri_picture']??""?>"/></p>

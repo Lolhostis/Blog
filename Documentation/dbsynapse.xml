@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+- phpMyAdmin XML Dump
+- version 5.0.2
+- https://www.phpmyadmin.net
+-
+- Hôte : 127.0.0.1:3306
+- Généré le : mer. 08 déc. 2021 à 15:14
+- Version du serveur :  5.7.31
+- Version de PHP : 7.3.21
+-->
+
+<pma_xml_export version="1.0" xmlns:pma="https://www.phpmyadmin.net/some_doc_url/">
+    <!--
+    - Structure schemas
+    -->
+    <pma:structure_schemas>
+        <pma:database name="dbsynapse" collation="utf8mb4_unicode_ci" charset="utf8mb4">
+            <pma:table name="tcomment">
+                CREATE TABLE `tcomment` (
+                  `id` int(11) NOT NULL AUTO_INCREMENT,
+                  `date` date NOT NULL,
+                  `content` text COLLATE utf8mb4_unicode_ci NOT NULL,
+                  `id_news` int(11) NOT NULL,
+                  `login_user` varchar(30) COLLATE utf8mb4_unicode_ci NOT NULL,
+                  PRIMARY KEY (`id`),
+                  KEY `id_news` (`id_news`),
+                  KEY `login_user` (`login_user`)
+                ) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+            </pma:table>
+            <pma:table name="tnews">
+                CREATE TABLE `tnews` (
+                  `id` int(11) NOT NULL AUTO_INCREMENT,
+                  `title` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
+                  `description` text COLLATE utf8mb4_unicode_ci NOT NULL,
+                  `date` date NOT NULL,
+                  `login_user` varchar(30) COLLATE utf8mb4_unicode_ci NOT NULL,
+                  PRIMARY KEY (`id`),
+                  KEY `login_user` (`login_user`)
+                ) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+            </pma:table>
+            <pma:table name="tnewsincludepicture">
+                CREATE TABLE `tnewsincludepicture` (
+                  `id_news` int(11) NOT NULL,
+                  `id_picture` int(11) NOT NULL,
+                  PRIMARY KEY (`id_news`,`id_picture`),
+                  KEY `id_picture` (`id_picture`)
+                ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+            </pma:table>
+            <pma:table name="tpicture">
+                CREATE TABLE `tpicture` (
+                  `id` int(11) NOT NULL AUTO_INCREMENT,
+                  `uri` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
+                  `alt` varchar(500) COLLATE utf8mb4_unicode_ci NOT NULL,
+                  PRIMARY KEY (`id`)
+                ) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+            </pma:table>
+            <pma:table name="tuser">
+                CREATE TABLE `tuser` (
+                  `login` varchar(30) COLLATE utf8mb4_unicode_ci NOT NULL,
+                  `password` varchar(30) COLLATE utf8mb4_unicode_ci NOT NULL,
+                  `email` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
+                  `is_admin` tinyint(1) NOT NULL,
+                  `id_picture` int(11) NOT NULL,
+                  PRIMARY KEY (`login`),
+                  UNIQUE KEY `email` (`email`),
+                  KEY `id_picture` (`id_picture`)
+                ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+            </pma:table>
+        </pma:database>
+    </pma:structure_schemas>
+
+    <!--
+    - Base de données : 'dbsynapse'
+    -->
+    <database name="dbsynapse">
+        <!-- Table tcomment -->
+        <table name="tcomment">
+            <column name="id">1</column>
+            <column name="date">2021-11-18</column>
+            <column name="content">Ceci est mon commentaire signé Chpatata</column>
+            <column name="id_news">1</column>
+            <column name="login_user">Chpatata</column>
+        </table>
+        <table name="tcomment">
+            <column name="id">2</column>
+            <column name="date">2021-11-03</column>
+            <column name="content">de&amp;#34;d</column>
+            <column name="id_news">1</column>
+            <column name="login_user">Chpatata</column>
+        </table>
+        <table name="tcomment">
+            <column name="id">3</column>
+            <column name="date">2021-11-03</column>
+            <column name="content">de&amp;#34;d</column>
+            <column name="id_news">1</column>
+            <column name="login_user">Chpatata</column>
+        </table>
+        <!-- Table tnews -->
+        <table name="tnews">
+            <column name="id">1</column>
+            <column name="title">News num 1</column>
+            <column name="description">Ceci est le texte de la news numero 1</column>
+            <column name="date">2021-11-03</column>
+            <column name="login_user">Chpatata</column>
+        </table>
+        <table name="tnews">
+            <column name="id">2</column>
+            <column name="title">DDD</column>
+            <column name="description">DEZDZ</column>
+            <column name="date">2021-11-04</column>
+            <column name="login_user">Chpatata</column>
+        </table>
+        <!-- Table tnewsincludepicture -->
+        <!-- Table tpicture -->
+        <table name="tpicture">
+            <column name="id">1</column>
+            <column name="uri">/images/chpatata.png</column>
+            <column name="alt">image de chpatata</column>
+        </table>
+        <table name="tpicture">
+            <column name="id">2</column>
+            <column name="uri">/pictures/arano</column>
+            <column name="alt">D2</column>
+        </table>
+        <!-- Table tuser -->
+        <table name="tuser">
+            <column name="login">Chpatata</column>
+            <column name="password">chatonchaton</column>
+            <column name="email">chpatata@gmail.com</column>
+            <column name="is_admin">1</column>
+            <column name="id_picture">1</column>
+        </table>
+        <table name="tuser">
+            <column name="login">Arn</column>
+            <column name="password">chaton</column>
+            <column name="email">a@a.a</column>
+            <column name="is_admin">1</column>
+            <column name="id_picture">1</column>
+        </table>
+    </database>
+</pma_xml_export>

@@ -1,5 +1,8 @@
 <?php
 namespace Models;
+use \Config\Connection;
+use \Gateways\PictureGateway;
+use \Jobs\Picture;
 
 /*
 require_once('../Jobs/User.php');
@@ -27,9 +30,9 @@ class PictureModel {
 	private $dsn='mysql:host=localhost;dbname=dbsynapse';
 
 	public function __construct() {
-		$this->con=new \Config\Connection($this->dsn, $this->user, $this->pass);
+		$this->con=new Connection($this->dsn, $this->user, $this->pass);
 
-		$this->picture_gw = new \Gateways\PictureGateway($this->con);
+		$this->picture_gw = new PictureGateway($this->con);
 	}
 
 	/**

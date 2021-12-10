@@ -9,12 +9,12 @@ namespace Config;
 
 /** \class Connection of the databases
 */
-class Connection extends PDO {
+class Connection extends \PDO {
   private $stmt;
 
   public function __construct(string $dsn, string $username, string $password) {
     parent::__construct($dsn,$username,$password);
-    $this->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    $this->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
   }
 
   /** * @param string $query
@@ -32,7 +32,7 @@ class Connection extends PDO {
 
   public function getResults() : array {
     //return $this->stmt->fetchall();
-    return $this->stmt->fetchall(PDO::FETCH_ASSOC);
+    return $this->stmt->fetchall(\PDO::FETCH_ASSOC);
   }
 }
 
