@@ -1,5 +1,17 @@
 <?php
 namespace Models;
+
+use \Config\Connection;
+
+use \Gateways\PictureGateway;
+use \Gateways\UserGateway;
+use \Gateways\NewsGateway;
+
+use \Jobs\User;
+use \Jobs\Picture;
+use \Jobs\News;
+
+
 /*
 require_once('../Jobs/User.php');
 require_once('../Jobs/Picture.php');

@@ -1,5 +1,14 @@
 <?php
 namespace Models;
+
+use \Config\Connection;
+
+use \Gateways\PictureGateway;
+use \Gateways\UserGateway;
+
+use \Jobs\Picture;
+use \Jobs\User;
+
 /*
 require_once('../Jobs/User.php');
 require_once('../Jobs/Picture.php');
@@ -74,7 +83,7 @@ class UserModel {
 	function existLogin(string $login):bool {
 		$query= 'SELECT login FROM tUser WHERE login=:Login';
 
-    return $this->con->executeQuery($query, array(':Login' => array($login->getPseudo(), PDO::PARAM_STR)));
+    return $this->con->executeQuery($query, array(':Login' => array($login->getPseudo(), \PDO::PARAM_STR)));
 	}
 
 	/**
@@ -85,7 +94,7 @@ class UserModel {
 	function existPicture(string $login):bool {
 		$query= 'SELECT picture FROM tUser WHERE login=:Login';
 
-    return $this->con->executeQuery($query, array(':Login' => array($login->getPseudo(), PDO::PARAM_STR)));
+    return $this->con->executeQuery($query, array(':Login' => array($login->getPseudo(), \PDO::PARAM_STR)));
 	}
 	
 	/**

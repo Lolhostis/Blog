@@ -1,7 +1,10 @@
 <?php
 namespace Models;
+
 use \Config\Connection;
+
 use \Gateways\PictureGateway;
+
 use \Jobs\Picture;
 
 /*
