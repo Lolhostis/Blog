@@ -58,11 +58,11 @@ class CommentModel {
 		$raw_comment = $this->comment_gw->getFullCommentById($id);
 		if( empty($raw_comment) ) {
 			//Error, no comment matching this id
-			throw new Exception("No comment matching this id");
+			throw new \Exception("No comment matching this id");
 		}
 		if( count($raw_comment) != 1) {
 			//Error, multiple comments matching this id
-			throw new Exception("Multiples comments matching this id");
+			throw new \Exception("Multiples comments matching this id");
 		}
 		$raw_comment = $raw_comment[0];
 		$raw_comment_hour = $this->comment_gw->getHourById($id);
@@ -99,15 +99,15 @@ class CommentModel {
 	function addComment(int $id, string $text, string $date, string $login_user, string $id_news):bool {
 		
 		if( empty($this->user_gw->FindByName($login_user)) ) {
-			throw new Exception("Unknown user login");
+			throw new \Exception("Unknown user login");
 		}
 		
 		if( empty($this->news_gw->getNewsById($id_news)) ) {
-			throw new Exception("Unknown news's ID ");
+			throw new \Exception("Unknown news's ID ");
 		}
 		
 		if( !empty($this->comment_gw->getCommentById($id)) ) {
-			throw new Exception("ID Comment already exists");
+			throw new \Exception("ID Comment already exists");
 		}
 
 		return $this->comment_gw->insert_raw_comment($id, $date, $text, $id_news, $login_user);

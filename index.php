@@ -23,10 +23,8 @@ $myLibLoader = new SplClassLoader('Tests', './');
 $myLibLoader->register();
 
 $pictureCont = new \Tests\PictureController();
-/*
-$commentCont = new \Tests\comment_controler();
-$newsCont = new \Tests\news_controler();
-$userCont = new \Tests\user_controler();
-*/
+$commentCont = new \Tests\CommentControler();
+$newsCont = new \Tests\NewsControler();
+$userCont = new \Tests\UserControler();
 
 ?>

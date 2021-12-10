@@ -1,19 +1,8 @@
 <?php
 namespace Models;
-
 use \Config\Connection;
-
 use \Gateways\PictureGateway;
-
 use \Jobs\Picture;
-
-/*
-require_once('../Jobs/User.php');
-require_once('../Jobs/Picture.php');
-require_once('../Jobs/Comment.php');
-require_once('../Gateways/PictureGateway.php');
-require_once('../Gateways/NewsGateway.php');
-*/
 
 /**
   /** \author L'HOSTIS Loriane & ALLEMAND Arnaud
@@ -46,10 +35,10 @@ class PictureModel {
 	function findById(int $id):Picture {
 		$raw_picture = $this->picture_gw->FindById($id);
 		if( empty($raw_picture) ) {
-			throw new Exception("No picture matching this id");
+			throw new \Exception("No picture matching this id");
 		}
 		if( count($raw_picture) != 1) {
-			throw new Exception("Multiples pictures matching this id");
+			throw new \Exception("Multiples pictures matching this id");
 		}
 		$raw_picture = $raw_picture[0];
 		
@@ -64,7 +53,7 @@ class PictureModel {
 	 */
 	function addPicture(Picture $p):bool {
 		if( !empty($this->picture_gw->FindByID($p->getId())) ) {
-			throw new Exception("the picture ID already exists");
+			throw new \Exception("the picture ID already exists");
 		}
 
 		return $this->picture_gw->insert_raw_picture($p->getId(), $p->getUri(), $p->getAlt());

@@ -3,29 +3,26 @@
 ?>
 
   </head>
-   <body class="text-center">
+    <body class="text-center">
 
-  <main class="px-3">
-      <p></br></br></p>
-      <img height="25%" src="Resources/Pictures/error.png"/>
+      <main class="px-3">
+        <p></br></br></p>
+        <img height="35%" src="<?= "Views/Resources/Pictures/error.png" ?>" />
 
- <p class="lead">
-<?php
-  if( isset($tErrors) ) {
-    foreach($tErrors as $key => $value) {
-      echo $key." :</br>";
-      foreach($value as $msg) {
-        echo "\t".$msg."</br>";
-      }
-    }
-  }
-?>
-</p>
-      <a  href="home.php">
-        <button class="btn btn-secondary me-md-2" type="button">Home</button>
-      </a>
-  </main>
+        <p class="lead">
+        <?php
+        if( isset($tErrors) ) {
+          foreach($tErrors as $value) {
+            echo $value ."</br>";
+          }
+        }
+        ?>
+        </p>
+        <a  href="<?=$tViews['home']?>">
+          <button class="btn btn-secondary me-md-2" type="button">Home</button>
+        </a>
+      </main>
 
-  </body>
+    </body>
    <script src="Resources/js/bootstrap.bundle.min.js"></script>
 </html>

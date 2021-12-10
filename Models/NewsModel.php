@@ -58,11 +58,11 @@ class NewsModel {
 		$raw_news = $this->news_gw->getFullNewsById($id);
 		if( empty($raw_news) ) {
 			//Error, no comment matching this id
-			throw new Exception("No news matching this id");
+			throw new \Exception("No news matching this id");
 		}
 		if( count($raw_news) != 1) {
 			//Error, multiple comments matching this id
-			throw new Exception("Multiple news matching this id");
+			throw new \Exception("Multiple news matching this id");
 		}
 		$raw_news = $raw_news[0];
 		
@@ -111,10 +111,10 @@ class NewsModel {
 	function addNews(int $id, string $title, string $description, string $date, string $login_user):bool {
 
 		if( !empty($this->news_gw->getNewsById($id)) ) {
-			throw new Exception("the news ID already exists");
+			throw new \Exception("the news ID already exists");
 		}
 		if( empty($this->user_gw->FindByName($login_user)) ) {
-			throw new Exception("Unknown user login");
+			throw new \Exception("Unknown user login");
 		}
 
 		return $this->news_gw->insert_raw_news($id, $title, $description, $date, $login_user);

@@ -102,6 +102,10 @@ class PictureController {
 
     $id_picture=$_POST['id_picture'];
     $uri_picture=$_POST['uri_picture'];
+    /* if($uri_picture==""){
+      "Views/Resources/Pictures/error.png";
+    }
+    */
     $alt_picture=$_POST['alt_picture'];
     Validation::val_form_picture_add($id_picture, $uri_picture, $alt_picture, $tErrors);
 

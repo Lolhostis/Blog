@@ -52,10 +52,10 @@ class UserModel {
 	function findByLogin(string $login):User {
 		$raw_user = $this->user_gw->FindFullByName($login);
 		if( empty($raw_user) ) {
-			throw new Exception("No user matching this id");
+			throw new \Exception("No user matching this id");
 		}
 		if( count($raw_user) != 1) {
-			throw new Exception("Multiple users matching this id");
+			throw new \Exception("Multiple users matching this id");
 		}
 		$raw_user = $raw_user[0];
 		
@@ -108,11 +108,11 @@ class UserModel {
 	function addUser(string $login, string $password, string $email, bool $isadmin, int $id_picture):bool {
 
 		if( !empty($this->user_gw->FindByName($login)) ) {
-			throw new Exception("Login already existing");
+			throw new \Exception("Login already existing");
 		}
 
 		if( empty($this->picture_gw->FindById($id_picture)) ) {
-			throw new Exception("Unknown Picture ID");
+			throw new \Exception("Unknown Picture ID");
 		}
 		
 		return $this->user_gw->insert_raw_user($login, $password, $email, $isadmin, $id_picture);
