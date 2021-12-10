@@ -1,5 +1,7 @@
 <?php
 namespace Tests;
+use \Models\CommentModel;
+use  \Config\Validation;
 
 /**
   /** \author L'HOSTIS Loriane
@@ -48,10 +50,10 @@ class CommentController {
           break;
       }
 
-    } catch (PDOException $e){
+    } catch (\PDOException $e){
       $tErrors[] =  "Unexpected error";
        require ($rep.$tViews['error']);
-    }catch (Exception $e2){
+    }catch (\Exception $e2){
       $tErrors[] =  "Unexpected error";
       require ($rep.$tViews['error']);
     }
@@ -75,9 +77,9 @@ class CommentController {
     global $rep,$tViews;
 
     $id_comment=$_POST['id_comment'];
-    \Config\Validation::val_form_comment_consult($id_comment, $tErrors); //if there is an exception, it is catched by the case exception in the 'case try'
+    Validation::val_form_comment_consult($id_comment, $tErrors); //if there is an exception, it is catched by the case exception in the 'case try'
 
-    $model_comment = new \Models\CommentModel();
+    $model_comment = new CommentModel();
 
     $data=$model_comment->findById($id_comment); //if there is an exception, it is catched by the case exception in the 'case try'
 
@@ -104,9 +106,9 @@ class CommentController {
     $hour_comment=$_POST['hour_comment'];
     $login_user_comment=$_POST['login_user_comment'];
     $id_news_comment = $_POST['id_news_comment'];
-    \Config\Validation::val_form_comment_add($id_comment, $text_comment, $date_comment, $login_user_comment, $id_news_comment, $tErrors);
+    Validation::val_form_comment_add($id_comment, $text_comment, $date_comment, $login_user_comment, $id_news_comment, $tErrors);
 
-    $model_comment = new \Models\CommentModel();
+    $model_comment = new CommentModel();
 
     $result_insert=$model_comment->addComment($id_comment, $text_comment, $date_comment, $login_user_comment, $id_news_comment);
 

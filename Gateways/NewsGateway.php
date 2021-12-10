@@ -1,5 +1,9 @@
 <?php
 namespace Gateways;
+use \Config\Connection;
+use \Jobs\News;
+use \Jobs\User;
+
 /**
   /** \author L'HOSTIS Loriane & ALLEMAND Arnaud
   /** \date 05/12/2021
@@ -25,11 +29,11 @@ Class NewsGateway {
    public function insert_news(News $n, User $u):bool {
         $query="INSERT INTO TNews(id, title, description, date, login_user) VALUES(:id, :title, :description, :date, :login_user);";
 
-        $params[':id']=array($n->getId(), PDO::PARAM_INT);
-        $params[':title']=array($n->getTitle(), PDO::PARAM_STR);
-        $params[':description']=array($n->getDescription(), PDO::PARAM_STR);
-        $params[':date']=array($n->getDate(), PDO::PARAM_STR);
-        $params[':login_user']=array($u->getPseudo(), PDO::PARAM_STR);
+        $params[':id']=array($n->getId(), \PDO::PARAM_INT);
+        $params[':title']=array($n->getTitle(), \PDO::PARAM_STR);
+        $params[':description']=array($n->getDescription(), \PDO::PARAM_STR);
+        $params[':date']=array($n->getDate(), \PDO::PARAM_STR);
+        $params[':login_user']=array($u->getPseudo(), \PDO::PARAM_STR);
 
         return ( $this->con->executeQuery($query, $params) );
     }
@@ -46,11 +50,11 @@ Class NewsGateway {
     public function insert_raw_news(int $id, string $title, string $description, string $date, string $login_user):bool {
         $query="INSERT INTO TNews(id, title, description, date, login_user) VALUES(:id, :title, :description, :date, :login_user);";
 
-        $params[':id']=array($id, PDO::PARAM_INT);
-        $params[':title']=array($title, PDO::PARAM_STR);
-        $params[':description']=array($description, PDO::PARAM_STR);
-        $params[':date']=array($date, PDO::PARAM_STR);
-        $params[':login_user']=array($login_user, PDO::PARAM_STR);
+        $params[':id']=array($id, \PDO::PARAM_INT);
+        $params[':title']=array($title, \PDO::PARAM_STR);
+        $params[':description']=array($description, \PDO::PARAM_STR);
+        $params[':date']=array($date, \PDO::PARAM_STR);
+        $params[':login_user']=array($login_user, \PDO::PARAM_STR);
 
         return ( $this->con->executeQuery($query, $params) );
     }
@@ -63,7 +67,7 @@ Class NewsGateway {
     public function delete_news(News $n):bool {
         $query="DELETE FROM TNews WHERE id=:id";
 
-        return ( $this->con->executeQuery($query, array(':id'=>array($n->getId(), PDO::PARAM_INT))) );
+        return ( $this->con->executeQuery($query, array(':id'=>array($n->getId(), \PDO::PARAM_INT))) );
     }
 
     /**
@@ -85,7 +89,7 @@ Class NewsGateway {
     public function getNewsById(int $id):array {
         $query="SELECT * FROM TNews WHERE id=:id;";
 
-        $this->con->executeQuery($query, [':id'=>array($id, PDO::PARAM_INT)]);
+        $this->con->executeQuery($query, [':id'=>array($id, \PDO::PARAM_INT)]);
 
         return $this->con->getResults();
     }
@@ -98,7 +102,7 @@ Class NewsGateway {
 	public function getFullNewsById(int $id):array {
         $query="SELECT * FROM TNews, TUser, TPicture WHERE TNews.login_user=TUser.login AND TUser.id_picture = TPicture.id AND TNews.id=:id;";
 
-        $this->con->executeQuery($query, [':id'=>array($id, PDO::PARAM_INT)]);
+        $this->con->executeQuery($query, [':id'=>array($id, \PDO::PARAM_INT)]);
 
         return $this->con->getResults();
     }
@@ -111,7 +115,7 @@ Class NewsGateway {
     public function getFullPicturesById(int $id):array {
         $query="SELECT id_picture FROM TNewsIncludePicture WHERE id_news=:id;";
 
-        $this->con->executeQuery($query, [':id'=>array($id, PDO::PARAM_INT)]);
+        $this->con->executeQuery($query, [':id'=>array($id, \PDO::PARAM_INT)]);
 
         return $this->con->getResults();
     }
@@ -124,7 +128,7 @@ Class NewsGateway {
     public function getFullCommentsById(int $id):array {
         $query="SELECT id AS id_comment FROM TComment WHERE id_news=:id;";
 
-        $this->con->executeQuery($query, [':id'=>array($id, PDO::PARAM_INT)]);
+        $this->con->executeQuery($query, [':id'=>array($id, \PDO::PARAM_INT)]);
 
         return $this->con->getResults();
     }

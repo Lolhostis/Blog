@@ -1,5 +1,7 @@
 <?php
 namespace Tests;
+use \Models\UserModel;
+use  \Config\Validation;
 
 /**
   /** \author L'HOSTIS Loriane
@@ -48,10 +50,10 @@ class UserController {
           break;
       }
 
-    } catch (PDOException $e){
+    } catch (\PDOException $e){
       $tErrors[] =  "Unexpected error";
        require ($rep.$tViews['error']);
-    }catch (Exception $e2){
+    }catch (\Exception $e2){
       $tErrors[] =  "Unexpected error";
       require ($rep.$tViews['error']);
     }
@@ -75,9 +77,9 @@ class UserController {
     global $rep,$tViews;
 
     $login_user=$_POST['login_user'];
-    \Config\Validation::val_form_user_consult($login_user, $tErrors); //if there is an exception, it is catched by the case exception in the 'case try'
+    Validation::val_form_user_consult($login_user, $tErrors); //if there is an exception, it is catched by the case exception in the 'case try'
 
-    $model_user = new \Models\UserModel();
+    $model_user = new UserModel();
 
     $data=$model_user->findByLogin($login_user); //if there is an exception, it is catched by the case exception in the 'case try'
 
@@ -103,9 +105,9 @@ class UserController {
     $isadmin_user=$_POST['isadmin_user'];
     $id_picture_user=$_POST['id_picture_user'];
     $isadmin_user = $_POST['isadmin_user'];
-    \Config\Validation::val_form_user_add($login_user, $password_user, $email_user, $id_picture_user, $tErrors);
+    Validation::val_form_user_add($login_user, $password_user, $email_user, $id_picture_user, $tErrors);
 
-    $model_user = new \Models\UserModel();
+    $model_user = new UserModel();
 
     $result_insert=$model_user->addUser($login_user, $password_user, $email_user, $isadmin_user, $id_picture_user);
 

@@ -18,9 +18,9 @@
         <div>
             <p>Results :</p>
             <p><?php=$notification?></p>
-            <p>Id : <?php=$row_picture['res_id_picture']?></p>
-           <p>Uri : <?php=$row_picture['res_uri_picture']?></p>
-           <p>Alt : <?php=$row_picture['res_alt_picture']?></p>
+            <p>Id : <?php= $row_picture['res_id_picture'] ?? "" ?></p>
+           <p>Uri : <?php= $row_picture['res_uri_picture']?></p>
+           <p>Alt : <?php= $row_picture['res_alt_picture']?></p>
            <p>Result Insert : <?php=$row_picture['res_insert']?></p>
            <img src="source_uri_picture" placeholder="placeholder_alt_picture"/>
         </div>

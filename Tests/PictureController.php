@@ -13,17 +13,6 @@ use \Models\PictureModel;
   /** \namespace Tests
 */
 
-/*
-require_once('../Jobs/Comment.php');
-require_once('../Jobs/News.php');
-require_once('../Jobs/Picture.php');
-require_once('../Jobs/User.php');
-require_once('../Models/PictureModel.php');
-require_once('../Config/Connexion.php');
-require_once('../Config/Validation.php');
-*/
-
-
 /** \class Controller of pictures PictureController.php
 */
 class PictureController {

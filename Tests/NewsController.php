@@ -1,5 +1,7 @@
 <?php
 namespace Tests;
+use \Models\NewsModel;
+use  \Config\Validation;
 
 /**
   /** \author L'HOSTIS Loriane
@@ -75,9 +77,9 @@ class NewsController {
     global $rep,$tViews;
 
     $id_news=$_POST['id_news'];
-    \Config\Validation::val_form_news_consult($id_news, $tErrors); //if there is an exception, it is catched by the case exception in the 'case try'
+    Validation::val_form_news_consult($id_news, $tErrors); //if there is an exception, it is catched by the case exception in the 'case try'
 
-    $model_news = new \Models\NewsModel();
+    $model_news = new NewsModel();
 
     $data=$model_news->findById($id_news); //if there is an exception, it is catched by the case exception in the 'case try'
 
@@ -102,9 +104,9 @@ class NewsController {
     $description_news=$_POST['description_news'];
     $date_news=$_POST['date_news'];
     $login_user_news=$_POST['login_user_news'];
-    \Config\Validation::val_form_news_add($id_news, $title_news, $description_news, $date_news, $login_user_news, $tErrors);
+    Validation::val_form_news_add($id_news, $title_news, $description_news, $date_news, $login_user_news, $tErrors);
 
-    $model_news = new \Models\NewsModel();
+    $model_news = new NewsModel();
 
     $result_insert=$model_news-> addNews($id_news, $title_news, $description_news, $date_news, $login_user_news);
 

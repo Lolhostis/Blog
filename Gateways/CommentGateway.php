@@ -1,5 +1,8 @@
 <?php
 namespace Gateways;
+use \Config\Connection;
+use \Jobs\News;
+use \Jobs\Comment;
 /**
   /** \author L'HOSTIS Loriane & ALLEMAND Arnaud
   /** \date 05/12/2021
@@ -25,11 +28,11 @@ Class CommentGateway {
     public function insert_comment(Comment $c, News $n):bool {
         $query="INSERT INTO TComment(id, date, content, id_news, login_user) VALUES(:id, :date, :content, :id_news, :login_user);";
 
-        $params[':id']=array($c->getId(), PDO::PARAM_INT);
-        $params[':date']=array($c->getDate(), PDO::PARAM_STR);
-        $params[':content']=array($c->getText(), PDO::PARAM_STR);
-        $params[':id_news']=array($n->getId(), PDO::PARAM_INT);
-        $params[':login_user']=array($c->getAuthor()->getPseudo(), PDO::PARAM_STR);
+        $params[':id']=array($c->getId(), \PDO::PARAM_INT);
+        $params[':date']=array($c->getDate(), \PDO::PARAM_STR);
+        $params[':content']=array($c->getText(), \PDO::PARAM_STR);
+        $params[':id_news']=array($n->getId(), \PDO::PARAM_INT);
+        $params[':login_user']=array($c->getAuthor()->getPseudo(), \PDO::PARAM_STR);
 
         return ( $this->con->executeQuery($query, $params) );
     }
@@ -46,11 +49,11 @@ Class CommentGateway {
 	public function insert_raw_comment(string $id, string $date, string $content, string $id_news, string $login_user):bool {
         $query="INSERT INTO TComment(id, date, content, id_news, login_user) VALUES(:id, :date, :content, :id_news, :login_user);";
 
-        $params[':id']=array($id, PDO::PARAM_INT);
-        $params[':date']=array($date, PDO::PARAM_STR);
-        $params[':content']=array($content, PDO::PARAM_STR);
-        $params[':id_news']=array($id_news, PDO::PARAM_INT);
-        $params[':login_user']=array($login_user, PDO::PARAM_STR);
+        $params[':id']=array($id, \PDO::PARAM_INT);
+        $params[':date']=array($date, \PDO::PARAM_STR);
+        $params[':content']=array($content, \PDO::PARAM_STR);
+        $params[':id_news']=array($id_news, \PDO::PARAM_INT);
+        $params[':login_user']=array($login_user, \PDO::PARAM_STR);
 
         return ( $this->con->executeQuery($query, $params) );
     }
@@ -63,7 +66,7 @@ Class CommentGateway {
     public function delete_comment(Comment $c):bool {
         $query="DELETE FROM TComment WHERE id=:id";
 
-        return ( $this->con->executeQuery($query, array(':id'=>array($c->getId(), PDO::PARAM_INT))) );
+        return ( $this->con->executeQuery($query, array(':id'=>array($c->getId(), \PDO::PARAM_INT))) );
     }
 
     /**
@@ -85,7 +88,7 @@ Class CommentGateway {
     public function getCommentById(int $id):array {
         $query="SELECT * FROM TComment WHERE id=:id;";
 
-        $this->con->executeQuery($query, [':id'=>array($id, PDO::PARAM_INT)]);
+        $this->con->executeQuery($query, [':id'=>array($id, \PDO::PARAM_INT)]);
         return $this->con->getResults();
     }
 	
@@ -102,7 +105,7 @@ Class CommentGateway {
 					AND TComment.id_news = TNews.id
 					AND TComment.id=:id;";
 
-        $this->con->executeQuery($query, [':id'=>array($id, PDO::PARAM_INT)]);
+        $this->con->executeQuery($query, [':id'=>array($id, \PDO::PARAM_INT)]);
         return $this->con->getResults();
     }
 	
@@ -114,7 +117,7 @@ Class CommentGateway {
 	public function getHourById(int $id):array {
 		$query="SELECT DATE_FORMAT(date, '%H:%i') AS hour FROM TComment WHERE id=:id;";
 
-        $this->con->executeQuery($query, [':id'=>array($id, PDO::PARAM_INT)]);
+        $this->con->executeQuery($query, [':id'=>array($id, \PDO::PARAM_INT)]);
 		
         return $this->con->getResults();
 	}

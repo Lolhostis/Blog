@@ -1,10 +1,6 @@
 <?php
 namespace Jobs;
-/*
-require_once("User.php");
-require_once("Picture.php");
-require_once("Comment.php");
-*/
+use \Jobs\User;
 
 /**
   /** \author ALLEMAND Arnaud
