@@ -102,20 +102,27 @@ class PictureController {
 
     $id_picture=$_POST['id_picture'];
     $uri_picture=$_POST['uri_picture'];
-    /* if($uri_picture==""){
-      "Views/Resources/Pictures/error.png";
+    //If the uri is not given, we use default values
+    if($uri_picture==""){
+      $uri_picture = "Views/Resources/Pictures/no_data_found.png";
     }
-    */
     $alt_picture=$_POST['alt_picture'];
+    //If the alt is not given, we use default values
+    if($alt_picture==""){
+      $alt_picture = "no_picture_given";
+    }
     Validation::val_form_picture_add($id_picture, $uri_picture, $alt_picture, $tErrors);
 
     $model_picture = new PictureModel();
 
     $result_insert=$model_picture->addPicture(new Picture($id_picture, $uri_picture, $alt_picture));
 
-    if($result_insert==true){
-      $notification="Picture added";
-    }else{
+    if($result_insert==true) {
+      $row_picture = array (
+      'res_insert' => "Picture added"
+      );
+    }
+    else{
      // tErrors[]="Can't add this picture";
       //error view
     }

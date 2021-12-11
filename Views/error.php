@@ -18,9 +18,10 @@
         }
         ?>
         </p>
-        <a  href="<?=$tViews['home']?>">
-          <button class="btn btn-secondary me-md-2" type="button">Home</button>
-        </a>
+            <!-- <a href="<?=$tViews['home']?>"> -->
+            <a href="index.php">
+		          <button class="btn btn-secondary me-md-2" type="button">Home</button>
+		        </a>
       </main>
 
     </body>
