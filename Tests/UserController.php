@@ -25,7 +25,8 @@ class UserController {
     $tErrors = array();
 
     try{
-      $action=$_REQUEST['action'];
+      $action= isset($_REQUEST['action']) ? $_REQUEST['action'] : NULL;
+      //$action=$_REQUEST['action'];
 
       switch($action) {
         case NULL:
@@ -51,10 +52,10 @@ class UserController {
       }
 
     } catch (\PDOException $e){
-      $tErrors[] =  "Unexpected error";
+      $tErrors[] =  $e->getMessage();
        require ($rep.$tViews['error']);
-    }catch (\Exception $e2){
-      $tErrors[] =  "Unexpected error";
+    }catch (\Exception $e){
+      $tErrors[] =  $e->getMessage();
       require ($rep.$tViews['error']);
     }
 
@@ -73,7 +74,7 @@ class UserController {
    /** This function return informations about a user from the database
     * \param[in, out] tErrors Array of errors
     */
-  function get_user(array $tErrors) {
+  function get_user(array &$tErrors) {
     global $rep,$tViews;
 
     $login_user=$_POST['login_user'];
@@ -96,7 +97,7 @@ class UserController {
    /** This function add a user into the database
     * \param[in, out] tErrors Array of errors
     */
-  function add_user(array $tErrors) {
+  function add_user(array &$tErrors) {
     global $rep,$tViews;
 
     $login_user=$_POST['login_user'];
@@ -111,82 +112,11 @@ class UserController {
 
     $result_insert=$model_user->addUser($login_user, $password_user, $email_user, $isadmin_user, $id_picture_user);
 
-    if($result_insert==true){
-      $notification="User added";
-    }else{
-     // tErrors[]="Can't add this user";
-      //error view
-    }
+    $row_user = array (
+      'res_insert' => "User added"
+      ); 
 
     require ($rep.$tViews['view_test_user']);
   }
 }
 ?>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  /*
-
-    if( isset($_POST['action']) ) {
-        $errors = "";
-        $umodel = new UserModel();
-
-        if( $_POST['action']=="Get user" ) {
-            $user="";
-            Validation::val_form_user_consult($_POST['login_user'], $errors);
-            if( !empty($errors) ) {
-                echo "NO VALID FORM !</br>".$errors."</br>";
-            }
-            try {
-                $user = $umodel->findByLogin($_POST['login_user']);
-            }
-            catch (Exception $exception) {
-                echo $exception->getMessage().'</br>'.$exception->getLine().'</br>'.$exception->getFile() . "<br/>";
-            }
-
-            if( $user!="" ) {
-                echo "Resulting User : ".$user->toString()."</br>";
-            }
-        }
-
-        if( $_POST['action']=="Add user" ) {
-
-            Validation::val_form_user_add($_POST['login_user'], $_POST['password'], $_POST['email'], $_POST['id_picture'], $errors);
-            if( !empty($errors) ) {
-                echo "NO VALID FORM !</br>".$errors."</br>";
-            }
-            else {
-                try {
-                    if( $umodel->addUser($_POST['login_user'], $_POST['password'], $_POST['email'], $_POST['isadmin'], $_POST['id_picture']) ) {
-                        echo "Success</br>";
-                    }
-                    else {
-                        echo "Failure</br>";
-                    }
-                }
-                catch (Exception $exception) {
-                    echo $exception->getMessage().'</br>'.$exception->getLine().'</br>'.$exception->getFile() . "<br/>";
-                }
-            }
-           // $_POST = [];
-        }
-    }
-?>
-
-
-*/

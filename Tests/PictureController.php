@@ -23,7 +23,6 @@ class PictureController {
     global $rep,$tViews;
     session_start();
 
-    //initialization of an array of errors
     $tErrors = array();
 
     try{
@@ -54,10 +53,10 @@ class PictureController {
       }
 
     } catch (\PDOException $e){
-      $tErrors[] =  "Unexpected error";
-       require ($rep.$tViews['error']);
-    }catch (\Exception $e2){
-      $tErrors[] =  "Unexpected error";
+      $tErrors[] = $e->getMessage();
+      require ($rep.$tViews['error']);
+    }catch (\Exception $e){
+      $tErrors[] = $e->getMessage();
       require ($rep.$tViews['error']);
     }
 
@@ -68,7 +67,6 @@ class PictureController {
   */
   function Reinit() {
   global $rep,$tViews;
-
     $row_picture = array ();
     require ($rep.$tViews['view_test_picture']);
   }
@@ -76,7 +74,7 @@ class PictureController {
    /** This function return informations about a picture from the database
     * \param[in, out] tErrors Array of errors
     */
-  function get_picture(array $tErrors) {
+  function get_picture(array &$tErrors) {
     global $rep, $tViews;
 
     $id_picture=$_POST['id_picture'];
@@ -97,7 +95,7 @@ class PictureController {
    /** This function add a picture into the database
     * \param[in, out] tErrors Array of errors
     */
-  function add_picture(array $tErrors) {
+  function add_picture(array &$tErrors) {
     global $rep,$tViews;
 
     $id_picture=$_POST['id_picture'];
@@ -112,20 +110,14 @@ class PictureController {
       $alt_picture = "no_picture_given";
     }
     Validation::val_form_picture_add($id_picture, $uri_picture, $alt_picture, $tErrors);
-
+    
     $model_picture = new PictureModel();
 
     $result_insert=$model_picture->addPicture(new Picture($id_picture, $uri_picture, $alt_picture));
 
-    if($result_insert==true) {
-      $row_picture = array (
+    $row_picture = array (
       'res_insert' => "Picture added"
-      );
-    }
-    else{
-     // tErrors[]="Can't add this picture";
-      //error view
-    }
+    );
 
     require ($rep.$tViews['view_test_picture']);
   }

@@ -7,13 +7,13 @@
     <body>
 
         <form method="POST">
-           <p>Id : <input type="INT" name="id_picture" value="<?php echo $_POST['id_picture']??""?>" required/></p>
-           <p>Uri : <input type="TEXT" name="uri_picture" value="<?php echo $_POST['uri_picture']??""?>"/></p>
-           <p>Alt : <input type="TEXT" name="alt_picture" value="<?php echo $_POST['alt_picture']??""?>"/></p>
-           <p><input type="SUBMIT" name="action" value="get_picture"/></p>
-           <p><input type="SUBMIT" name="action" value="add_picture"/></p>
+            <p>Id : <input type="INT" name="id_picture" value="<?php echo $_POST['id_picture']??""?>" required/></p>
+            <p>Uri : <input type="TEXT" name="uri_picture" value="<?php echo $_POST['uri_picture']??""?>"/></p>
+            <p>Alt : <input type="TEXT" name="alt_picture" value="<?php echo $_POST['alt_picture']??""?>"/></p>
+            <p><input type="SUBMIT" name="action" value="get_picture"/></p>
+            <p><input type="SUBMIT" name="action" value="add_picture"/></p>
             <p><input type="SUBMIT" name="action" value="delete_picture"/></p>
-           <p><input type="RESET" /></p>
+            <p><input type="RESET" /></p>
         </form>
 
         <div>

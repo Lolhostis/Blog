@@ -15,16 +15,14 @@ Class Comment {
   private $id;
   private $text;
   private $date;
-  private $hour;
   private $author;
 
   /** Constructor of the Comment job class
     */
-  public function __construct(int $id, string $text, string $date, string $hour, User $author) {
+  public function __construct(int $id, string $text, string $date, User $author) {
     $this->id=$id;
     $this->text=$text;
     $this->date=$date;
-    $this->hour=$hour;
     $this->author=$author;
   }
 
@@ -40,10 +38,6 @@ Class Comment {
     return $this->text;
   }
 
-  public function getHour():string {
-    return $this->hour;
-  }
-
   public function getAuthor():User {
     return $this->author;
   }
@@ -52,7 +46,6 @@ Class Comment {
 	  $result = "id : ".$this->id;
 	  $result = $result.", text : ".$this->text;
 	  $result = $result.", date : ".$this->date;
-	  $result = $result.", hour : ".$this->hour;
 	  $result = $result.", author : ".$this->author->getPseudo();
 	  $result = $result."</br>";
 	  

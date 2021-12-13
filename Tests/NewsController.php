@@ -25,7 +25,8 @@ class NewsController {
     $tErrors = array();
 
     try{
-      $action=$_REQUEST['action'];
+      $action= isset($_REQUEST['action']) ? $_REQUEST['action'] : NULL;
+      //$action=$_REQUEST['action'];
 
       switch($action) {
         case NULL:
@@ -50,11 +51,11 @@ class NewsController {
           break;
       }
 
-    } catch (PDOException $e){
-      $tErrors[] =  "Unexpected error";
+    }catch (\PDOException $e){
+      $tErrors[] =  $e->getMessage();
        require ($rep.$tViews['error']);
-    }catch (Exception $e2){
-      $tErrors[] =  "Unexpected error";
+    }catch (\Exception $e){
+      $tErrors[] =  $e->getMessage();
       require ($rep.$tViews['error']);
     }
 
@@ -73,7 +74,7 @@ class NewsController {
    /** This function return informations about a news from the database
     * \param[in, out] tErrors Array of errors
     */
-  function get_news(array $tErrors) {
+  function get_news(array &$tErrors) {
     global $rep,$tViews;
 
     $id_news=$_POST['id_news'];
@@ -88,7 +89,7 @@ class NewsController {
       'res_title_news' => $data->getTitle(),
       'res_description_news' => $data->getDescription(),
       'res_date_news' => $data->getDate(),
-      'res_login_user_news' => $data->getAuthor()->getLogin(),
+      'res_login_user_news' => $data->getAuthor()->getPseudo(),
     );
     require ($rep.$tViews['view_test_news']);
   }
@@ -96,7 +97,7 @@ class NewsController {
    /** This function add a news into the database
     * \param[in, out] tErrors Array of errors
     */
-  function add_news(array $tErrors) {
+  function add_news(array &$tErrors) {
     global $rep,$tViews;
 
     $id_news=$_POST['id_news'];
@@ -110,117 +111,12 @@ class NewsController {
 
     $result_insert=$model_news-> addNews($id_news, $title_news, $description_news, $date_news, $login_user_news);
 
-    if($result_insert==true){
-      $notification="News added";
-    }else{
-     // tErrors[]="Can't add this user";
-      //error view
-    }
+    $row_news = array (
+      'res_insert' => "News added"
+      );
 
     require ($rep.$tViews['view_test_news']);
   }
 }
 ?>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/*
-    require_once('../Jobs/Comment.php');
-    require_once('../Jobs/News.php');
-    require_once('../Jobs/Picture.php');
-    require_once('../Jobs/User.php');
-    require_once('../Models/NewsModel.php');
-    require_once('../Config/Connexion.php');
-    require_once('../Config/Validation.php');
-
-    if( isset($_POST['action']) ) {
-        $errors = "";
-        $nmodel = new NewsModel();
-
-        if( $_POST['action']=="Get news" ) {
-            $news="";
-            Validation::val_form_news_consult($_POST['id_news'], $errors);
-            if( !empty($errors) ) {
-                echo "NO VALID FORM !</br>".$errors."</br>";
-            }
-            try {
-                $news = $nmodel->findById($_POST['id_news']);
-            }
-            catch (Exception $exception) {
-                echo $exception->getMessage().'</br>'.$exception->getLine().'</br>'.$exception->getFile() . "<br/>";
-            }
-
-            if( $news!="" ) {
-                echo "Resulting News : ".$news->toString()."</br>";
-            }
-        }
-
-        if( $_POST['action']=="Add news" ) {
-
-            Validation::val_form_news_add($_POST['id_news'], $_POST['title'], $_POST['description'], $_POST['date'], $_POST['login_user'],$errors);
-            if( !empty($errors) ) {
-                echo "NO VALID FORM !</br>".$errors."</br>";
-            }
-            else {
-                try {
-                    if( $nmodel->addNews($_POST['id_news'], $_POST['title'], $_POST['description'], $_POST['date'], $_POST['login_user']) ) {
-                        echo "Success</br>";
-                    }
-                    else {
-                        echo "Failure</br>";
-                    }
-                }
-                catch (Exception $exception) {
-                    echo $exception->getMessage().'</br>'.$exception->getLine().'</br>'.$exception->getFile() . "<br/>";
-                }
-            }
-            $_POST = [];
-        }
-    }
-?>
-*/

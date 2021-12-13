@@ -19,18 +19,33 @@
            <p><input type="SUBMIT" name="action" value="delete_user"/></p>
            <p><input type="RESET" /></p>
 
-        <div>
-            <p>Results :</p>
-            <p><?php=$notification?></p>
-            <p>Login : <?=$row_user['res_login_user']??""?> </p>
-           <p>Password : <?=$row_user['res_password_user']??""?></p>
-           <p>Email : <?=$row_user['res_email_user']??""?></p>
-           <p> Is an admin :</br>
-            <label><input type="RADIO" name="isadmin_user" value=<?=if($row_user['res_isadmin_user']==true)??""?>/>Yes</label>
-            <label><input type="RADIO" name="isadmin_user" value=<?=if($row_user['res_isadmin_user']==false)??""?> />No</label>
-           </p>
-           <p>Id of the profile picture : <?=$row_user['res_id_picture_user']??""?></p>
-        </div>
+
+            <div>
+                <?php if( isset($row_user) && !empty($row_user) )
+                {
+                ?>
+                    <p>Results :</p>
+                    <?php if( isset($_POST['action']) && $_POST['action']=="get_user" )
+                        {
+                    ?>
+                        <p>Login : <?= $row_user['res_login_user'] ?? "" ?></p>
+                        <p>Password : <?= $row_user['res_password_user'] ?? "no text" ?></p>
+                        <p>Email : <?= $row_user['res_email_user'] ?? "" ?></p>
+                        <p>Is an admin : <?= $row_user['res_isadmin_user'] ? "Yes" : "No" ?></p>
+                        <p>Id of the profile picture : <?= $row_user['res_id_picture_user'] ?? "" ?></p>
+                    <?php
+                    }
+                    else if( isset($_POST['action']) && $_POST['action']=="add_user" )
+                    {
+                    ?>
+                        <p>Result Insert : <?= $row_user['res_insert'] ?? "" ?></p>
+                    <?php
+                    } 
+                    ?>
+                <?php
+                }
+                ?>
+            </div>
         </form>
     </body>
 </html>

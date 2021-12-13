@@ -11,17 +11,6 @@ use \Jobs\Picture;
 use \Jobs\User;
 use \Jobs\Comment;
 
-
-/*
-require_once('../Jobs/User.php');
-require_once('../Jobs/Picture.php');
-require_once('../Jobs/Comment.php');
-require_once('../Gateways/UserGateway.php');
-require_once('../Gateways/PictureGateway.php');
-require_once('../Gateways/CommentGateway.php');
-require_once('../Gateways/NewsGateway.php');
-*/
-
 /**
   /** \author L'HOSTIS Loriane & ALLEMAND Arnaud
   /** \date 05/12/2021
@@ -56,6 +45,7 @@ class CommentModel {
 	 */
 	function findById(int $id):Comment {
 		$raw_comment = $this->comment_gw->getFullCommentById($id);
+		
 		if( empty($raw_comment) ) {
 			//Error, no comment matching this id
 			throw new \Exception("No comment matching this id");
@@ -65,8 +55,8 @@ class CommentModel {
 			throw new \Exception("Multiples comments matching this id");
 		}
 		$raw_comment = $raw_comment[0];
-		$raw_comment_hour = $this->comment_gw->getHourById($id);
-		$raw_comment_hour = $raw_comment_hour[0];
+		$raw_single_comment = $this->comment_gw->getCommentById($id);
+		$raw_single_comment = $raw_single_comment[0];
 		
 		//Instantiating the picture from raw data
 		$picture = new Picture($raw_comment['id_picture'], $raw_comment['uri'], $raw_comment['alt']);
@@ -82,7 +72,7 @@ class CommentModel {
 		}
 
 		//Instantiating the comment from raw data
-		$comment = new Comment($raw_comment['id'], $raw_comment['content'], $raw_comment['date'], $raw_comment_hour['hour'] , $user);
+		$comment = new Comment($raw_comment['id'], $raw_comment['content'], $raw_single_comment['date'], $user);
 
 		return $comment;
 	}

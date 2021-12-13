@@ -29,7 +29,7 @@ Class CommentGateway {
         $query="INSERT INTO TComment(id, date, content, id_news, login_user) VALUES(:id, :date, :content, :id_news, :login_user);";
 
         $params[':id']=array($c->getId(), \PDO::PARAM_INT);
-        $params[':date']=array($c->getDate(), \PDO::PARAM_STR);
+        $params[':date']=array($c->getDate(), \PDO::PARAM_STR); 
         $params[':content']=array($c->getText(), \PDO::PARAM_STR);
         $params[':id_news']=array($n->getId(), \PDO::PARAM_INT);
         $params[':login_user']=array($c->getAuthor()->getPseudo(), \PDO::PARAM_STR);
@@ -47,10 +47,10 @@ Class CommentGateway {
      * @return [bool]             true if it's right ; false if there is a problem
      */
 	public function insert_raw_comment(string $id, string $date, string $content, string $id_news, string $login_user):bool {
-        $query="INSERT INTO TComment(id, date, content, id_news, login_user) VALUES(:id, :date, :content, :id_news, :login_user);";
+        $query="INSERT INTO TComment(id, date, content, id_news, login_user) VALUES(:id, STR_TO_DATE(:date, '%Y %d %m %H %i'), :content, :id_news, :login_user);";
 
         $params[':id']=array($id, \PDO::PARAM_INT);
-        $params[':date']=array($date, \PDO::PARAM_STR);
+        $params[':date']=array(str_replace("-", " ", str_replace(":", " ", str_replace("T", " ", $date))), \PDO::PARAM_STR);
         $params[':content']=array($content, \PDO::PARAM_STR);
         $params[':id_news']=array($id_news, \PDO::PARAM_INT);
         $params[':login_user']=array($login_user, \PDO::PARAM_STR);
@@ -86,7 +86,7 @@ Class CommentGateway {
      * @return [array]    All the comments from the database with the good Id
      */
     public function getCommentById(int $id):array {
-        $query="SELECT * FROM TComment WHERE id=:id;";
+        $query="SELECT id, DATE_FORMAT(date, '%Y-%m-%d %H:%m') as date, content, id_news, login_user FROM TComment WHERE id=:id;";
 
         $this->con->executeQuery($query, [':id'=>array($id, \PDO::PARAM_INT)]);
         return $this->con->getResults();
