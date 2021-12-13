@@ -92,6 +92,26 @@ class PictureController {
     require ($rep.$tViews['view_test_picture']);
   }
 
+     /** This function delete a picture from the database
+    * \param[in, out] tErrors Array of errors
+    */
+    function delete_picture(array &$tErrors) {
+      global $rep, $tViews;
+
+      $id_picture=$_POST['id_picture'];
+      Validation::val_form_picture_consult($id_picture, $tErrors); //if there is an exception, it is catched by the case exception in the 'case try'
+  
+      $model_picture = new PictureModel();
+  
+      $data=$model_picture->delete($id_picture); //if there is an exception, it is catched by the case exception in the 'case try'
+      
+      if(!$data){
+        $tErrors[]="Errors to delete a picture";
+        require ($rep.$tViews['error']);
+      }
+      require ($rep.$tViews['view_test_picture']);
+    }
+
    /** This function add a picture into the database
     * \param[in, out] tErrors Array of errors
     */

@@ -60,13 +60,13 @@ Class CommentGateway {
 
     /**
      * Delete a comment from a database
-     * @param  Comment $c Comment to delete
+     * @param  string $id Id from the comment to delete
      * @return [bool]     true if it's right ; false if there is a problem
      */
-    public function delete_comment(Comment $c):bool {
+    public function delete_comment(int $id):bool {
         $query="DELETE FROM TComment WHERE id=:id";
 
-        return ( $this->con->executeQuery($query, array(':id'=>array($c->getId(), \PDO::PARAM_INT))) );
+        return ( $this->con->executeQuery($query, array(':id'=>array($id, \PDO::PARAM_INT))) );
     }
 
     /**

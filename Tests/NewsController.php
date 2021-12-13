@@ -94,6 +94,25 @@ class NewsController {
     require ($rep.$tViews['view_test_news']);
   }
 
+   /** This function delete a news from the database
+    * \param[in, out] tErrors Array of errors
+    */
+    function delete_news(array &$tErrors) {
+      global $rep,$tViews;
+  
+      $id_news=$_POST['id_news'];
+      Validation::val_form_news_consult($id_news, $tErrors); //if there is an exception, it is catched by the case exception in the 'case try'
+
+      $model_news = new NewsModel();
+      $data=$model_news->delete($id_news); //if there is an exception, it is catched by the case exception in the 'case try'
+      
+      if(!$data){
+        $tErrors[]="Errors to delete a news";
+        require ($rep.$tViews['error']);
+      }
+      require ($rep.$tViews['view_test_news']);
+    }  
+
    /** This function add a news into the database
     * \param[in, out] tErrors Array of errors
     */

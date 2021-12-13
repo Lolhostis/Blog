@@ -64,10 +64,10 @@ Class NewsGateway {
      * @param  News   $n News to delete
      * @return [bool]    true if it's right ; false if there is a problem
      */
-    public function delete_news(News $n):bool {
+    public function delete_news(int $id):bool {
         $query="DELETE FROM TNews WHERE id=:id";
 
-        return ( $this->con->executeQuery($query, array(':id'=>array($n->getId(), \PDO::PARAM_INT))) );
+        return ( $this->con->executeQuery($query, array(':id'=>array($id, \PDO::PARAM_INT))) );
     }
 
     /**

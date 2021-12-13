@@ -94,6 +94,26 @@ class UserController {
     require ($rep.$tViews['view_test_user']);
   }
 
+       /** This function delete a user from the database
+    * \param[in, out] tErrors Array of errors
+    */
+    function delete_user(array &$tErrors) {
+      global $rep,$tViews;
+
+      $login_user=$_POST['login_user'];
+      Validation::val_form_user_consult($login_user, $tErrors); //if there is an exception, it is catched by the case exception in the 'case try'
+
+      $model_user = new UserModel();
+
+      $data=$model_user->delete($login_user); //if there is an exception, it is catched by the case exception in the 'case try'
+      
+      if(!$data){
+        $tErrors[]="Errors to delete a user";
+        require ($rep.$tViews['error']);
+      }
+      require ($rep.$tViews['view_test_user']);
+    }
+
    /** This function add a user into the database
     * \param[in, out] tErrors Array of errors
     */

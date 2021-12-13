@@ -102,5 +102,35 @@ class CommentModel {
 
 		return $this->comment_gw->insert_raw_comment($id, $date, $text, $id_news, $login_user);
 	}
+
+	/**
+	 * Delete a comment
+	 * @param int    $id         Id of the comment to remove
+   * @return [bool]    true if it's right ; false if there is a problem
+	 */
+	function deleteComment(int $id):bool {
+		string $login_user, $id_news; 
+		
+		$res = $this->comment_gw->getCommentById($id);
+		if( empty($res) ) {
+			throw new \Exception("ID Comment doesn't exist");
+		}
+
+		$login_user = $res->getAuthor()->getPseudo();
+		
+		if( empty($this->user_gw->FindByName($login_user)) ) {
+			throw new \Exception("Unknown user login");
+		}
+		
+	//	$id_news = $res->getAuthor()->getPseudo();
+
+	//	if( empty($this->news_gw->getNewsById($id_news)) ) {
+	//		throw new \Exception("Unknown news's ID");
+	//	}
+		
+
+
+		return $this->comment_gw->delete_comment($id);
+	}
 }
 ?> 

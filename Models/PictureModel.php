@@ -58,5 +58,19 @@ class PictureModel {
 
 		return $this->picture_gw->insert_raw_picture($p->getId(), $p->getUri(), $p->getAlt());
 	}
+
+	/**
+	 * Delete a picture
+	 * @param int $id   Id of the picture to remove
+     * @return [bool]   true if it's right ; false if there is a problem
+	 */
+	function deletePicture(int $id):bool {
+		
+		if( empty($this->picture_gw->FindByID($p->getId())) ) {
+			throw new \Exception("the picture ID doesn't exist");
+		}
+
+		return $this->picture_gw->delete_picture($id);
+	}
 }
 ?> 

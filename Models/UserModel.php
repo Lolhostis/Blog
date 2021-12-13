@@ -9,16 +9,6 @@ use \Gateways\UserGateway;
 use \Jobs\Picture;
 use \Jobs\User;
 
-/*
-require_once('../Jobs/User.php');
-require_once('../Jobs/Picture.php');
-require_once('../Jobs/Comment.php');
-require_once('../Gateways/UserGateway.php');
-require_once('../Gateways/PictureGateway.php');
-require_once('../Gateways/CommentGateway.php');
-require_once('../Gateways/NewsGateway.php');
-*/
-
 /**
   /** \author L'HOSTIS Loriane & ALLEMAND Arnaud
   /** \date 05/12/2021
@@ -116,6 +106,24 @@ class UserModel {
 		}
 		
 		return $this->user_gw->insert_raw_user($login, $password, $email, $isadmin, $id_picture);
+	}
+
+	/**
+	 * Delete a user
+	 * @param int $id   Id of the picture to remove
+     * @return [bool]   true if it's right ; false if there is a problem
+	 */
+	function deleteUser(string $id):bool {
+		
+		if( empty($this->user_gw->FindByName($login)) ) {
+			throw new \Exception("Login doesn't exist");
+		}
+
+		if( empty($this->picture_gw->FindById($id_picture)) ) {
+			throw new \Exception("Unknown Picture ID");
+		}
+		
+		return $this->user_gw->delete_user($id);
 	}
 }
 ?> 

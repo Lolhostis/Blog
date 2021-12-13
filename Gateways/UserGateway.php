@@ -79,7 +79,7 @@ use \Jobs\User;
      * @param  string $id Id of the user to remove
      * @return [bool]     true if it's right ; false if there is a problem
      */
-    public function delete(string $id) : bool{
+    public function delete_user(string $id) : bool{
       $query= "DELETE FROM tUser WHERE login = :ID";
 
       return $this->con->executeQuery($query, array(':ID' => array($id, \PDO::PARAM_STR)) );

@@ -119,5 +119,23 @@ class NewsModel {
 
 		return $this->news_gw->insert_raw_news($id, $title, $description, $date, $login_user);
 	}
+
+	/**
+	 * Delete a news
+	 * @param int $id   Id of the news to remove
+     * @return [bool]   true if it's right ; false if there is a problem
+	 */
+	function deleteNews(int $id):bool {
+		
+		if( empty($this->news_gw->getNewsById($id)) ) {
+			throw new \Exception("the news ID doesn't exist");
+		}
+
+		if( empty($this->user_gw->FindByName($login_user)) ) {
+			throw new \Exception("Unknown user login");
+		}
+
+		return $this->news_gw->delete_news($id);
+	}
 }
 ?> 

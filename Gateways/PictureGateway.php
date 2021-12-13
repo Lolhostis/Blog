@@ -35,7 +35,7 @@ use \Jobs\Picture;
     }
 
     /**
-     * Insert a bew picture from the database
+     * Insert a new picture from the database
      * @param  int    $id  Id of the picture to add
      * @param  string $uri URI of the picture to add
      * @param  string $alt Description of the picture to add

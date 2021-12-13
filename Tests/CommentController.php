@@ -88,12 +88,29 @@ class CommentController {
       'res_id_comment' => $id_comment,
       'res_text_comment' => $data->getText(),
       'res_date_comment' => $data->getDate(),
-      //'res_hour_comment' => $data->getHour(),
       'res_login_user_comment' => $data->getAuthor()->getPseudo(),
-      //'res_id_news_comment' => $data->getPicture()->getId(),
     );
     require ($rep.$tViews['view_test_comment']);
   }
+
+     /** This function delete a comment from the database
+    * \param[in, out] tErrors Array of errors
+    */
+    function delete_comment(array &$tErrors) {
+      global $rep,$tViews;
+  
+      $id_comment=$_POST['id_comment'];
+      Validation::val_form_comment_consult($id_comment, $tErrors); //if there is an exception, it is catched by the case exception in the 'case try'
+
+      $model_comment = new CommentModel();
+      $data=$model_comment->deleteComment($id_comment); //if there is an exception, it is catched by the case exception in the 'case try'
+      
+      if($data=false){
+        $tErrors[]="Error to delete a comment";
+        require ($rep.$tViews['error']);
+      }
+      require ($rep.$tViews['view_test_comment']);
+    } 
 
    /** This function add a user into the database
     * \param[in, out] tErrors Array of errors
