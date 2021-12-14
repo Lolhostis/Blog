@@ -24,7 +24,7 @@ $myLibLoader->register();
 
 //$pictureCont = new \Tests\PictureController();
 //$commentCont = new \Tests\CommentController();
-//$newsCont = new \Tests\NewsController();
-$userCont = new \Tests\UserController();
+$newsCont = new \Tests\NewsController();
+//$userCont = new \Tests\UserController();
 
 ?>

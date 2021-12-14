@@ -38,7 +38,13 @@
                 ?>
                     <p>Result Insert : <?= $row_news['res_insert'] ?? "" ?></p>
                 <?php
-                } 
+                }
+                else if( isset($_POST['action']) && $_POST['action']=="delete_news" )
+                {
+                ?>
+                    <p>Result Delete : <?= $row_news['res_delete'] ?? "" ?></p>
+                <?php
+                }
                 ?>
             <?php
             }

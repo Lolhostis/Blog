@@ -104,12 +104,19 @@ class NewsController {
       Validation::val_form_news_consult($id_news, $tErrors); //if there is an exception, it is catched by the case exception in the 'case try'
 
       $model_news = new NewsModel();
-      $data=$model_news->delete($id_news); //if there is an exception, it is catched by the case exception in the 'case try'
+      $result_delete=$model_news->deleteNews($id_news); //if there is an exception, it is catched by the case exception in the 'case try'
       
-      if(!$data){
+      $row_news = array (
+        'res_delete' => "News deleted"
+      );
+      /*
+      * Will nether go there
+      if(!$result_delete){
         $tErrors[]="Errors to delete a news";
         require ($rep.$tViews['error']);
       }
+      */
+
       require ($rep.$tViews['view_test_news']);
     }  
 

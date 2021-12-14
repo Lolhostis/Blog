@@ -128,11 +128,7 @@ class NewsModel {
 	function deleteNews(int $id):bool {
 		
 		if( empty($this->news_gw->getNewsById($id)) ) {
-			throw new \Exception("the news ID doesn't exist");
-		}
-
-		if( empty($this->user_gw->FindByName($login_user)) ) {
-			throw new \Exception("Unknown user login");
+			throw new \Exception("The news ID doesn't exist");
 		}
 
 		return $this->news_gw->delete_news($id);

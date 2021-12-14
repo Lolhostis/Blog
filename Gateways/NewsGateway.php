@@ -60,14 +60,33 @@ Class NewsGateway {
     }
 
     /**
-     * Delete a news from the database
+     * Delete a news from the database from its ID
+     * The news is deleted from the TNews and TNewsincludepicture databases
      * @param  News   $n News to delete
-     * @return [bool]    true if it's right ; false if there is a problem
+     * @return [bool]    true if the deletion succeded ; false otherwise
      */
     public function delete_news(int $id):bool {
-        $query="DELETE FROM TNews WHERE id=:id";
+        
+        if ( $this->delete_news_picture_association($id) ) {
+            // News have been deleted from the TNewsincludepicture database
+            $query="DELETE FROM TNews WHERE id=:id";
+            return $this->con->executeQuery($query, array(':id'=>array($id, \PDO::PARAM_INT)));
+        }
+        else {
+            return false;
+        }
+    }
 
-        return ( $this->con->executeQuery($query, array(':id'=>array($id, \PDO::PARAM_INT))) );
+    /**
+     * Delete all the tuple concerning the news of the
+     * given id from the 'TNewsincludepicture' table
+     * @param  int $id_news     ID of the news to delete
+     * @return [bool]           true if the deletion of all the tuples succeded
+     */
+    private function delete_news_picture_association(int $id_news):bool {
+        $query = "DELETE FROM TNewsincludepicture WHERE id_news=:id_news";
+
+        return ( $this->con->executeQuery($query, array(':id_news'=>array($id_news, \PDO::PARAM_INT))) );
     }
 
     /**
