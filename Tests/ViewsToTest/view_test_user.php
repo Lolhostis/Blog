@@ -40,7 +40,13 @@
                     ?>
                         <p>Result Insert : <?= $row_user['res_insert'] ?? "" ?></p>
                     <?php
-                    } 
+                    }
+                    else if( isset($_POST['action']) && $_POST['action']=="delete_user" )
+                    {
+                    ?>
+                        <p>Result Delete : <?= $row_user['res_delete'] ?? "" ?></p>
+                    <?php
+                    }
                     ?>
                 <?php
                 }

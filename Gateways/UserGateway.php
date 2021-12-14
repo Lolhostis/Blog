@@ -76,13 +76,13 @@ use \Jobs\User;
 
     /**
      * Delete a user from the database
-     * @param  string $id Id of the user to remove
-     * @return [bool]     true if it's right ; false if there is a problem
+     * @param  string $login  login of the user to remove
+     * @return [bool]         true if the deletion succeded ; false otherwise
      */
-    public function delete_user(string $id) : bool{
-      $query= "DELETE FROM tUser WHERE login = :ID";
+    public function delete_user(string $login) : bool{
+      $query= "DELETE FROM tUser WHERE login = :login";
 
-      return $this->con->executeQuery($query, array(':ID' => array($id, \PDO::PARAM_STR)) );
+      return $this->con->executeQuery($query, array(':login' => array($login, \PDO::PARAM_STR)) );
     }
 
     /**

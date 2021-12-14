@@ -110,20 +110,16 @@ class UserModel {
 
 	/**
 	 * Delete a user
-	 * @param int $id   Id of the picture to remove
-     * @return [bool]   true if it's right ; false if there is a problem
+	 * @param int $login	login of the user to remove
+     * @return [bool]		true if the deletion succeded ; false otherwise
 	 */
-	function deleteUser(string $id):bool {
+	function deleteUser(string $login):bool {
 		
 		if( empty($this->user_gw->FindByName($login)) ) {
 			throw new \Exception("Login doesn't exist");
 		}
-
-		if( empty($this->picture_gw->FindById($id_picture)) ) {
-			throw new \Exception("Unknown Picture ID");
-		}
 		
-		return $this->user_gw->delete_user($id);
+		return $this->user_gw->delete_user($login);
 	}
 }
 ?> 

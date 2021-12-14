@@ -105,12 +105,19 @@ class UserController {
 
       $model_user = new UserModel();
 
-      $data=$model_user->delete($login_user); //if there is an exception, it is catched by the case exception in the 'case try'
+      $result_delete = $model_user->deleteUser($login_user); //if there is an exception, it is catched by the case exception in the 'case try'
       
-      if(!$data){
+      $row_user = array (
+        'res_delete' => "User deleted"
+      );
+      /*
+      * Will nether go there
+      if(!$result_delete){
         $tErrors[]="Errors to delete a user";
         require ($rep.$tViews['error']);
       }
+      */
+
       require ($rep.$tViews['view_test_user']);
     }
 
