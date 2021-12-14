@@ -103,12 +103,20 @@ class CommentController {
       Validation::val_form_comment_consult($id_comment, $tErrors); //if there is an exception, it is catched by the case exception in the 'case try'
 
       $model_comment = new CommentModel();
-      $data=$model_comment->deleteComment($id_comment); //if there is an exception, it is catched by the case exception in the 'case try'
+
+      $result_delete = $model_comment->deleteComment($id_comment); //if there is an exception, it is catched by the case exception in the 'case try'
       
+      $row_comment = array (
+        'res_delete' => "Comment deleted"
+      );
+      /*
+      * Will never go there
       if($data=false){
         $tErrors[]="Error to delete a comment";
         require ($rep.$tViews['error']);
       }
+      */
+
       require ($rep.$tViews['view_test_comment']);
     } 
 

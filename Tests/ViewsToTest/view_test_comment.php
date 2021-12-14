@@ -38,6 +38,12 @@
                     <p>Result Insert : <?= $row_comment['res_insert'] ?? "" ?></p>
                 <?php
                 }
+                else if( isset($_POST['action']) && $_POST['action']=="delete_comment" )
+                {
+                ?>
+                    <p>Result Delete : <?= $row_comment['res_delete'] ?? "" ?></p>
+                <?php
+                }
                 ?>
             <?php
             }

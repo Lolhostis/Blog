@@ -60,8 +60,8 @@ Class CommentGateway {
 
     /**
      * Delete a comment from a database
-     * @param  string $id Id from the comment to delete
-     * @return [bool]     true if it's right ; false if there is a problem
+     * @param  int $id  Id from the comment to delete
+     * @return [bool]   true if the deletion succeded ; false otherwise
      */
     public function delete_comment(int $id):bool {
         $query="DELETE FROM TComment WHERE id=:id";
@@ -121,6 +121,14 @@ Class CommentGateway {
 		
         return $this->con->getResults();
 	}
+
+    public function getIdNewsByIdComment(int $id):array {
+        $query="SELECT id_news FROM TComment WHERE id=:id;";
+
+        $this->con->executeQuery($query, [':id'=>array($id, \PDO::PARAM_INT)]);
+
+        return $this->con->getResults();
+    }
 
     /*
     public function show_all_comments() {
