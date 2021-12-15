@@ -22,6 +22,7 @@ class NewsController {
     session_start();
 
     //initialization of an array of errors
+
     $tErrors = array();
 
     try{
@@ -65,7 +66,7 @@ class NewsController {
  /** This function loads the page
   */
   function Reinit() {
-  global $rep,$tViews;
+    global $rep,$tViews;
 
     $row_news = array ();
     require ($rep.$tViews['view_test_news']);
@@ -106,18 +107,15 @@ class NewsController {
       $model_news = new NewsModel();
       $result_delete=$model_news->deleteNews($id_news); //if there is an exception, it is catched by the case exception in the 'case try'
       
-      $row_news = array (
-        'res_delete' => "News deleted"
-      );
-      /*
-      * Will nether go there
       if(!$result_delete){
         $tErrors[]="Errors to delete a news";
         require ($rep.$tViews['error']);
-      }
-      */
-
-      require ($rep.$tViews['view_test_news']);
+      }else{
+        $row_news = array (
+          'res_delete' => "News deleted"
+        );
+        require ($rep.$tViews['view_test_news']);
+      }      
     }  
 
    /** This function add a news into the database

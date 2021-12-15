@@ -47,7 +47,7 @@ Class CommentGateway {
      * @return [bool]             true if it's right ; false if there is a problem
      */
 	public function insert_raw_comment(string $id, string $date, string $content, string $id_news, string $login_user):bool {
-        $query="INSERT INTO TComment(id, date, content, id_news, login_user) VALUES(:id, STR_TO_DATE(:date, '%Y %d %m %H %i'), :content, :id_news, :login_user);";
+        $query="INSERT INTO TComment(id, date, content, id_news, login_user) VALUES(:id, STR_TO_DATE(:date, '%Y %m %d %H %i'), :content, :id_news, :login_user);";
 
         $params[':id']=array($id, \PDO::PARAM_INT);
         $params[':date']=array(str_replace("-", " ", str_replace(":", " ", str_replace("T", " ", $date))), \PDO::PARAM_STR);

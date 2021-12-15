@@ -66,7 +66,7 @@ class PictureModel {
 	 */
 	function deletePicture(int $id):bool {
 		
-		if( empty($this->picture_gw->FindByID($p->getId())) ) {
+		if( empty($this->picture_gw->FindByID($id)) ) {
 			throw new \Exception("the picture ID doesn't exist");
 		}
 

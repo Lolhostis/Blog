@@ -15,6 +15,9 @@
             <p><input type="SUBMIT" name="action" value="add_comment"/></p>
             <p><input type="SUBMIT" name="action" value="delete_comment"/></p>
             <p><input type="RESET" /></p>
+            <a href="index.php">
+		        Main menu
+		    </a>
         </form>
 
         <div>

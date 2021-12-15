@@ -5,7 +5,7 @@
 - https://www.phpmyadmin.net
 -
 - Hôte : 127.0.0.1:3306
-- Généré le : mer. 08 déc. 2021 à 15:14
+- Généré le : mer. 15 déc. 2021 à 13:51
 - Version du serveur :  5.7.31
 - Version de PHP : 7.3.21
 -->
@@ -19,14 +19,14 @@
             <pma:table name="tcomment">
                 CREATE TABLE `tcomment` (
                   `id` int(11) NOT NULL AUTO_INCREMENT,
-                  `date` date NOT NULL,
+                  `date` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
                   `content` text COLLATE utf8mb4_unicode_ci NOT NULL,
                   `id_news` int(11) NOT NULL,
                   `login_user` varchar(30) COLLATE utf8mb4_unicode_ci NOT NULL,
                   PRIMARY KEY (`id`),
                   KEY `id_news` (`id_news`),
                   KEY `login_user` (`login_user`)
-                ) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+                ) ENGINE=MyISAM AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
             </pma:table>
             <pma:table name="tnews">
                 CREATE TABLE `tnews` (
@@ -37,7 +37,7 @@
                   `login_user` varchar(30) COLLATE utf8mb4_unicode_ci NOT NULL,
                   PRIMARY KEY (`id`),
                   KEY `login_user` (`login_user`)
-                ) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+                ) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
             </pma:table>
             <pma:table name="tnewsincludepicture">
                 CREATE TABLE `tnewsincludepicture` (
@@ -53,7 +53,7 @@
                   `uri` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
                   `alt` varchar(500) COLLATE utf8mb4_unicode_ci NOT NULL,
                   PRIMARY KEY (`id`)
-                ) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+                ) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
             </pma:table>
             <pma:table name="tuser">
                 CREATE TABLE `tuser` (
@@ -76,33 +76,19 @@
     <database name="dbsynapse">
         <!-- Table tcomment -->
         <table name="tcomment">
-            <column name="id">1</column>
-            <column name="date">2021-11-18</column>
-            <column name="content">Ceci est mon commentaire signé Chpatata</column>
+            <column name="id">6</column>
+            <column name="date">2021-01-12 12:42:00</column>
+            <column name="content">cezca</column>
             <column name="id_news">1</column>
-            <column name="login_user">Chpatata</column>
-        </table>
-        <table name="tcomment">
-            <column name="id">2</column>
-            <column name="date">2021-11-03</column>
-            <column name="content">de&amp;#34;d</column>
-            <column name="id_news">1</column>
-            <column name="login_user">Chpatata</column>
-        </table>
-        <table name="tcomment">
-            <column name="id">3</column>
-            <column name="date">2021-11-03</column>
-            <column name="content">de&amp;#34;d</column>
-            <column name="id_news">1</column>
-            <column name="login_user">Chpatata</column>
+            <column name="login_user">Arn</column>
         </table>
         <!-- Table tnews -->
         <table name="tnews">
             <column name="id">1</column>
-            <column name="title">News num 1</column>
-            <column name="description">Ceci est le texte de la news numero 1</column>
-            <column name="date">2021-11-03</column>
-            <column name="login_user">Chpatata</column>
+            <column name="title">Lorinane </column>
+            <column name="description">prends pas (trop) la conf non plus</column>
+            <column name="date">2021-12-12</column>
+            <column name="login_user">Arn</column>
         </table>
         <table name="tnews">
             <column name="id">2</column>
@@ -110,6 +96,13 @@
             <column name="description">DEZDZ</column>
             <column name="date">2021-11-04</column>
             <column name="login_user">Chpatata</column>
+        </table>
+        <table name="tnews">
+            <column name="id">3</column>
+            <column name="title">Testing News 3</column>
+            <column name="description">THis is a testing news 3</column>
+            <column name="date">2021-12-15</column>
+            <column name="login_user">Arn</column>
         </table>
         <!-- Table tnewsincludepicture -->
         <!-- Table tpicture -->
@@ -123,6 +116,16 @@
             <column name="uri">/pictures/arano</column>
             <column name="alt">D2</column>
         </table>
+        <table name="tpicture">
+            <column name="id">3</column>
+            <column name="uri">Views/Resources/Pictures/no_data_found.png</column>
+            <column name="alt">no_picture_given</column>
+        </table>
+        <table name="tpicture">
+            <column name="id">4</column>
+            <column name="uri">Views/Resources/Pictures/no_data_found.png</column>
+            <column name="alt">no_picture_given</column>
+        </table>
         <!-- Table tuser -->
         <table name="tuser">
             <column name="login">Chpatata</column>
@@ -135,6 +138,13 @@
             <column name="login">Arn</column>
             <column name="password">chaton</column>
             <column name="email">a@a.a</column>
+            <column name="is_admin">1</column>
+            <column name="id_picture">1</column>
+        </table>
+        <table name="tuser">
+            <column name="login">Lorianeuh</column>
+            <column name="password">Chpatata</column>
+            <column name="email">adorable@cvrai.fr</column>
             <column name="is_admin">1</column>
             <column name="id_picture">1</column>
         </table>

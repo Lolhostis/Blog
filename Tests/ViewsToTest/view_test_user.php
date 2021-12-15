@@ -18,6 +18,9 @@
            <p><input type="SUBMIT" name="action" value="add_user"/></p>
            <p><input type="SUBMIT" name="action" value="delete_user"/></p>
            <p><input type="RESET" /></p>
+           <a href="index.php">
+		        Main menu
+		    </a>
 
 
             <div>

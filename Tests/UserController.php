@@ -31,7 +31,7 @@ class UserController {
       switch($action) {
         case NULL:
           $this->Reinit();
-        break;
+          break;
 
         case "get_user":
           $this->get_user($tErrors);
@@ -107,18 +107,16 @@ class UserController {
 
       $result_delete = $model_user->deleteUser($login_user); //if there is an exception, it is catched by the case exception in the 'case try'
       
-      $row_user = array (
-        'res_delete' => "User deleted"
-      );
-      /*
-      * Will nether go there
       if(!$result_delete){
         $tErrors[]="Errors to delete a user";
         require ($rep.$tViews['error']);
+      }else{
+        $row_user = array (
+          'res_delete' => "User deleted"
+        );
+  
+        require ($rep.$tViews['view_test_user']);
       }
-      */
-
-      require ($rep.$tViews['view_test_user']);
     }
 
    /** This function add a user into the database
@@ -135,13 +133,26 @@ class UserController {
     $isadmin_user = $_POST['isadmin_user'];
     Validation::val_form_user_add($login_user, $password_user, $email_user, $id_picture_user, $tErrors);
 
-    $model_user = new UserModel();
+    if( count(tError)==0 ) {
+      $model_user = new UserModel();
 
-    $result_insert=$model_user->addUser($login_user, $password_user, $email_user, $isadmin_user, $id_picture_user);
-
-    $row_user = array (
-      'res_insert' => "User added"
+      if( $model_user->addUser($login_user, $password_user, $email_user, $isadmin_user, $id_picture_user) ) {
+        $row_user = array (
+          'res_insert' => "User added"
+        ); 
+      }
+      else {
+        $tErrors[] = "Errors to add a user";
+        $row_user = array (
+          'res_insert' => "No user added"
+        ); 
+      }
+    }
+    else {
+      $row_user = array (
+        'res_insert' => "No user added"
       ); 
+    }
 
     require ($rep.$tViews['view_test_user']);
   }

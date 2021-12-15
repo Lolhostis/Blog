@@ -10,13 +10,13 @@
         <img height="35%" src="<?= "Views/Resources/Pictures/error.png" ?>" />
 
         <p class="lead">
-        <?php
-        if( isset($tErrors) ) {
-          foreach($tErrors as $value) {
-            echo $value ."</br>";
+          <?php
+          if( isset($tErrors) ) {
+            foreach($tErrors as $value) {
+              echo $value ."</br>";
+            }
           }
-        }
-        ?>
+          ?>
         </p>
             <!-- <a href="<?=$tViews['home']?>"> -->
             <a href="index.php">

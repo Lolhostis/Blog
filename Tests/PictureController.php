@@ -22,7 +22,7 @@ class PictureController {
   function __construct() {
     global $rep,$tViews;
     session_start();
-
+    
     $tErrors = array();
 
     try{
@@ -59,8 +59,9 @@ class PictureController {
       $tErrors[] = $e->getMessage();
       require ($rep.$tViews['error']);
     }
-
+    
     exit(0);
+   
   }
 
  /** This function loads the page
@@ -103,13 +104,18 @@ class PictureController {
   
       $model_picture = new PictureModel();
   
-      $data=$model_picture->delete($id_picture); //if there is an exception, it is catched by the case exception in the 'case try'
+      $result_delete=$model_picture->deletePicture($id_picture); //if there is an exception, it is catched by the case exception in the 'case try'
       
-      if(!$data){
+      if(!$result_delete){
         $tErrors[]="Errors to delete a picture";
         require ($rep.$tViews['error']);
+      }else{
+        $row_picture = array (
+          'res_delete' => "Picture deleted"
+        );
+  
+        require ($rep.$tViews['view_test_picture']);
       }
-      require ($rep.$tViews['view_test_picture']);
     }
 
    /** This function add a picture into the database

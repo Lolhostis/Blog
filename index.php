@@ -11,7 +11,7 @@ require_once(__DIR__.'/Config/Config.php');
 require_once(__DIR__.'/Config/SplClassLoader.php');
 $myLibLoader = new SplClassLoader('Config', './');
 $myLibLoader->register();
-$myLibLoader = new SplClassLoader('Controller', './');
+$myLibLoader = new SplClassLoader('Controllers', './');
 $myLibLoader->register();
 $myLibLoader = new SplClassLoader('Gateways', './');
 $myLibLoader->register();
@@ -22,9 +22,10 @@ $myLibLoader->register();
 $myLibLoader = new SplClassLoader('Tests', './');
 $myLibLoader->register();
 
+$mainCont = new \Controllers\FrontController();
 //$pictureCont = new \Tests\PictureController();
 //$commentCont = new \Tests\CommentController();
-//$newsCont = new \Tests\NewsController();
-$userCont = new \Tests\UserController();
+// $newsCont = new \Tests\NewsController();
+//$userCont = new \Tests\UserController();
 
 ?>

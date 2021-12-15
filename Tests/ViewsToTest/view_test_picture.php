@@ -7,6 +7,7 @@
     <body>
 
         <form method="POST">
+            <h1>Consult & add Picture</h1>
             <p>Id : <input type="INT" name="id_picture" value="<?php echo $_POST['id_picture']??""?>" required/></p>
             <p>Uri : <input type="TEXT" name="uri_picture" value="<?php echo $_POST['uri_picture']??""?>"/></p>
             <p>Alt : <input type="TEXT" name="alt_picture" value="<?php echo $_POST['alt_picture']??""?>"/></p>
@@ -14,6 +15,9 @@
             <p><input type="SUBMIT" name="action" value="add_picture"/></p>
             <p><input type="SUBMIT" name="action" value="delete_picture"/></p>
             <p><input type="RESET" /></p>
+            <a href="index.php">
+		        Main menu
+		    </a>
         </form>
 
         <div>
@@ -44,8 +48,13 @@
                     <p>Result Insert : <?= $row_picture['res_insert'] ?? "" ?></p>
                 <?php
                 }
+                else if( isset($_POST['action']) && $_POST['action']=="delete_picture" )
+                {
                 ?>
-
+                    <p>Result Delete : <?= $row_picture['res_delete'] ?? "" ?></p>
+                <?php
+                }
+                ?>
             <?php
             }
             ?>
