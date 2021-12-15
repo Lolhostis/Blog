@@ -69,14 +69,36 @@ use \Jobs\Picture;
     }
 
     /**
-     * Delete a picture from the database
+     * Delete a picture from the database from its ID
+     * This deletion delete the picture from
+     * the TPicture and TNewsincludepicture databases
+     * As a result, a picture is deleted from all the news which include it
      * @param  int    $id Id of the picture to delete
      * @return [bool]     true if it's right ; false if there is a problem
      */
-    public function delete(int $id) : bool{
-      $query= "DELETE FROM tPicture WHERE id = :ID";
+    public function delete_picture(int $id) : bool{
 
-      return $this->con->executeQuery($query, array(':ID' => array($id, \PDO::PARAM_INT)) );
+      if($this->delete_picture_news_association($id) ) {
+        // Pictures have been deleted from the TNewsincludepicture database
+        $query= "DELETE FROM tPicture WHERE id = :ID";
+        return $this->con->executeQuery($query, array(':ID' => array($id, \PDO::PARAM_INT)) );
+      }
+      else {
+        return false;
+      }
+    }
+
+    /**
+     * Delete all the tuple concerning the picture of the
+     * given id from the 'TNewsincludepicture' table
+     * As a result, a picture is deleted from all the news which include it
+     * @param  int $id_news     ID of the news to delete
+     * @return [bool]           true if the deletion of all the tuples succeded
+     */
+    private function delete_picture_news_association(int $id_picture):bool {
+      $query = "DELETE FROM TNewsincludepicture WHERE id_picture=:id_picture";
+
+      return $this->con->executeQuery($query, array(':id_picture' => array($id_picture, \PDO::PARAM_INT)) );
     }
 
     /**
