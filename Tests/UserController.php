@@ -17,21 +17,31 @@ class UserController {
 
    /** Constructor of the User controller
     */
-  function __construct() {
+  function __construct(array &$tErrors, string $action) {
     global $rep,$tViews;
     session_start();
 
+    /*
+    * Made in the FrontController
     //initialization of an array of errors
     $tErrors = array();
+    */
 
     try{
+      /*
+      * Action passed by argument in the constructor
       $action= isset($_REQUEST['action']) ? $_REQUEST['action'] : NULL;
       //$action=$_REQUEST['action'];
+      */
 
       switch($action) {
+        /*
+        * The default main page is returned by the front controller
+        * in its Reinit method
         case NULL:
           $this->Reinit();
           break;
+        */
 
         case "get_user":
           $this->get_user($tErrors);
@@ -46,9 +56,10 @@ class UserController {
         break;
 
         default:
-          $tErrors[] =  "No php view";
-          require ($rep.$tViews['view_test_user']);
-          break;
+          //We normally won't go there
+          // as the action has been verified in the front controller
+          $tErrors[] = "No php control for action : ".$action;
+          require ($rep.$tViews['error']);
       }
 
     } catch (\PDOException $e){
@@ -62,14 +73,15 @@ class UserController {
     exit(0);
   }
 
- /** This function loads the page
-  */
+  /*
+  * Made in the FrontController
   function Reinit() {
   global $rep,$tViews;
 
     $row_user = array ();
     require ($rep.$tViews['view_test_user']);
   }
+  */
 
    /** This function return informations about a user from the database
     * \param[in, out] tErrors Array of errors

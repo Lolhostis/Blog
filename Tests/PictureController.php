@@ -19,37 +19,49 @@ class PictureController {
 
    /** Constructor of the Picture controller
     */
-  function __construct() {
+  function __construct(array &$tErrors, string $action) {
     global $rep,$tViews;
     session_start();
     
+    /*
+    * Made in the FrontController
+    //initialization of an array of errors
     $tErrors = array();
+    */
 
     try{
+      /*
+      * Action passed by argument in the constructor
       $action= isset($_REQUEST['action']) ? $_REQUEST['action'] : NULL;
-    //  $action=$_REQUEST['action'];
+      //$action=$_REQUEST['action'];
+      */
 
       switch($action) {
+        /*
+        * The default main page is returned by the front controller
+        * in its Reinit method
         case NULL:
           $this->Reinit();
         break;
+        */
 
         case "get_picture":
           $this->get_picture($tErrors);
-        break;
+          break;
 
         case "add_picture":
           $this->add_picture($tErrors);
-        break;
+          break;
 
         case "delete_picture":
           $this->delete_picture($tErrors);
-        break;
+          break;
 
         default:
-          $tErrors[] =  "No php view";
-          require ($rep.$tViews['view_test_picture']);
-          break;
+          //We normally won't go there
+          // as the action has been verified in the front controller
+          $tErrors[] = "No php control for action : ".$action;
+          require ($rep.$tViews['error']);
       }
 
     } catch (\PDOException $e){
@@ -61,16 +73,16 @@ class PictureController {
     }
     
     exit(0);
-   
   }
 
- /** This function loads the page
-  */
+  /*
+  * Made in the FrontController
   function Reinit() {
   global $rep,$tViews;
     $row_picture = array ();
     require ($rep.$tViews['view_test_picture']);
   }
+  */
 
    /** This function return informations about a picture from the database
     * \param[in, out] tErrors Array of errors

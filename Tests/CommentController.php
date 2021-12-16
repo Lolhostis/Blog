@@ -15,23 +15,34 @@ use \Config\Validation;
 */
 class CommentController {
 
-   /** Constructor of the Comment controller
+   /** 
+    * Constructor of the Comment controller
     */
-  function __construct() {
+  function __construct(array &$tErrors, string $action) {
     global $rep,$tViews;
     session_start();
 
+    /*
+    * Made in the FrontController
     //initialization of an array of errors
     $tErrors = array();
+    */
 
     try{
+      /*
+      * Action passed by argument in the constructor
       $action=isset($_REQUEST['action']) ? $_REQUEST['action'] : NULL;
       //$action=$_REQUEST['action'];
+      */
 
       switch($action) {
+        /*
+        * The default main page is returned by the front controller
+        * in its Reinit method
         case NULL:
           $this->Reinit();
         break;
+        */
 
         case "get_comment":
           $this->get_comment($tErrors);
@@ -46,14 +57,14 @@ class CommentController {
         break;
 
         default:
-          $tErrors[] = "No php view";
-          require ($rep.$tViews['view_test_comment']);
-          break;
+          //We normally won't go there
+          // as the action has been verified in the front controller
+          $tErrors[] = "No php control for action : ".$action;
+          require ($rep.$tViews['error']);
       }
-
-    } catch (\PDOException $e){
+    }catch (\PDOException $e){
       $tErrors[] =  $e->getMessage();
-       require ($rep.$tViews['error']);
+      require ($rep.$tViews['error']);
     }catch (\Exception $e){
       $tErrors[] =  $e->getMessage();
       require ($rep.$tViews['error']);
@@ -62,14 +73,15 @@ class CommentController {
     exit(0);
   }
 
- /** This function loads the page
-  */
+  /*
+  * Made in the FrontController
   function Reinit() {
     global $rep,$tViews;
 
     $row_comment = array ();
     require ($rep.$tViews['view_test_comment']);
   }
+  */
 
    /** This function return informations about a comment from the database
     * \param[in, out] tErrors Array of errors

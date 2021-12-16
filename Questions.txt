@@ -1,2 +1,9 @@
 Does a model can call another model inside one of its functions ?
 	Exemple : UserModel->isAdminById in CommentModel->FindById
+
+PLus de try catch dans le front controller vu que toutes les eception seront catch par les sous controlleurs ?
+Renommage pout vers main_view
+
+Validation ne renvoie plus d'exception
+Erreur dans le tableau tError -> géré à la fin de l'appel à Validation par le controller à la suite if(count(tErrors)>0) {...}
+Exception renvoyées par le modelgérées par le controller dans le try catch encapsulant le switch

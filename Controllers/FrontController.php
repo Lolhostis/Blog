@@ -21,109 +21,45 @@ class FrontController {
     */
   function __construct() {
     global $rep,$tViews;
+    global $news_actions, $comment_actions, $picture_actions, $user_actions;
+    global $manage_jobs;
     session_start();
 
     //initialization of an array of errors
     $tErrors = array();
 
-    try{
+    try {
       $action = isset($_REQUEST['action']) ? $_REQUEST['action'] : NULL;
       //$action=$_REQUEST['action'];
 
-      if(in_array($action, $news_actions)){
-        new NewsController();
-      }elseif(in_array($action, $comment_actions)){
-        new CommentController();
+      if($action==NULL) {
+        $this->Reinit();
+      }
+      elseif(in_array($action, array_keys($manage_jobs))) {
+        $_POST = array();
+        $_GET = array();
+        require($manage_jobs[$action]);
+      }
+      elseif(in_array($action, $news_actions)){
+        new NewsController($tErrors, $action);
+      }
+      elseif(in_array($action, $comment_actions)){
+        new CommentController($tErrors, $action);
       }
       elseif(in_array($action, $user_actions)){
-        new UserController();
+        new UserController($tErrors, $action);
       }
       elseif(in_array($action, $picture_actions)){
-        new PictureController();
+        new PictureController($tErrors, $action);
       }
-      
-      switch($action) {
-        case NULL:
-          $this->Reinit();
-          break;
-        
-        // Main menu
-        case "manage_news":
-          require($rep.$tViews["view_test_news"]);
-          break;
-
-        case "manage_comment":
-          require($rep.$tViews["view_test_comment"]);
-          break;
-        
-        case "manage_user":
-          require($rep.$tViews["view_test_user"]);
-          break;
-        
-        case "manage_picture":
-            require($rep.$tViews["view_test_picture"]);
-            break;
-      }
-      
       else{
-        $tErrors[] = "No php view";
-        require ($rep.$tViews['view_test_news']);
+        // Unknown action
+        $tErrors[] = "No php view for action : ".$action;
+        require ($rep.$tViews['error']);
       }
-
-        /*
-        case "get_news":
-          new NewsController(); //->get_news($tErrors);
-          break;
-        case "add_news":
-          new NewsController(); //->add_news($tErrors);
-          break;
-        case "delete_news":
-          new NewsController(); //->delete_news($tErrors);
-          break;        
-
-        // Comment related
-        case "get_comment":
-          new CommentController(); //->get_comment($tErrors);
-        break;
-
-        case "add_comment":
-          new CommentController(); //->add_comment($tErrors);
-        break;
-
-        case "delete_comment":
-          new CommentController(); //->delete_comment($tErrors);
-        break;
-
-        //User related
-        case "get_user":
-          new UserController(); //->get_user($tErrors);
-          break;
-
-        case "add_user":
-          new UserController(); //->add_user($tErrors);
-          break;
-
-        case "delete_user":
-          new UserController(); //->delete_user($tErrors);
-          break;
-
-        //Picture related
-        case "get_picture":
-          new PictureController(); //->get_picture($tErrors);
-        break;
-
-        case "add_picture":
-          new PictureController(); //->add_picture($tErrors);
-        break;
-
-        case "delete_picture":
-          new PictureController(); //->delete_picture($tErrors);
-        break;
-         */
-
     }catch (\PDOException $e){
       $tErrors[] =  $e->getMessage();
-       require ($rep.$tViews['error']);
+      require ($rep.$tViews['error']);
     }catch (\Exception $e){
       $tErrors[] =  $e->getMessage();
       require ($rep.$tViews['error']);
@@ -132,12 +68,13 @@ class FrontController {
     exit(0);
   }
 
- /** This function loads the page
+ /**
+  * This function loads the page
   */
   function Reinit() {
     global $rep,$tViews;
 
-    require ($rep.$tViews['pouet']);
+    require ($rep.$tViews['main_view']);
   }
 }
 ?>
