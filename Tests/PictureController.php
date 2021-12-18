@@ -21,7 +21,7 @@ class PictureController {
     */
   function __construct(array &$tErrors, string $action) {
     global $rep,$tViews;
-    session_start();
+    //session_start();
     
     /*
     * Made in the FrontController
@@ -92,16 +92,27 @@ class PictureController {
 
     $id_picture=$_POST['id_picture'];
     Validation::val_form_picture_consult($id_picture, $tErrors); //if there is an exception, it is catched by the case exception in the 'case try'
+    if(count($tErrors)>0){
+      require ($rep.$tViews['error']);
+      require ($rep.$tViews['view_test_picture']);
+      return;
+    }
 
     $model_picture = new PictureModel();
 
-    $data=$model_picture->findById($id_picture); //if there is an exception, it is catched by the case exception in the 'case try'
+    try{
+      $data=$model_picture->findById($id_picture); //if there is an exception, it is catched by the case exception in the 'case try'
+      
+      $row_picture = array (
+        'res_id_picture' => $id_picture,
+        'res_uri_picture' => $data->getUri(),
+        'res_alt_picture' => $data->getAlt(),
+      );
+    }catch(\Exception $e){
+      $tErrors[] = $e->getMessage();
+      require ($rep.$tViews['error']);
+    }
 
-    $row_picture = array (
-      'res_id_picture' => $id_picture,
-      'res_uri_picture' => $data->getUri(),
-      'res_alt_picture' => $data->getAlt(),
-    );
     require ($rep.$tViews['view_test_picture']);
   }
 
@@ -113,21 +124,34 @@ class PictureController {
 
       $id_picture=$_POST['id_picture'];
       Validation::val_form_picture_consult($id_picture, $tErrors); //if there is an exception, it is catched by the case exception in the 'case try'
-  
-      $model_picture = new PictureModel();
-  
-      $result_delete=$model_picture->deletePicture($id_picture); //if there is an exception, it is catched by the case exception in the 'case try'
-      
-      if(!$result_delete){
-        $tErrors[]="Errors to delete a picture";
+      if(count($tErrors)>0){
         require ($rep.$tViews['error']);
-      }else{
-        $row_picture = array (
-          'res_delete' => "Picture deleted"
-        );
-  
         require ($rep.$tViews['view_test_picture']);
+        return;
       }
+      
+      $model_picture = new PictureModel();
+      try{
+        $result_delete=$model_picture->deletePicture($id_picture); //if there is an exception, it is catched by the case exception in the 'case try'
+        if(count($tErrors)>0){
+          require ($rep.$tViews['error']);
+          require ($rep.$tViews['view_test_picture']);
+          return;
+        }
+
+        if(!$result_delete){
+          $tErrors[]="Errors to delete a picture";
+          require ($rep.$tViews['error']);
+        }else{
+          $row_picture = array (
+            'res_delete' => "Picture deleted"
+          );
+        } 
+      }catch(\Exception $e){
+        $tErrors[] = $e->getMessage();
+        require ($rep.$tViews['error']);
+      }  
+      require ($rep.$tViews['view_test_picture']);
     }
 
    /** This function add a picture into the database
@@ -148,10 +172,22 @@ class PictureController {
       $alt_picture = "no_picture_given";
     }
     Validation::val_form_picture_add($id_picture, $uri_picture, $alt_picture, $tErrors);
-    
+    if(count($tErrors)>0){
+      require ($rep.$tViews['error']);
+      require ($rep.$tViews['view_test_picture']);
+      return;
+    }
+
     $model_picture = new PictureModel();
 
-    $result_insert=$model_picture->addPicture(new Picture($id_picture, $uri_picture, $alt_picture));
+    try{
+      $result_insert=$model_picture->addPicture(new Picture($id_picture, $uri_picture, $alt_picture));
+    }catch(\Exception $e){
+      $tErrors[] = $e->getMessage();
+      require ($rep.$tViews['error']);
+      require ($rep.$tViews['view_test_picture']);
+      return;
+    }  
 
     $row_picture = array (
       'res_insert' => "Picture added"

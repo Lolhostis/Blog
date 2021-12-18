@@ -19,7 +19,7 @@ class UserController {
     */
   function __construct(array &$tErrors, string $action) {
     global $rep,$tViews;
-    session_start();
+   // session_start();
 
     /*
     * Made in the FrontController
@@ -91,19 +91,29 @@ class UserController {
 
     $login_user=$_POST['login_user'];
     Validation::val_form_user_consult($login_user, $tErrors); //if there is an exception, it is catched by the case exception in the 'case try'
+    if(count($tErrors)>0){
+      require ($rep.$tViews['error']);
+      require ($rep.$tViews['view_test_user']);
+      return;
+    }
 
     $model_user = new UserModel();
 
-    $data=$model_user->findByLogin($login_user); //if there is an exception, it is catched by the case exception in the 'case try'
+    try{
+      $data=$model_user->findByLogin($login_user); //if there is an exception, it is catched by the case exception in the 'case try'
 
-    $row_user = array (
-      'res_login_user' => $login_user,
-      'res_password_user' => $data->getPassword(),
-      'res_email_user' => $data->getEmail(),
-      'res_isadmin_user' => $data->getIsAdmin(),
-      'res_id_picture_user' => $data->getPicture()->getId(),
-    );
-    require ($rep.$tViews['view_test_user']);
+      $row_user = array (
+        'res_login_user' => $login_user,
+        'res_password_user' => $data->getPassword(),
+        'res_email_user' => $data->getEmail(),
+        'res_isadmin_user' => $data->getIsAdmin(),
+        'res_id_picture_user' => $data->getPicture()->getId(),
+      );
+    }catch(\Exception $e){
+      $tErrors[] = $e->getMessage();
+      require ($rep.$tViews['error']);
+    }       
+    require ($rep.$tViews['view_test_user']);      
   }
 
        /** This function delete a user from the database
@@ -114,21 +124,30 @@ class UserController {
 
       $login_user=$_POST['login_user'];
       Validation::val_form_user_consult($login_user, $tErrors); //if there is an exception, it is catched by the case exception in the 'case try'
+      if(count($tErrors)>0){
+        require ($rep.$tViews['error']);
+        require ($rep.$tViews['view_test_user']);
+        return;
+      }
 
       $model_user = new UserModel();
 
-      $result_delete = $model_user->deleteUser($login_user); //if there is an exception, it is catched by the case exception in the 'case try'
+      try{
+        $result_delete = $model_user->deleteUser($login_user); //if there is an exception, it is catched by the case exception in the 'case try'
       
-      if(!$result_delete){
-        $tErrors[]="Errors to delete a user";
+        if(!$result_delete){
+          $tErrors[]="Errors to delete a user";
+          require ($rep.$tViews['error']);
+        }else{
+          $row_user = array (
+            'res_delete' => "User deleted"
+          );
+        }
+      }catch(\Exception $e){
+        $tErrors[] = $e->getMessage();
         require ($rep.$tViews['error']);
-      }else{
-        $row_user = array (
-          'res_delete' => "User deleted"
-        );
-  
-        require ($rep.$tViews['view_test_user']);
-      }
+      }       
+      require ($rep.$tViews['view_test_user']); 
     }
 
    /** This function add a user into the database
@@ -144,29 +163,31 @@ class UserController {
     $id_picture_user=$_POST['id_picture_user'];
     $isadmin_user = $_POST['isadmin_user'];
     Validation::val_form_user_add($login_user, $password_user, $email_user, $id_picture_user, $tErrors);
-
-    if( count(tError)==0 ) {
-      $model_user = new UserModel();
-
-      if( $model_user->addUser($login_user, $password_user, $email_user, $isadmin_user, $id_picture_user) ) {
-        $row_user = array (
-          'res_insert' => "User added"
-        ); 
-      }
-      else {
-        $tErrors[] = "Errors to add a user";
-        $row_user = array (
-          'res_insert' => "No user added"
-        ); 
-      }
-    }
-    else {
-      $row_user = array (
-        'res_insert' => "No user added"
-      ); 
+    if(count($tErrors)>0){
+      require ($rep.$tViews['error']);
+      require ($rep.$tViews['view_test_user']);
+      return;
     }
 
-    require ($rep.$tViews['view_test_user']);
+    try{
+        $model_user = new UserModel();
+
+          if( $model_user->addUser($login_user, $password_user, $email_user, $isadmin_user, $id_picture_user) ) {
+          $row_user = array (
+            'res_insert' => "User added"
+          ); 
+        }
+        else {
+          $tErrors[] = "Errors to add a user";
+          $row_user = array (
+            'res_insert' => "No user added"
+          ); 
+        }
+    }catch(\Exception $e){
+      $tErrors[] = $e->getMessage();
+      require ($rep.$tViews['error']);
+    }       
+    require ($rep.$tViews['view_test_user']); 
   }
 }
 ?>

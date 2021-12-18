@@ -20,7 +20,7 @@ class CommentController {
     */
   function __construct(array &$tErrors, string $action) {
     global $rep,$tViews;
-    session_start();
+   // session_start();
 
     /*
     * Made in the FrontController
@@ -91,17 +91,27 @@ class CommentController {
 
     $id_comment=$_POST['id_comment'];
     Validation::val_form_comment_consult($id_comment, $tErrors); //if there is an exception, it is catched by the case exception in the 'case try'
+    if(count($tErrors)>0){
+      require ($rep.$tViews['error']);
+      require ($rep.$tViews['view_test_comment']);
+      return;
+    }
 
     $model_comment = new CommentModel();
 
-    $data=$model_comment->findById($id_comment); //if there is an exception, it is catched by the case exception in the 'case try'
+    try{
+      $data=$model_comment->findById($id_comment); //if there is an exception, it is catched by the case exception in the 'case try'
 
-    $row_comment = array (
-      'res_id_comment' => $id_comment,
-      'res_text_comment' => $data->getText(),
-      'res_date_comment' => $data->getDate(),
-      'res_login_user_comment' => $data->getAuthor()->getPseudo(),
-    );
+      $row_comment = array (
+        'res_id_comment' => $id_comment,
+        'res_text_comment' => $data->getText(),
+        'res_date_comment' => $data->getDate(),
+        'res_login_user_comment' => $data->getAuthor()->getPseudo(),
+      );
+    }catch(\Exception $e){
+      $tErrors[] = $e->getMessage();
+      require ($rep.$tViews['error']);
+    }        
     require ($rep.$tViews['view_test_comment']);
   }
 
@@ -113,22 +123,31 @@ class CommentController {
   
       $id_comment=$_POST['id_comment'];
       Validation::val_form_comment_consult($id_comment, $tErrors); //if there is an exception, it is catched by the case exception in the 'case try'
+      if(count($tErrors)>0){
+        require ($rep.$tViews['error']);
+        require ($rep.$tViews['view_test_comment']);
+        return;
+      }
 
       $model_comment = new CommentModel();
 
-      $result_delete = $model_comment->deleteComment($id_comment); //if there is an exception, it is catched by the case exception in the 'case try'
+      try{
+        $result_delete = $model_comment->deleteComment($id_comment); //if there is an exception, it is catched by the case exception in the 'case try'
      
-      if($data=false){
-        $tErrors[]="Error to delete a comment";
+        if($data=false){
+          $tErrors[]="Error to delete a comment";
+          require ($rep.$tViews['error']);
+        }
+        else{
+          $row_comment = array (
+            'res_delete' => "Comment deleted"
+          );
+        }
+      }catch(\Exception $e){
+        $tErrors[] = $e->getMessage();
         require ($rep.$tViews['error']);
-      }
-      else{
-        $row_comment = array (
-          'res_delete' => "Comment deleted"
-        );
-  
-        require ($rep.$tViews['view_test_comment']); 
-      }
+      }        
+      require ($rep.$tViews['view_test_comment']);
     } 
 
    /** This function add a user into the database
@@ -143,15 +162,24 @@ class CommentController {
     $login_user_comment=$_POST['login_user_comment'];
     $id_news_comment = $_POST['id_news_comment'];
     Validation::val_form_comment_add($id_comment, $text_comment, $date_comment, $login_user_comment, $id_news_comment, $tErrors);
-
+    if(count($tErrors)>0){
+      require ($rep.$tViews['error']);
+      require ($rep.$tViews['view_test_comment']);
+      return;
+    }
+    
     $model_comment = new CommentModel();
 
-    $result_insert=$model_comment->addComment($id_comment, $text_comment, $date_comment, $login_user_comment, $id_news_comment);
+    try{
+      $result_insert=$model_comment->addComment($id_comment, $text_comment, $date_comment, $login_user_comment, $id_news_comment);
 
-    $row_comment = array (
-      'res_insert' => "Comment added"
-    );
-    
+      $row_comment = array (
+        'res_insert' => "Comment added"
+      );
+    }catch(\Exception $e){
+      $tErrors[] = $e->getMessage();
+      require ($rep.$tViews['error']);
+    }        
     require ($rep.$tViews['view_test_comment']);
   }
 }

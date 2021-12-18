@@ -4,7 +4,7 @@ use \Models\NewsModel;
 use  \Config\Validation;
 
 /**
-  /** \author L'HOSTIS Loriane
+  /** \author L'HOSTIS Loriane & ALLEMAND Arnaud
   /** \date 05/12/2021
   /** \file NewsController.php
   /** \namespace Tests
@@ -19,7 +19,7 @@ class NewsController {
     */
   function __construct(array &$tErrors, string $action) {
     global $rep,$tViews;
-    session_start();
+  //  session_start();
 
     /*
     * Made in the FrontController
@@ -91,18 +91,28 @@ class NewsController {
 
     $id_news=$_POST['id_news'];
     Validation::val_form_news_consult($id_news, $tErrors); //if there is an exception, it is catched by the case exception in the 'case try'
+    if(count($tErrors)>0){
+      require ($rep.$tViews['error']);
+      require ($rep.$tViews['view_test_news']);
+      return;
+    }
 
     $model_news = new NewsModel();
 
-    $data=$model_news->findById($id_news); //if there is an exception, it is catched by the case exception in the 'case try'
+    try{
+      $data=$model_news->findById($id_news); //if there is an exception, it is catched by the case exception in the 'case try'
 
-    $row_news = array (
-      'res_id_news' => $id_news,
-      'res_title_news' => $data->getTitle(),
-      'res_description_news' => $data->getDescription(),
-      'res_date_news' => $data->getDate(),
-      'res_login_user_news' => $data->getAuthor()->getPseudo(),
-    );
+      $row_news = array (
+        'res_id_news' => $id_news,
+        'res_title_news' => $data->getTitle(),
+        'res_description_news' => $data->getDescription(),
+        'res_date_news' => $data->getDate(),
+        'res_login_user_news' => $data->getAuthor()->getPseudo(),
+      );
+    }catch(\Exception $e){
+      $tErrors[] = $e->getMessage();
+      require ($rep.$tViews['error']);
+    }       
     require ($rep.$tViews['view_test_news']);
   }
 
@@ -114,19 +124,29 @@ class NewsController {
   
       $id_news=$_POST['id_news'];
       Validation::val_form_news_consult($id_news, $tErrors); //if there is an exception, it is catched by the case exception in the 'case try'
+      if(count($tErrors)>0){
+        require ($rep.$tViews['error']);
+        require ($rep.$tViews['view_test_news']);
+        return;
+      }
 
       $model_news = new NewsModel();
-      $result_delete=$model_news->deleteNews($id_news); //if there is an exception, it is catched by the case exception in the 'case try'
+      try{
+        $result_delete=$model_news->deleteNews($id_news); //if there is an exception, it is catched by the case exception in the 'case try'
       
-      if(!$result_delete){
-        $tErrors[]="Errors to delete a news";
+        if(!$result_delete){
+          $tErrors[]="Errors to delete a news";
+          require ($rep.$tViews['error']);
+        }else{
+          $row_news = array (
+            'res_delete' => "News deleted"
+          );
+        }
+      }catch(\Exception $e){
+        $tErrors[] = $e->getMessage();
         require ($rep.$tViews['error']);
-      }else{
-        $row_news = array (
-          'res_delete' => "News deleted"
-        );
-        require ($rep.$tViews['view_test_news']);
-      }      
+      }       
+      require ($rep.$tViews['view_test_news']); 
     }  
 
    /** This function add a news into the database
@@ -141,15 +161,24 @@ class NewsController {
     $date_news=$_POST['date_news'];
     $login_user_news=$_POST['login_user_news'];
     Validation::val_form_news_add($id_news, $title_news, $description_news, $date_news, $login_user_news, $tErrors);
-
+    if(count($tErrors)>0){
+      require ($rep.$tViews['error']);
+      require ($rep.$tViews['view_test_news']);
+      return;
+    }
+    
     $model_news = new NewsModel();
 
-    $result_insert=$model_news-> addNews($id_news, $title_news, $description_news, $date_news, $login_user_news);
+    try{
+      $result_insert=$model_news-> addNews($id_news, $title_news, $description_news, $date_news, $login_user_news);
 
-    $row_news = array (
-      'res_insert' => "News added"
-      );
-
+      $row_news = array (
+        'res_insert' => "News added"
+        );
+    }catch(\Exception $e){
+      $tErrors[] = $e->getMessage();
+      require ($rep.$tViews['error']);
+    }       
     require ($rep.$tViews['view_test_news']);
   }
 }

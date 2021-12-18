@@ -24,7 +24,6 @@
             <?php if( isset($row_picture) && !empty($row_picture) )
             {
             ?>
-                <p>Results :</p>
                 <?php if( isset($_POST['action']) && $_POST['action']=="get_picture" )
                 {
                 ?>

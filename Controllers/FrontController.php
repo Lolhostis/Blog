@@ -1,9 +1,9 @@
 <?php
 namespace Controllers;
-use \Test\CommentController;
-use \Test\NewsController;
-use \Test\PictureController;
-use \Test\UserController;
+use \Tests\CommentController;
+use \Tests\NewsController;
+use \Tests\PictureController;
+use \Tests\UserController;
 use \Config\Validation;
 
 /**
