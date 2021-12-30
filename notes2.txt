@@ -1,0 +1,11 @@
+if (!isset($_COOKIE['cookieCpt'])) {
+      setcookie("cookieCpt", 0, time()+365*24*3600, '/'); //A la fin on spécifie le chemin
+    }
+    setcookie("cookieCpt", $cpt = $_COOKIE["cookieCpt"] +1, time()+365*24*3600, '/');
+
+
+ <!-- <a  href="<?php $rep . $tViews['article']?>"> -->
+
+https://www.youtube.com/watch?v=5njdLNkfOCU 
+
+

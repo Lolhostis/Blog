@@ -1,13 +1,14 @@
 <?php
-  include('head.php');
+  include($tViews['head']);
 ?>
 
   </head>
   <body>
 
 <?php
-  include('menu.php');
+  include($tViews['menu']);
 ?>
+
     <main>
       <section class="py-5 text-center container">
         <div class="row py-lg-5">
@@ -28,9 +29,13 @@
                 <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>
                 -->
 
-                 <a  href="article.php">
+        <a href="index.php?action=article">
+          <p>Cliquez ici pour aller sur article.php</p>
+        </a>
+
+                <a  href="<?php 'index.php?GET="' . $tViews['article'] . "'"?>">
                    <button type="button" class="btn  btn-outline-light">
-                      <img  width="100%" height="225" src="Resources/Pictures/heart.jpg"/>
+                      <img  width="100%" height="225" src="<?php echo $tViews['pictures'] . "heart.jpg"?>"/>
                   </button>
                 </a>
 
@@ -51,9 +56,9 @@
 
             <div class="col">
               <div class="card shadow-sm">
-                <a  href="article.php">
+                <a href="<?php echo $tViews['article'] ?>">
                   <button type="button" class="btn btn-sm btn-outline-light">
-                      <img  width="100%" height="225" src="Resources/Pictures/woman-working.jpg"/>
+                      <img  width="100%" height="225" src="<?php echo $tViews['pictures'] . "woman-working.jpg"?>"/>
                   </button>
                 </a>
 
@@ -66,6 +71,31 @@
 
               </div>
             </div>
+
+            <?php
+              $model_news = new Models\NewsModel();
+              echo $model_news;
+              $tAllnews = $model_news.getAllNews();
+            foreach($tAllnews as $news): ?>
+              <div class="col">
+                <div class="card shadow-sm">
+                  <?php echo $news->getId() ?>
+                  <a href="<?php echo $news['article'] ?>">
+                    <button type="button" class="btn btn-sm btn-outline-light">
+                        <img  width="100%" height="225" src="<?php echo $news->getPicture()?>"/>
+                    </button>
+                  </a>
+
+                  <div class="card-body">
+                    <p class="card-text"> <?php echo $news->getDescription(); ?> </p>
+                    <div class="d-flex justify-content-between align-items-center">
+                      <small class="text-muted">18 November 2021</small>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+            <?php endforeach; ?>
 
 
           </div>
@@ -90,9 +120,9 @@
     </main>
 
 <?php
-  include('footer.php');
+  include($tViews['footer']);
 ?>
 
   </body>
-   <script src="Resources/js/bootstrap.bundle.min.js"></script>
+  <script src="<?php echo $tViews['bootstrapMinJs']?>"></script>
 </html>

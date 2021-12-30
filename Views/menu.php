@@ -1,3 +1,4 @@
+<?php global $rep,$tViews; ?>
 <header>
       <div class="collapse bg-dark" id="navbarHeader">
         <div class="container">
@@ -10,11 +11,11 @@
                     <p class="text-muted">Synapse is a blog concerning health and computer science.</p>
                   </div>
 
-                <form class="d-flex">
-                  <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                  <button class="btn btn-outline-success" type="submit">Search</button>
+                <form class="d-flex" method="get" action="index.php">
+                  <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="q">
+                  <button class="btn btn-outline-success" type="submit" value="search_news">Search</button>
                 </form>
-                 <a  href="sign_in.php">
+                 <a href="<?php echo $tViews['sign_in'] ?>">
                     <button class="btn btn-light me-md-2" type="button">Sign in/up</button>
                 </a>
               </div>

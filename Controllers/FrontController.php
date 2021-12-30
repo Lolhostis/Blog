@@ -1,10 +1,8 @@
 <?php
 namespace Controllers;
-use \Tests\CommentController;
-use \Tests\NewsController;
-use \Tests\PictureController;
-use \Tests\UserController;
 use \Config\Validation;
+use \Controllers\NewsController;
+use \Controllers\SwitchController;
 
 /**
   /** \author L'HOSTIS Loriane & ALLEMAND Arnaud
@@ -35,11 +33,6 @@ class FrontController {
       if($action==NULL) {
         $this->Reinit();
       }
-      elseif(in_array($action, array_keys($manage_jobs))) {
-        $_POST = array();
-        $_GET = array();
-        require($manage_jobs[$action]);
-      }
       elseif(in_array($action, $news_actions)){
         new NewsController($tErrors, $action);
       }
@@ -51,6 +44,13 @@ class FrontController {
       }
       elseif(in_array($action, $picture_actions)){
         new PictureController($tErrors, $action);
+      }
+      else if($action=="article"){
+       // require ($rep.$tViews['article']); 
+       //new SwitchController($tErrors, $action);
+       // header('location:' . $tViews['article']);
+        require ($rep.$tViews['article']);
+       //$this->Reinit('article');
       }
       else{
         // Unknown action
@@ -74,7 +74,7 @@ class FrontController {
   function Reinit() {
     global $rep,$tViews;
 
-    require ($rep.$tViews['main_view']);
+    require ($rep.$tViews['home']);
   }
 }
 ?>

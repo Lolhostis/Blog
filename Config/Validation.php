@@ -13,6 +13,13 @@ class Validation {
 		}
 	}
 
+    static function val_search_title()(string &$search_title, &$tErrors) {
+        if (!isset($search_title)||$search_title=="") {
+            $tErrors[] = "No valid title</br>";
+            $search_title="";
+        }
+    }
+
     static function val_form_news_consult(string &$id, &$tErrors) {
         if (!isset($id)||$id==""||!filter_var($id, FILTER_VALIDATE_INT)) {
             $tErrors[] = "No valid id - Enter a number</br>";

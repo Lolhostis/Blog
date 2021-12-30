@@ -1,0 +1,11 @@
+jira : gestion de projet informatique 
+
+"woman-working.jpg"
+
+news_description_cut
+
+$rowSearch['picture_name']
+
+news_date
+https://grafikart.fr/tutoriels/recherche-php-40 
+
