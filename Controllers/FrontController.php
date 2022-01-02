@@ -66,7 +66,9 @@ class FrontController {
   * This function loads the page
   */
   function Reinit() {
-    global $rep,$tViews, $tDirectory;
+    global $rep,$tViews, $tDirectory, $page, $nbNewsPerPage;
+
+    $page = isset($_REQUEST['page']) ? $_REQUEST['page'] : 1;
 
     require ($rep.$tViews['home']);
   }

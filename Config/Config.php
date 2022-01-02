@@ -56,4 +56,8 @@ $manage_jobs = array(
     'manage_user'=>$rep.$tViews['view_test_user'],
     'manage_picture'=>$rep.$tViews['view_test_picture']
 );
+
+//Var
+$nbNewsPerPage = -1;
+
 ?>

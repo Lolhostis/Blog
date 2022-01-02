@@ -1,0 +1,66 @@
+\\([^\\'"\.])
+' . DIRECTORY_SEPARATOR . '{1}
+
+' . DIRECTORY_SEPARATOR . '
+
+<link href="<?php echo $tViews['bootstrapMinJs']?>" rel="stylesheet">
+
+
+
+
+
+            <div class="col">
+              <div class="card shadow-sm">
+                <a href="<?php echo $tViews['article'] ?>">
+                  <button type="button" class="btn btn-sm btn-outline-light">
+                      <img  width="100%" height="225" src="<?php echo $tViews['pictures'] . "woman-working.jpg"?>"/>
+                  </button>
+                </a>
+
+                <div class="card-body">
+                  <p class="card-text">As the vast majority of women who present in threatened preterm labour (TPTL) will not deliver early, clinicians need to balance the risks of over-medicalising the majority of women, against the potential risk... </p>
+                  <div class="d-flex justify-content-between align-items-center">
+                    <small class="text-muted">18 November 2021</small>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+
+            <?php
+              $model_news = new Models\NewsModel();
+              echo $model_news;
+              $tAllnews = $model_news.getAllNews();
+            foreach($tAllnews as $news): ?>
+              <div class="col">
+                <div class="card shadow-sm">
+                  <?php echo $news->getId() ?>
+                  <a href="<?php echo $news['article'] ?>">
+                    <button type="button" class="btn btn-sm btn-outline-light">
+                        <img  width="100%" height="225" src="<?php echo $news->getPicture()?>"/>
+                    </button>
+                  </a>
+
+                  <div class="card-body">
+                    <p class="card-text"> <?php echo $news->getDescription(); ?> </p>
+                    <div class="d-flex justify-content-between align-items-center">
+                      <small class="text-muted">18 November 2021</small>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+            <?php endforeach; ?>
+
+
+
+
+
+
+getId(); //int 
+        getDescription()
+        getDate()
+        getAuthor()
+        getPictures()
+        getCommentList()
+

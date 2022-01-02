@@ -19,74 +19,54 @@
         </div>
       </section>
 
+      <!-- https://bmcmedinformdecismak.biomedcentral.com/articles -->
+
       <div class="album py-5 bg-light">
         <div class="container">
 
           <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
-            <div class="col">
-              <div class="card shadow-sm">
-                <!--
-                <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>
-                -->
-
-        <a href="index.php?action=switch_article&id=1">
-          <p>Cliquez ici pour aller sur article.php</p>
-        </a>
-
-                <a  href="<?php 'index.php?GET="' . $tViews['article'] . "'"?>">
-                   <button type="button" class="btn  btn-outline-light">
-                      <img  width="100%" height="225" src="<?php echo $tViews['pictures'] . "heart.jpg"?>"/>
-                  </button>
-                </a>
-
-                <!-- https://bmcmedinformdecismak.biomedcentral.com/articles -->
-
-                <div class="card-body">
-                  <p class="card-text">Cardiovascular diseases (CVDs) are always considered by healthcare specialists for different reasons, including extensive prevalence, increased costs, chronicity, and high risk of death. The control of CVDs is... </p>
-                  <div class="d-flex justify-content-between align-items-center">
-                    <div class="btn-group">
-                      <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                      <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
-                    </div>
-                    <small class="text-muted">20 November 2021</small>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-
-
             <?php
               $model_news = new Models\NewsModel();
               $tAllnews = $model_news->findAll();
+
+              $maxPage = ceil(count($tAllnews) / $nbNewsPerPage);
+              $page = max(1, min($page, $maxPage));
               //var_dump($tAllnews);
-            foreach($tAllnews as $news): 
+            //for($tAllnews as $news):
+            for($i=$nbNewsPerPage * ($page-1) ; $i<$nbNewsPerPage * $page; $i++){
+              if($i >= count($tAllnews)) break;
+              $news=$tAllnews[$i];
+
               //var_dump($news);
             ?>
               <div class="col">
                 <div class="card shadow-sm">
-                  <?php  foreach($news->getPictures() as $id_pict):
-                   $model_picture = new \Models\PictureModel();
-                   $pict = $model_picture->findById($id_pict);
+                  <?php  $model_picture = new \Models\PictureModel();
+                  if(isset($news->getPictures()[0])){
+                    $pict = $model_picture->findById($news->getPictures()[0]);
+                  }
                   
                   echo $news->getId(); ?>
-                  <a href="<?= "index.php?action=switch_article&id=" . $news->getId() ?>">
+                  <a href="<?= "?action=switch_article&id=" . $news->getId() ?>">
                     <button type="button" class="btn btn-sm btn-outline-light">
                         <img  width="100%" height="225" src="<?php echo $tDirectory['news_pictures'] . $pict->getUri()?>"/>
                     </button>
                   </a>
 
                   <div class="card-body">
-                    <p class="card-text"> <?php echo $news->getDescription(); ?> </p>
+                    <p class="card-text"> <?php echo substr($news->getDescription(),0, 200) . '...'; ?> </p>
                     <div class="d-flex justify-content-between align-items-center">
-                      <small class="text-muted">18 November 2021</small>
+                      <div class="btn-group">
+                        <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
+                      </div>
+
+                      <small class="text-muted"><?= $news->getDate() ?></small>          <!--November 18th 2021-->            
                     </div>
                   </div>
 
-                  <?php endforeach; ?>
                 </div>
               </div>
-            <?php endforeach; ?>
+            <?php } ?>
 
 
           </div>
@@ -96,15 +76,25 @@
 
       <nav aria-label="My navigation page">
         <ul class="pagination justify-content-center">
-          <li class="page-item disabled">
-            <a class="page-link"><</a>
-          </li>
-          <li class="page-item"><a class="page-link" href="#">1</a></li>
-          <li class="page-item active"><a class="page-link" href="#">2</a></li>
-          <li class="page-item"><a class="page-link" href="#">3</a></li>
-          <li class="page-item">
-            <a class="page-link" href="#">></a>
-          </li>
+          
+          <?php 
+            if($page>1){ 
+          ?>
+
+            <li class="page-item ">
+              <a class="page-link" href="<?= "?page=" . ($page - 1) ?>"><</a>
+            </li>
+            <li class="page-item"><a class="page-link" href="<?= "?page=" . ($page - 1) ?>"><?=($page - 1)?></a></li>
+          <?php } ?>
+
+          <li class="page-item active"><a class="page-link" href="<?= "?page=" .$page ?>"><?=$page?></a></li>
+
+          <?php if($page+1<=$maxPage){ ?>
+            <li class="page-item"><a class="page-link"  href="<?= "?page=" .($page +1) ?>"><?=($page +1)?></a></li>
+            <li class="page-item">
+              <a class="page-link" href="<?= "?page=" .($page +1) ?>">></a>
+            </li>
+          <?php } ?>
         </ul>
       </nav>
 
