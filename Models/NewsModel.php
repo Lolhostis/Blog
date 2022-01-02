@@ -56,6 +56,7 @@ class NewsModel {
 	 */
 	function findById(int $id):News {
 		$raw_news = $this->news_gw->getFullNewsById($id);
+		//var_dump($raw_news);
 		if( empty($raw_news) ) {
 			//Error, no comment matching this id
 			throw new \Exception("No news matching this id");
@@ -94,7 +95,7 @@ class NewsModel {
 		}
 
 		//Instantiating the news from raw data
-		$news = new News($raw_news['id'], $raw_news['description'], $raw_news['date'], $raw_news['title'], $user, $news_pictures, $news_comments);
+		$news = new News($raw_news['id_news'], $raw_news['description'], $raw_news['date'], $raw_news['title'], $user, $news_pictures, $news_comments);
 
 		return $news;
 	}

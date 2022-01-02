@@ -136,7 +136,7 @@ Class NewsGateway {
      * @return [array]    All news from the database with the specific Id
      */
 	public function getFullNewsById(int $id):array {
-        $query="SELECT * FROM TNews, TUser, TPicture WHERE TNews.login_user=TUser.login AND TUser.id_picture = TPicture.id AND TNews.id=:id;";
+        $query="SELECT * FROM (SELECT id AS id_news, title, description, date, login_user from TNews) AS N, TUser, TPicture WHERE N.login_user=TUser.login AND TUser.id_picture = TPicture.id AND N.id_news=:id;";
 
         $this->con->executeQuery($query, [':id'=>array($id, \PDO::PARAM_INT)]);
 
