@@ -58,18 +58,21 @@
 
             <?php
               $model_news = new Models\NewsModel();
-              $tAllnews = $model_news->getAllNews();
-            foreach($tAllnews as $news): ?>
+              $tAllnews = $model_news->findAll();
+              //var_dump($tAllnews);
+            foreach($tAllnews as $news): 
+              //var_dump($news);
+            ?>
               <div class="col">
                 <div class="card shadow-sm">
                   <?php  foreach($news->getPictures() as $id_pict):
                    $model_picture = new \Models\PictureModel();
                    $pict = $model_picture->findById($id_pict);
                   
-                  echo $news->getId() ?>
-                  <a href="<?php echo $news['article'] ?>">
+                  echo $news->getId(); ?>
+                  <a href="<?= "index.php?action=switch_article&id=" . $news->getId() ?>">
                     <button type="button" class="btn btn-sm btn-outline-light">
-                        <img  width="100%" height="225" src="<?php echo $news->getPicture()?>"/>
+                        <img  width="100%" height="225" src="<?php echo $tDirectory['news_pictures'] . $pict->getUri()?>"/>
                     </button>
                   </a>
 
@@ -80,6 +83,7 @@
                     </div>
                   </div>
 
+                  <?php endforeach; ?>
                 </div>
               </div>
             <?php endforeach; ?>

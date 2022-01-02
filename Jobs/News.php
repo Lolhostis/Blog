@@ -17,7 +17,7 @@ Class News {
   private $date;
   private $title;
   private $author;
-  private $pictures;
+  private $pictures; //Contains a list of all the news'pictures ID
   private $commentList;
 
   public function __construct(int $id, string $description, string $date, string $title, User $author, array $pictures=array(), array $commentList=array()) {

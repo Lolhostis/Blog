@@ -150,6 +150,45 @@ class NewsController {
     require ($rep.$tViews['home']);
   }
 
+   /** This function add a picture to a news into the database
+    * \param[in, out] tErrors Array of errors
+    */
+  function add_picture_to_news(array &$tErrors) {
+    global $rep,$tViews;
+
+    $id_news=$_POST['id_news'];
+    $id_picture=$_POST['id_picture'];
+    Validation::val_form_news_consult($id_news, $tErrors);
+    Validation::val_form_picture_consult($id_picture, $tErrors);
+    if(count($tErrors)>0){
+      require ($rep.$tViews['error']);
+      require ($rep.$tViews['home']);
+      return;
+    }
+    
+    $model_news = new NewsModel();
+
+    try{
+      $result_insert=$model_news->addPictureToNews($id_news, $id_picture);
+
+      if($result_insert) {
+        $row_news = array (
+          'res_insert' => "News added"
+          );
+      }
+      else {
+        $row_news = array (
+          'res_insert' => "No News added"
+          );
+      }
+    }catch(\Exception $e){
+      $tErrors[] = $e->getMessage();
+      require ($rep.$tViews['error']);
+    }       
+    require ($rep.$tViews['home']);
+  }
+
+
   function search_news(array &$tErrors) {
     global $rep,$tViews, $rowSearch;
 

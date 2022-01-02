@@ -60,6 +60,22 @@ Class NewsGateway {
     }
 
     /**
+     * Insert a tuple in the 'TNewsincludepicture' table
+     * with the given news ID and the given picture ID
+     * @param  int $id_news         ID of the news to insert
+     * @param  int $id_picture      ID of the picture to insert
+     * @return [bool]               true if the insertion of all the tuples succeded, flase otherwise
+     */
+    private function add_news_picture_association(int $id_news, int $id_picture):bool {
+        $query = "INSERT INTO TNewsincludepicture(id_news, id_picture) VALUES(:id_news, :id_picture);";
+
+        $params[':id_news']=array($id_news, \PDO::PARAM_INT);
+        $params[':id_picture']=array($id_picture, \PDO::PARAM_INT);
+
+        return ( $this->con->executeQuery($query, $params) );
+    }
+
+    /**
      * Delete a news from the database from its ID
      * The news is deleted from the TNews and TNewsincludepicture databases
      * @param  News   $n News to delete
@@ -90,11 +106,12 @@ Class NewsGateway {
     }
 
     /**
-     * Get all news
+     * Get all the news from the database
      * @return [array] All news from the database
      */
     public function getAllNews():array {
-        $query="SELECT * FROM TNews;";
+        $query="SELECT * FROM (SELECT id AS id_news, title, description, date, login_user from TNews) AS N, TUser, TPicture WHERE N.login_user=TUser.login AND TUser.id_picture = TPicture.id;";
+
         $this->con->executeQuery($query, array());
 
         return ( $this->con->getResults() );

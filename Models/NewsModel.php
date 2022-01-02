@@ -98,6 +98,60 @@ class NewsModel {
 
 		return $news;
 	}
+
+	/**
+	 * Find all of the news and return them in an array
+	 * @return [array]     array of News containing every news
+	 */
+	function findAll():array {
+		$all_raw_news = $this->news_gw->getAllNews();
+		//var_dump($all_raw_news);
+		$all_news = array();
+		/*
+		if( empty($raw_news) ) {
+			//Error, no comment matching this id
+			throw new \Exception("No news matching this id");
+		}
+		if( count($raw_news) != 1) {
+			//Error, multiple comments matching this id
+			throw new \Exception("Multiple news matching this id");
+		}
+		*/
+		foreach($all_raw_news as $raw_news) {
+			//Instantiating the picture from raw data
+			$picture_user = new Picture($raw_news['id_picture'], $raw_news['uri'], $raw_news['alt']);
+
+			//Instantiating the user from raw data
+			if($raw_news['is_admin'] == 1) {
+				//Case 1 : the user is an admin
+				$user = new User($raw_news['login_user'], $raw_news['password'], $picture_user, true, $raw_news['email']);
+			}
+			else {
+				//Case 2 : the user is not an admin
+				$user = new User($raw_news['login_user'], $raw_news['password'], $picture_user, false, $raw_news['email']);
+			}
+	
+			// public function __construct(int $id, string $description, string $date, string $title, User $author, array $pictures=array(), array $commentList=array())
+
+			$raw_news_pictures = $this->news_gw->getFullPicturesById($raw_news['id_news']);
+			$news_pictures = [];
+			foreach ($raw_news_pictures as $value) {
+				$news_pictures[] = $value['id_picture'];
+			}
+
+			$raw_news_comments = $this->news_gw->getFullCommentsById($raw_news['id_news']);
+			$news_comments = [];
+			foreach ($raw_news_comments as $value) {
+				$news_comments[] = $value['id_comment'];
+			}
+
+			//Instantiating the news from raw data
+			$news = new News($raw_news['id_news'], $raw_news['description'], $raw_news['date'], $raw_news['title'], $user, $news_pictures, $news_comments);
+			$all_news[] = $news;
+		}
+
+		return $all_news;
+	}
 	
 	/**
 	 * Add a new news
@@ -120,13 +174,22 @@ class NewsModel {
 		return $this->news_gw->insert_raw_news($id, $title, $description, $date, $login_user);
 	}
 
-	function addPictureToNews(int $id_news, int $id_picture) {
+
+	/**
+	 * Add a new picture to the news pictures'list
+	 * @param int    $id_news 		Id of the news to add the picture to
+	 * @param int    $id_picture	Id of the picture to add
+   	 * @return [bool]    			true if the insertion succeded ; false otherwise
+	 */
+	function addPictureToNews(int $id_news, int $id_picture):bool {
 		if( empty($this->news_gw->getNewsById($id)) ) {
 			throw new \Exception("the news ID doesn't exist");
 		}
 		if( empty($this->picture_gw->FindById($id)) ) {
 			throw new \Exception("the news ID doesn't exist");
 		}
+
+    	return $this->news_gw->add_news_picture_association($id_news, $id_picture);
 	}
 
 	/**
