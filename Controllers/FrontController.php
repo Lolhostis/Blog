@@ -1,8 +1,5 @@
 <?php
 namespace Controllers;
-use \Config\Validation;
-use \Controllers\NewsController;
-use \Controllers\SwitchController;
 
 /**
   /** \author L'HOSTIS Loriane & ALLEMAND Arnaud
@@ -18,8 +15,8 @@ class FrontController {
    /** Constructor of the Front controller
     */
   function __construct() {
-    global $rep,$tViews;
-    global $news_actions, $comment_actions, $picture_actions, $user_actions;
+    global $rep,$tViews, $tDirectory;
+    global $news_actions, $comment_actions, $picture_actions, $user_actions, $views_actions;
     global $manage_jobs;
     session_start();
 
@@ -45,13 +42,10 @@ class FrontController {
       elseif(in_array($action, $picture_actions)){
         new PictureController($tErrors, $action);
       }
-      else if($action=="article"){
-       // require ($rep.$tViews['article']); 
-       //new SwitchController($tErrors, $action);
-       // header('location:' . $tViews['article']);
-        require ($rep.$tViews['article']);
-       //$this->Reinit('article');
+      else if(in_array($action, $views_actions)){
+        new SwitchController($tErrors, $action);
       }
+
       else{
         // Unknown action
         $tErrors[] = "No php view for action : ".$action;
@@ -72,7 +66,7 @@ class FrontController {
   * This function loads the page
   */
   function Reinit() {
-    global $rep,$tViews;
+    global $rep,$tViews, $tDirectory;
 
     require ($rep.$tViews['home']);
   }

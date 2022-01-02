@@ -164,7 +164,7 @@ class PictureController {
     $uri_picture=$_POST['uri_picture'];
     //If the uri is not given, we use default values
     if($uri_picture==""){
-      $uri_picture = "Views/Resources/Pictures/no_data_found.png";
+      $uri_picture = "no_data_found.png";
     }
     $alt_picture=$_POST['alt_picture'];
     //If the alt is not given, we use default values

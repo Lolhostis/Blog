@@ -27,9 +27,9 @@ use \Jobs\Picture;
     public function insert(Picture $newPicture) : bool{
       $query= 'INSERT INTO tPicture VALUES (:Id, :URI, :ALT)';
 
-      return $this->con->executeQuery($query, array(':Id' => array($newUser->getId(), \PDO::PARAM_INT) ,
-                                            ':URI' => array($newUser->getUri(), \PDO::PARAM_STR) ,
-                                            ':ALT' => array($newUser->getAlt(), \PDO::PARAM_STR)
+      return $this->con->executeQuery($query, array(':Id' => array($newPicture->getId(), \PDO::PARAM_INT) ,
+                                            ':URI' => array($newPicture->getUri(), \PDO::PARAM_STR) ,
+                                            ':ALT' => array($newPicture->getAlt(), \PDO::PARAM_STR)
                                             )
                               );
     }
@@ -117,7 +117,7 @@ use \Jobs\Picture;
      * @param int $id Filter ID
      * @return [array]    All the pictures that corresponds to the ID
      */
-    	public function FindById(int $id) : array{
+    public function FindById(int $id) : array{
       $query='SELECT * FROM tPicture WHERE id=:ID';
       $this->con->executeQuery($query, array( ':ID' => array($id,\PDO::PARAM_INT)) );
       return $this->con->getResults();

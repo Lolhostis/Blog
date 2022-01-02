@@ -22,8 +22,5 @@
       }
     </style>
 
-    <?php global $rep,$tViews; ?>
-
-    <link href="<?php print($tViews['bootstrapMinJs'])?>" rel="stylesheet">
-    <script type="text/javascript" src="<?php echo $tViews['jquerry']?>"></script>
+    <link href="<?php echo $tViews['bootstrapMinCcs']?>" rel="stylesheet">
 

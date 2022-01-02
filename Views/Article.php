@@ -1,8 +1,8 @@
 <?php
-  global $rep,$tViews;
-  echo $rep. 'index.php';
-  include($rep. 'index.php');
   include($tViews['head']);
+
+  $model_news = new \Models\NewsModel();
+  $news = $model_news->findById($_REQUEST['id']);
 ?>
 
     <style>
@@ -56,6 +56,53 @@
 
     <main>
       <section class="py-3 container">
+
+
+
+      <h1 class="fw-light"><?= $news->getTitle()?></h1>
+
+        <div id="carouselExampleControls" class="carousel carousel-dark slide" data-bs-ride="carousel">
+          <div class="carousel-inner">
+            <?php foreach($news->getPictures() as $id_pict): ?>
+              <div class="carousel-item active">
+                <?php
+                  $model_picture = new \Models\PictureModel();
+                  $pict = $model_picture->findById($id_pict);
+                ?>
+                <img src="<?php echo $tDirectory['news_pictures'] . $pict->getUri()?>" height="500" class="d-block w-100" alt="<?=$pict->getAlt()?>">
+              </div>
+            <?php endforeach; ?>
+          </div>
+          <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+          </button>
+          <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+          </button>
+        </div>
+
+        <div class="card-body">
+          <p class="card-text"><?=$news->getDescription()?></p>
+        </div>
+
+        <p class="card-text">Date : <?=$news->getDate()?></p>
+        <p class="card-text">Author : <?=$news->getAuthor()->getPseudo()?></p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         <h1 class="fw-light">Cardiovascular diseases (CVDs)</h1>
 
         <div id="carouselExampleControls" class="carousel carousel-dark slide" data-bs-ride="carousel">

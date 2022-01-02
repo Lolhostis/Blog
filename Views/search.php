@@ -1,6 +1,6 @@
 <?php
   global $rep,$tViews;
-  include_once($rep. $tViews['head']);
+  include_once($rep . DIRECTORY_SEPARATOR . $tViews['head']);
 ?>
 
   </head>

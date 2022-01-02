@@ -1,6 +1,7 @@
 <?php
 namespace Controllers;
 use \Models\CommentModel;
+use \Models\NewsModel;
 use \Config\Validation;
 
 /**
@@ -19,9 +20,22 @@ class SwitchController {
     global $rep,$tViews;
 
     try{
+
       switch($action) {
-        case "article":
-          $this->switch_article($tErrors);
+        case "switch_article":
+           $this->switch_article($tErrors);
+        break;
+
+        case "switch_home":
+          $this->switch_home($tErrors);
+        break;
+
+        case "switch_sign_in":
+          $this->switch_sign_in($tErrors);
+        break;
+
+        case "switch_sign_out":
+          $this->switch_sign_out($tErrors);
         break;
 
         default:
@@ -39,14 +53,49 @@ class SwitchController {
     exit(0);
   }
 
-   /** This function return informations about a comment from the database
+   /** This function switch the current view in order to reach the article view 
     * \param[in, out] tErrors Array of errors
     */
   function switch_article(array &$tErrors) {
-    global $rep,$tViews;
+    global $rep,$tViews, $tDirectory;
+    
+    $id = isset($_REQUEST['id']) ? $_REQUEST['id'] : NULL;
+    if ($id=='NULL') {
+      require ($rep.$tViews['error']);
+    }
+    else {
+      $model_news = new NewsModel();
+      $news = $model_news->findById($id);
 
-    require ($rep.$tViews['article']);
+      require ($rep.$tViews['article']);
+    }
   }
+
+  /** This function switch the current view in order to reach the main view 
+    * \param[in, out] tErrors Array of errors
+    */
+    function switch_home(array &$tErrors) {
+      global $rep,$tViews, $tDirectory;
+      require ($rep.$tViews['home']);
+    }
+
+    /** This function switch the current view in order to reach the sign in view 
+    * \param[in, out] tErrors Array of errors
+    */
+  function switch_sign_in(array &$tErrors) {
+    global $rep,$tViews, $tDirectory;
+
+    require ($rep.$tViews['sign_in']);
+  }
+
+  /** This function switch the current view in order to reach the sign out view 
+    * \param[in, out] tErrors Array of errors
+    */
+    function switch_sign_out(array &$tErrors) {
+      global $rep,$tViews, $tDirectory;
+  
+      require ($rep.$tViews['sign_out']);
+    }
 }
 ?>
 

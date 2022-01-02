@@ -120,6 +120,15 @@ class NewsModel {
 		return $this->news_gw->insert_raw_news($id, $title, $description, $date, $login_user);
 	}
 
+	function addPictureToNews(int $id_news, int $id_picture) {
+		if( empty($this->news_gw->getNewsById($id)) ) {
+			throw new \Exception("the news ID doesn't exist");
+		}
+		if( empty($this->picture_gw->FindById($id)) ) {
+			throw new \Exception("the news ID doesn't exist");
+		}
+	}
+
 	/**
 	 * Delete a news
 	 * @param int $id   Id of the news to remove
