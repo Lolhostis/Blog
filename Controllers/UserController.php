@@ -183,6 +183,7 @@ class UserController {
 
     $login_user=$_POST['login_user'];
     $password_user=$_POST['password_user'];
+    $_POST = array();
     Validation::val_sign_in($login_user, $password_user, $tErrors);
     if(count($tErrors)>0){
       require ($rep.$tViews['error']);
@@ -193,7 +194,7 @@ class UserController {
         $model_user = new UserModel();
 
         if( $model_user->signin($login_user, $password_user, $tErrors) ) {
-          $_GET['action']="";
+          $_REQUEST = array();
           require("index.php");
         }
         else {

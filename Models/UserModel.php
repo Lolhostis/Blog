@@ -140,12 +140,10 @@ class UserModel {
 		}
 		$results=$results[0];
 		$ref_password=$results['password'];
-		var_dump($results);
 		//if(password_verify($password, $ref_password)) {
 		if($password == $ref_password) {
 			//The login corresponds to a user
 			// and the password is correct
-			var_dump($results);
 			$_SESSION['login']=$results['login'];
 			if($results['is_admin']) {
 				//The user is an admin
