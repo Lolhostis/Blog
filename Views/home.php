@@ -68,7 +68,6 @@
               </div>
             <?php } ?>
 
-
           </div>
         </div>
       </div>
@@ -82,17 +81,19 @@
           ?>
 
             <li class="page-item ">
-              <a class="page-link" href="<?= "?page=" . ($page - 1) ?>"><</a>
+              <a class="page-link" href="<?= "?page=1" ?>"><<</a>
             </li>
-            <li class="page-item"><a class="page-link" href="<?= "?page=" . ($page - 1) ?>"><?=($page - 1)?></a></li>
+            <li class="page-item">
+              <a class="page-link" href="<?= "?page=" . ($page - 1) ?>"><?=($page - 1)?></a>
+            </li>
           <?php } ?>
 
-          <li class="page-item active"><a class="page-link" href="<?= "?page=" .$page ?>"><?=$page?></a></li>
+          <li class="page-item active"><a class="page-link" href="<?= "?page=".$page ?>"><?=$page?></a></li>
 
           <?php if($page+1<=$maxPage){ ?>
             <li class="page-item"><a class="page-link"  href="<?= "?page=" .($page +1) ?>"><?=($page +1)?></a></li>
             <li class="page-item">
-              <a class="page-link" href="<?= "?page=" .($page +1) ?>">></a>
+              <a class="page-link" href="<?= "?page=" . $maxPage ?>">>></a>
             </li>
           <?php } ?>
         </ul>

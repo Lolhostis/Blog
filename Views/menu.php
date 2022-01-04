@@ -15,7 +15,7 @@
                   <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="q">
                   <button class="btn btn-outline-success" type="submit" value="search_news">Search</button>
                 </form>
-                 <a href="<?php echo $tViews['sign_in'] ?>">
+                 <a href="<?= '?action=switch_sign_in' ?>">
                     <button class="btn btn-light me-md-2" type="button">Sign in/up</button>
                 </a>
               </div>

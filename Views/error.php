@@ -20,7 +20,7 @@
           ?>
         </p>
             <!-- <a href="<?=$tViews['home']?>"> -->
-            <a href="<?php=$rep . "index.php"?>">
+            <a href="index.php">
 		          <button class="btn btn-secondary me-md-2" type="button">Home</button>
 		        </a>
       </main>

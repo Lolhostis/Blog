@@ -57,8 +57,6 @@
     <main>
       <section class="py-3 container">
 
-
-
       <h1 class="fw-light"><?= $news->getTitle()?></h1>
 
         <div id="carouselExampleControls" class="carousel carousel-dark slide" data-bs-ride="carousel">

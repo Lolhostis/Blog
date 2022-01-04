@@ -51,6 +51,9 @@ Class User {
   public function setIsAdmin(bool $isAdmin){
     $this->isAdmin = $isAdmin;
   }
+  public function isAdmin():bool {
+    return $this->isAdmin;
+  }
   public function setEmail(string $email){
     $this->email = $email;
   }

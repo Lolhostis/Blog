@@ -1,5 +1,7 @@
 <?php
 namespace Controllers;
+use \Controllers\UserController;
+use \Models\UserModel;
 
 /**
   /** \author L'HOSTIS Loriane & ALLEMAND Arnaud
@@ -12,23 +14,42 @@ namespace Controllers;
 */
 class FrontController {
 
+    private $user_mdl;
+
    /** Constructor of the Front controller
     */
   function __construct() {
     global $rep,$tViews, $tDirectory;
     global $news_actions, $comment_actions, $picture_actions, $user_actions, $views_actions;
-    global $manage_jobs;
-    session_start();
+    global $manage_jobs, $admin_actions;
+    $this->user_mdl = new UserModel();
+    if(!isset($_SESSION)) {
+      session_start();
+    }
 
     //initialization of an array of errors
     $tErrors = array();
 
     try {
-      $action = isset($_REQUEST['action']) ? $_REQUEST['action'] : NULL;
-      //$action=$_REQUEST['action'];
+      /* Getting the current connected user from the session cookies */
+      $cur_user = $this->user_mdl->getCurrentUser();
 
+      var_dump($action);
+      $action = isset($_REQUEST['action']) ? $_REQUEST['action'] : NULL;
+
+      var_dump($action);
       if($action==NULL) {
         $this->Reinit();
+      }
+      else if(in_array($action, $admin_actions)){
+        if($cur_user==NULL || !$cur_user->isAdmin()) {
+          /* No admin user connected */
+          require ($rep.$tViews['sign_up']);
+        }
+        else{
+          /* There is an admin user connected */
+          new AdminController($tErrors, $action);
+        }
       }
       elseif(in_array($action, $news_actions)){
         new NewsController($tErrors, $action);

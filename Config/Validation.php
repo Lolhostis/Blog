@@ -13,7 +13,31 @@ class Validation {
 		}
 	}
 
-    static function val_search_title()(string &$search_title, &$tErrors) {
+    static function clean_str(&$string_to_clean) {
+        $string_to_clean = filter_var($string_to_clean, FILTER_SANITIZE_STRING);
+    }
+
+    static function val_sign_in(string &$login, string &$password, array &$tErrors) {
+        if (!isset($login)||$login=="") {
+            $tErrors[] = "No valid login</br>";
+            $login="";
+             
+        }
+        else {
+            $login = filter_var($login, FILTER_SANITIZE_STRING);
+        }
+
+        if (!isset($password)||$password=="") {
+            $tErrors[] = "No valid password</br>";
+            $password="";
+             
+        }
+        else {
+            $password = filter_var($password, FILTER_SANITIZE_STRING);
+        }
+    }
+
+    static function val_search_title(string &$search_title, &$tErrors) {
         if (!isset($search_title)||$search_title=="") {
             $tErrors[] = "No valid title</br>";
             $search_title="";

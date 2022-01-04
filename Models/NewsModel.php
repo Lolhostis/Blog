@@ -56,7 +56,6 @@ class NewsModel {
 	 */
 	function findById(int $id):News {
 		$raw_news = $this->news_gw->getFullNewsById($id);
-		//var_dump($raw_news);
 		if( empty($raw_news) ) {
 			//Error, no comment matching this id
 			throw new \Exception("No news matching this id");
@@ -95,7 +94,7 @@ class NewsModel {
 		}
 
 		//Instantiating the news from raw data
-		$news = new News($raw_news['id_news'], $raw_news['description'], $raw_news['date'], $raw_news['title'], $user, $news_pictures, $news_comments);
+		$news = new News($raw_news['id'], $raw_news['description'], $raw_news['date'], $raw_news['title'], $user, $news_pictures, $news_comments);
 
 		return $news;
 	}
@@ -153,7 +152,7 @@ class NewsModel {
 
 		return $all_news;
 	}
-	
+
 	/**
 	 * Add a new news
 	 * @param int    $id          Id of the news to add
@@ -175,14 +174,7 @@ class NewsModel {
 		return $this->news_gw->insert_raw_news($id, $title, $description, $date, $login_user);
 	}
 
-
-	/**
-	 * Add a new picture to the news pictures'list
-	 * @param int    $id_news 		Id of the news to add the picture to
-	 * @param int    $id_picture	Id of the picture to add
-   	 * @return [bool]    			true if the insertion succeded ; false otherwise
-	 */
-	function addPictureToNews(int $id_news, int $id_picture):bool {
+	function addPictureToNews(int $id_news, int $id_picture) {
 		if( empty($this->news_gw->getNewsById($id)) ) {
 			throw new \Exception("the news ID doesn't exist");
 		}
@@ -190,7 +182,7 @@ class NewsModel {
 			throw new \Exception("the news ID doesn't exist");
 		}
 
-    	return $this->news_gw->add_news_picture_association($id_news, $id_picture);
+		return $this->news_gw->insert_picture_to_news($id_news, $id_picture);
 	}
 
 	/**

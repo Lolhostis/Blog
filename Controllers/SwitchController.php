@@ -34,6 +34,10 @@ class SwitchController {
           $this->switch_sign_in($tErrors);
         break;
 
+        case "switch_sign_up":
+          $this->switch_sign_up($tErrors);
+        break;
+
         case "switch_sign_out":
           $this->switch_sign_out($tErrors);
         break;
@@ -84,10 +88,14 @@ class SwitchController {
     */
   function switch_sign_in(array &$tErrors) {
     global $rep,$tViews, $tDirectory;
-
     require ($rep.$tViews['sign_in']);
   }
 
+  function switch_sign_up(array &$tErrors) {
+    global $rep,$tViews, $tDirectory;
+    require ($rep.$tViews['sign_up']);
+  }
+  
   /** This function switch the current view in order to reach the sign out view 
     * \param[in, out] tErrors Array of errors
     */

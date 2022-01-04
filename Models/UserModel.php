@@ -2,6 +2,7 @@
 namespace Models;
 
 use \Config\Connection;
+use \Config\Validation;
 
 use \Gateways\PictureGateway;
 use \Gateways\UserGateway;
@@ -120,6 +121,71 @@ class UserModel {
 		}
 		
 		return $this->user_gw->delete_user($login);
+	}
+
+	/**
+	 * Check the given login and password with the database
+	 * and if nedded creates session cookies
+	 * @param string 	$login		the login of the user
+	 * @param string 	$login		the password of the user
+	 * @param array		$tErrors	the error array
+     * @return [bool]		true if the user have successfully signed up ; false otherwise
+	 */
+	function signin($login, $password, &$tErrors):bool {
+		$results=$this->user_gw->FindFullByName($login);
+		if(empty($results)) {
+			//The login doesn't corresponds to any user
+			$tErrors[] = "Unknowed user";
+			return false;
+		}
+		$results=$results[0];
+		$ref_password=$results['password'];
+		var_dump($results);
+		//if(password_verify($password, $ref_password)) {
+		if($password == $ref_password) {
+			//The login corresponds to a user
+			// and the password is correct
+			var_dump($results);
+			$_SESSION['login']=$results['login'];
+			if($results['is_admin']) {
+				//The user is an admin
+				$_SESSION['role']='admin';
+			}
+			else {
+				//The user is not an admin
+				$_SESSION['role']='nonadmin';
+			}
+			return true;
+		}
+		return false;
+		$tErrors[] = "Wrong password";
+	}
+
+	/**
+	 * Destroy and empty the session array
+	 * in order to sign the current user out
+	 */
+	function signout() {
+		session_unset();
+		session_destroy();
+		$_SESSION = array();
+	}
+
+	/** 
+	 * Return an instance of the currently loged in user
+	 * NUll if no user is connected
+     * @return [bool]		An instance of the currently connected user; NULL if nobody is connected
+	*/
+	function getCurrentUser() {
+		//$this->signout();
+	    if(isset($_SESSION['login'], $_SESSION['role'])) {
+	      //$id=Validation::clean_int($_SESSION['id']);
+		  $login=$_SESSION['login'];
+	      //$role=Validation::clean_str($_SESSION['role']);
+	      return $this->findByLogin($login);
+		}
+		return null;
+		//throw new \Exception("No currently logged user");
 	}
 }
 ?> 

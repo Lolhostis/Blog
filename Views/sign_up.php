@@ -11,7 +11,7 @@
   <body class="text-center">
 
     <main class="main-signin">
-      <a  href="<?php echo $tViews['head'] ?>">
+      <a  href="index.php">
           <button class="btn btn-success" type="button">Home</button>
       </a>
 

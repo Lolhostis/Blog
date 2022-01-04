@@ -40,6 +40,10 @@ class UserController {
           $this->delete_user($tErrors);
         break;
 
+        case "signin_user":
+          $this->signin_user($tErrors);
+        break;
+
         default:
           //We normally won't go there
           // as the action has been verified in the front controller
@@ -172,6 +176,33 @@ class UserController {
       require ($rep.$tViews['error']);
     }       
     require ($rep.$tViews['view_test_user']); 
+  }
+
+  function signin_user(array &$tErrors) {
+    global $rep,$tViews;
+
+    $login_user=$_POST['login_user'];
+    $password_user=$_POST['password_user'];
+    Validation::val_sign_in($login_user, $password_user, $tErrors);
+    if(count($tErrors)>0){
+      require ($rep.$tViews['error']);
+      return;
+    }
+
+    try{
+        $model_user = new UserModel();
+
+        if( $model_user->signin($login_user, $password_user, $tErrors) ) {
+          $_GET['action']="";
+          require("index.php");
+        }
+        else {
+          require($rep.$tViews['error']);
+        }
+    }catch(\Exception $e){
+      $tErrors[] = $e->getMessage();
+      require ($rep.$tViews['error']);
+    }       
   }
 }
 ?>
