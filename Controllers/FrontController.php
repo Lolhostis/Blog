@@ -32,8 +32,6 @@ class FrontController {
     }
     //var_dump($_COOKIE);
 
-    
-
     //initialization of an array of errors
     $tErrors = array();
 

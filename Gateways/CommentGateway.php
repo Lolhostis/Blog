@@ -50,7 +50,8 @@ Class CommentGateway {
         $query="INSERT INTO TComment(id, date, content, id_news, login_user) VALUES(:id, STR_TO_DATE(:date, '%Y %m %d %H %i'), :content, :id_news, :login_user);";
 
         $params[':id']=array($id, \PDO::PARAM_INT);
-        $params[':date']=array(str_replace("-", " ", str_replace(":", " ", str_replace("T", " ", $date))), \PDO::PARAM_STR);
+        //$params[':date']=array(str_replace("-", " ", str_replace(":", " ", str_replace("T", " ", $date))), \PDO::PARAM_STR);
+        $params[':date']=array($date, \PDO::PARAM_STR);
         $params[':content']=array($content, \PDO::PARAM_STR);
         $params[':id_news']=array($id_news, \PDO::PARAM_INT);
         $params[':login_user']=array($login_user, \PDO::PARAM_STR);
@@ -128,6 +129,24 @@ Class CommentGateway {
         $this->con->executeQuery($query, [':id'=>array($id, \PDO::PARAM_INT)]);
 
         return $this->con->getResults();
+    }
+
+    /**
+     * Return the max comment id from all news
+     * @return [int]   Return the max comment id from all news
+     */
+    public function getIdComment():int {
+        $query="SELECT MAX(id) AS id FROM tComment;";
+
+       $this->con->executeQuery($query, array());
+    
+       $results = $this->con->getResults();
+       if(empty($results)) {
+           return 1;
+       }
+       else {
+           return $results[0]['id']+1;
+       }
     }
 
     /*

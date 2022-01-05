@@ -248,7 +248,7 @@ class UserController {
       return;
     }
 
-    $id_picture_user = 6;
+    $id_picture_user = 8;
     $isadmin_user = 0;
 
     Validation::val_form_user_add($login_user, $password_user, $email_user, $id_picture_user, $tErrors);

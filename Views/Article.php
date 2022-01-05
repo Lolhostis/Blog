@@ -67,7 +67,7 @@
                   $model_picture = new \Models\PictureModel();
                   $pict = $model_picture->findById($id_pict);
                 ?>
-                <img src="<?php echo $tDirectory['news_pictures'] . $pict->getUri()?>" height="500" class="d-block w-100" alt="<?=$pict->getAlt()?>">
+                <img src="<?php echo $tDirectory['news_pictures'] . $pict->getUri()?>" class="d-block w-100" alt="<?=$pict->getAlt()?>">
               </div>
             <?php endforeach; ?>
           </div>
@@ -87,52 +87,6 @@
 
         <p class="card-text">Date : <?=$news->getDate()?></p>
         <p class="card-text">Author : <?=$news->getAuthor()->getPseudo()?></p>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        <h1 class="fw-light">Cardiovascular diseases (CVDs)</h1>
-
-        <div id="carouselExampleControls" class="carousel carousel-dark slide" data-bs-ride="carousel">
-          <div class="carousel-inner">
-            <div class="carousel-item active">
-              <img src="<?php echo $tViews['pictures'] . "heart.jpg"?>" height="500" class="d-block " alt="Heart picture">
-            </div>
-            <div class="carousel-item">
-              <img src="<?php echo $tViews['pictures'] . "woman-working.jpg"?>" class="d-block w-100" alt="Woman working picture">
-            </div>
-          </div>
-          <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Previous</span>
-          </button>
-          <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Next</span>
-          </button>
-        </div>
-
-        <!-- https://bmcmedinformdecismak.biomedcentral.com/articles -->
-
-        <div class="card-body">
-          <p class="card-text">Cardiovascular diseases (CVDs) are always considered by healthcare specialists for different reasons, including extensive prevalence, increased costs, chronicity, and high risk of death. The control of CVDs is highly influenced by behavior and lifestyle and it seems necessary to train special abilities about lifestyle and behavior modification to improve self-care skills for patients, and their caregivers. As a result, the development of effective training systems should be considered by healthcare specialists.</p>
-          <h2>Methods</h2>
-          <p class="card-text">Hence, in this study, a framework for improving cardiovascular patients’ education processes is presented. Initially, an existing training system for cardiovascular patients is reviewed. Using field observations and targeted interviews with hospital experts, all components of its educating processes are identified, and their process maps are drawn up. After that, challenges in the training system are extracted with the aid of in-depth semi-structured interviews with experts. Due to the importance and different influence of the identified challenges, they are prioritized using a Multiple Criteria Decision-making (MCDM) method, and then their root causes were investigated. Finally, a novel framework is proposed and evaluated with hospital experts' help to improve the main challenges.</p>
-          <h2>Results</h2>
-          <p class="card-text">The most important challenges included high nursing workload and shortage of time, lack of understanding of training concepts by patients, lack of attention to training, disruption of the training processes by the patients’ caregivers, and patient's weakness in understanding the standard language. In identifying the root causes, learner, educator, and educational tools are the most effective in the training process; therefore, the improvement scenarios were designed accordingly in the proposed framework.</p>
-          <h2>Conclusions</h2>
-          <p class="card-text">Our study indicated that presenting a framework with applying different quantitative and qualitative methods has great potential to improve the processes of patient education for chronic diseases such as cardiovascular disease.</p>
-        </div>
       </section>
 
       <section class="py-3 container">
@@ -141,20 +95,30 @@
           <div class="w-100 row">
             <div class="col-md-2 col-xl-3 col-12 d-flex flex-column justify-content-center align-items-center">
 
-                <img class="w-40 rounded-circle" src="<?php echo $tViews['pictures'] . 'no_data_found.png'?>"> </td>
-                <h5>Pseudo</h5>
+                <?php
+                  $model_user = new \Models\UserModel();
+                ?>
+                <img class="w-50 rounded-circle" src="<?= isset($_SESSION['login']) ? $tDirectory['user_pictures'] . $model_user->findByLogin($_SESSION['login'])->getPicture()->getUri() : $tViews['pictures'] . 'no_data_found.png'?>"> </td>
+
+                <?php 
+                  if (isset($_SESSION['login'])){
+                ?>
+                    <h5><?= $_SESSION['login'] ?></h5>
+                <?php 
+                    }
+                ?>
 
             </div>   
             <div class="px-3 col-md-8 col-xl-6 col-12 flex-column d-flex justify-content-center align-items-center">
 
-                <form method="POST">
+                <form method="POST" action=<?= "?id=".$_GET['id'] ?>>
                     <div class="row w-100">
                         
                         <?php 
-                          if (isset($_SESSION['pseudo'])){
+                          if (!isset($_SESSION['login'])){
                         ?>
                             <div class="col-3 d-flex justify-content-end px-0">
-                                <label for="pseudo_comment">Pseudo : </label>
+                                <label for="login_comment">Pseudo : </label>
                             </div>
                             
                         <?php 
@@ -163,17 +127,17 @@
 
                         <div class="col-9">
                             <?php 
-                              if (!isset($_SESSION['pseudo'])){
+                              if (!isset($_SESSION['login'])){
                             ?>
-                                <input placeholder="Pseudo..." 
+                                <input placeholder="login..." 
                                             class="w-100 mb-2 text-secondary text-break textarea-comment" 
-                                            spellcheck="true" wrap="soft" maxlength="30" .resize="none" width="30" name="pseudo_comment"> 
+                                            spellcheck="true" wrap="soft" maxlength="30" .resize="none" width="30" name="login_comment"> 
                             <?php } ?>               
 
                                 <textarea type="textarea" name="text_comment" 
                                         placeholder="Write a comment please..." 
                                         class="w-100 my-2 text-secondary text-break textarea-comment" 
-                                        spellcheck="true" wrap="soft" maxlength="5000" .resize="none"></textarea>  
+                                        spellcheck="true" wrap="soft" maxlength="5000" .resize="none"></textarea>
 
                             <input type="SUBMIT" name="action" value="add_comment"/>
                         </div>
@@ -185,32 +149,26 @@
             </div>             
           </div>
 
+          <?php
+          $model_comment = new Models\CommentModel();
+          foreach($news->getCommentList() as $id_comment): 
+              $comment=$model_comment->findById($id_comment);
+          ?>
+            <div class="w-100 row">
+              <div class="col-md-2 col-xl-3 col-12 d-flex flex-column justify-content-center align-items-center">
+                  <img class="w-25 rounded-circle" src="<?php echo $tDirectory['user_pictures'] . $comment->getAuthor()->getPicture()->getUri()?>"> </td>
 
-          <table>
-            <tbody>
-                <tr class="text-center margin-x" >
-                    <td>  <img class="rounded-circle" src="https://mdbootstrap.com/img/Photos/Avatars/avatar-5.webp"/> </td>
-                    <!-- <svg class="bd-placeholder-img rounded-circle" width="110" height="110" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 110x110" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#777"/><text x="100%" y="100%" fill="#777" dy=".3em">110x110</text></svg> -->
-                    <td rowspan="2"> <p class="text-secondary text-md-start text-break">This article is really interesting !</p> </td>
-                </tr>
-                <tr>
-                    <td class="col align-self-center"> <h5>Laura</h5> </td>
-                </tr>
-            </tbody>
-          </table>
-
-          <table>
-            <tbody>
-                <tr class="text-center margin-x" >
-                    <td>  <img class="rounded-circle" src="https://mdbootstrap.com/img/Photos/Avatars/avatar-6.webp"/> </td>
-                    <td rowspan="2"> <p class="text-secondary text-md-start text-break">Thanks for the informations, it was really interesting !</p> </td>
-                </tr>
-                <tr>
-                    <td class="col align-self-center"> <h5>Loïc</h5> </td>
-                </tr>
-            </tbody>
-          </table>
-
+                  <h5><?= $comment->getAuthor()->getPseudo()?></h5>
+              </div>   
+            <div class="px-3 col-md-8 col-xl-6 col-12 flex-column d-flex justify-content-center align-items-center">
+                <div class="row w-100">
+                    <div class="col-9">
+                        <p class="text-secondary text-md-start text-break"><?= $comment->getText() ?></p> 
+                    </div>
+                </div>               
+            </div>             
+          </div>
+          <?php endforeach; ?>
       </section>
     </main>
 

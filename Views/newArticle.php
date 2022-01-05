@@ -89,6 +89,20 @@
           <p class="card-text">Our study indicated that presenting a framework with applying different quantitative and qualitative methods has great potential to improve the processes of patient education for chronic diseases such as cardiovascular disease.</p>
         </div>
       </section>
+
+
+      <form method="POST">
+          <input placeholder="Title..." 
+                      class="w-100 mb-2 text-secondary text-break textarea-comment" 
+                      spellcheck="true" wrap="soft" maxlength="30" .resize="none" width="30" name="title_news"> 
+                          
+          <textarea type="textarea" name="news_description" 
+                    placeholder="Write the description of the news please..." 
+                    class="w-100 my-2 text-secondary text-break textarea-comment" 
+                    spellcheck="true" wrap="soft" maxlength="5000" .resize="none"></textarea>  
+
+          <input type="SUBMIT" name="action" value="add_news"/>                  
+      </form>
     </main>
 
 <?php

@@ -155,24 +155,34 @@ class CommentController {
   function add_comment(array &$tErrors) {
     global $rep,$tViews;
 
-    $id_comment=$_POST['id_comment'];
-    $text_comment=$_POST['text_comment'];
-    $date_comment=date("d-m-Y", null);
-    $login_user_comment=$_POST['login_user_comment'];
+    $model_comment = new CommentModel();
+
+    try{
+      $id_comment = $model_comment->getIdComment();
+    }catch(\Exception $e){
+      $tErrors[] = $e->getMessage();
+      require ($rep.$tViews['error']);
+    }  
+
+    $login_user_comment = isset($_SESSION['login']) ? $_SESSION['login'] : $_POST['login_user_comment'];
     $id_news_comment = $_GET['id'];
+    $text_comment=$_POST['text_comment'];
+    
+    $date_comment=date("Y m d H i");
+    var_dump($date_comment);
+    // $date_comment = date('m-d-Y h:i:s a', time());
+
+   // count(new \NewsGateway\getNewsById($id_news_comment))
+    
     Validation::val_form_comment_add($id_comment, $text_comment, $date_comment, $login_user_comment, $id_news_comment, $tErrors);
     if(count($tErrors)>0){
       require ($rep.$tViews['error']);
-      require ($rep.$tViews['view_test_comment']);
       return;
     }
 
     try{
-
-      $model_comment = new CommentModel();
-
       if($model_comment->addComment($id_comment, $text_comment, $date_comment, $login_user_comment, $id_news_comment)) {
-        $_REQUEST[];
+        $_REQUEST = array();
         require("index.php");
       }
       else {

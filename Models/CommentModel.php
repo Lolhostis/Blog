@@ -117,5 +117,13 @@ class CommentModel {
 
 		return $this->comment_gw->delete_comment($id);
 	}
+	
+	/**
+	 * Get the max comment id from all news
+   	 * @return [int]  Get the max comment id from all news
+	 */
+	function getIdComment():int {
+		return $this->comment_gw->getIdComment();
+	}
 }
 ?> 
