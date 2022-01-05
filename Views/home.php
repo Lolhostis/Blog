@@ -14,18 +14,10 @@
       $model_news = new Models\NewsModel();
       $tAllnews = $model_news->findAll();
 
-      $maxPage = ceil(count($tAllnews) / $nbNewsPerPage);
-      $page = max(1, min($page, $maxPage));
-      //var_dump($tAllnews);
-    //for($tAllnews as $news):
-    for($i=$nbNewsPerPage * ($page-1) ; $i<$nbNewsPerPage * $page; $i++){
-      if($i >= count($tAllnews)) break;
-      $news=$tAllnews[$i];
-
-      //var_dump($news);
-    ?>
+      ?>
     <p>Number of news : <?php echo count($tAllnews)?> </p>
     <p>Number of connections : <?= isset($_COOKIE['cookieCpt']) ? $_COOKIE['cookieCpt'] : 0 ?> </p>
+    <p>Number of comments :  </p>
       <section class="py-5 text-center container">
         <div class="row py-lg-5">
           <div class="col-lg-6 col-md-8 mx-auto">
@@ -41,9 +33,22 @@
         <div class="container">
 
           <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+              <?php 
+                $maxPage = ceil(count($tAllnews) / $nbNewsPerPage);
+                $page = max(1, min($page, $maxPage));
+                //var_dump($tAllnews);
+              //for($tAllnews as $news):
+              for($i=$nbNewsPerPage * ($page-1) ; $i<$nbNewsPerPage * $page; $i++){
+                if($i >= count($tAllnews)) break;
+                $news=$tAllnews[$i];
+                ?>
+
               <div class="col">
                 <div class="card shadow-sm">
-                  <?php  $model_picture = new \Models\PictureModel();
+                  <?php 
+
+                  //var_dump($news);
+                  $model_picture = new \Models\PictureModel();
                   if(isset($news->getPictures()[0])){
                     $pict = $model_picture->findById($news->getPictures()[0]);
                   }

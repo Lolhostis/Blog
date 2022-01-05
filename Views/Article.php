@@ -131,7 +131,7 @@
                             ?>
                                 <input placeholder="login..." 
                                             class="w-100 mb-2 text-secondary text-break textarea-comment" 
-                                            spellcheck="true" wrap="soft" maxlength="30" .resize="none" width="30" name="login_comment"> 
+                                            spellcheck="true" wrap="soft" maxlength="30" .resize="none" width="30" name="login_user_comment"> 
                             <?php } ?>               
 
                                 <textarea type="textarea" name="text_comment" 
@@ -151,24 +151,27 @@
 
           <?php
           $model_comment = new Models\CommentModel();
-          foreach($news->getCommentList() as $id_comment): 
-              $comment=$model_comment->findById($id_comment);
+          if(!empty($news->getCommentList())){
+            foreach($news->getCommentList() as $id_comment){
+                $comment=$model_comment->findById($id_comment);
           ?>
             <div class="w-100 row">
               <div class="col-md-2 col-xl-3 col-12 d-flex flex-column justify-content-center align-items-center">
-                  <img class="w-25 rounded-circle" src="<?php echo $tDirectory['user_pictures'] . $comment->getAuthor()->getPicture()->getUri()?>"> </td>
+                  <img class="w-25 rounded-circle" src="<?php echo $tDirectory['user_pictures'] . $comment->getAuthor()->getPicture()->getUri(); ?>"> </td>
 
-                  <h5><?= $comment->getAuthor()->getPseudo()?></h5>
+                  <h5><?= $comment->getAuthor()->getPseudo(); ?></h5>
               </div>   
             <div class="px-3 col-md-8 col-xl-6 col-12 flex-column d-flex justify-content-center align-items-center">
                 <div class="row w-100">
                     <div class="col-9">
-                        <p class="text-secondary text-md-start text-break"><?= $comment->getText() ?></p> 
+                        <p class="text-secondary text-md-start text-break"><?= $comment->getText(); ?></p> 
                     </div>
                 </div>               
             </div>             
           </div>
-          <?php endforeach; ?>
+          <?php 
+            }
+          } ?>
       </section>
     </main>
 

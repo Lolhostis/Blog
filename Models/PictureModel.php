@@ -49,7 +49,7 @@ class PictureModel {
 	/**
 	 * Add a new picture
 	 * @param Picture $p Picture to add
-   * @return [bool]    true if it's right ; false if there is a problem
+     * @return [bool]    true if it's right ; false if there is a problem
 	 */
 	function addPicture(Picture $p):bool {
 		if( !empty($this->picture_gw->FindByID($p->getId())) ) {

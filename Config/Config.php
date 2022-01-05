@@ -60,6 +60,6 @@ $manage_jobs = array(
 $admin_actions = array('add_news', 'delete_news', 'add_user');
 
 //Var
-$nbNewsPerPage = 1;
+$nbNewsPerPage = 3;
 
 ?>

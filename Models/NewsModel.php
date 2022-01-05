@@ -11,17 +11,6 @@ use \Jobs\User;
 use \Jobs\Picture;
 use \Jobs\News;
 
-
-/*
-require_once('../Jobs/User.php');
-require_once('../Jobs/Picture.php');
-require_once('../Jobs/Comment.php');
-require_once('../Gateways/UserGateway.php');
-require_once('../Gateways/PictureGateway.php');
-require_once('../Gateways/CommentGateway.php');
-require_once('../Gateways/NewsGateway.php');
-*/
-
 /**
   /** \author L'HOSTIS Loriane & ALLEMAND Arnaud
   /** \date 05/12/2021
