@@ -47,7 +47,7 @@ $tDirectory['news_pictures']='Assets' . DIRECTORY_SEPARATOR . 'Pictures' . DIREC
 //Actions
 $news_actions = array('get_news', 'add_news', 'delete_news', 'search_news');
 $comment_actions = array('get_comment', 'add_comment', 'delete_comment');
-$user_actions = array('get_user', 'add_user', 'delete_user', 'signin_user');
+$user_actions = array('get_user', 'add_user', 'delete_user', 'signin_user', 'signout_user', "signup_user");
 $picture_actions = array('get_picture', 'add_picture', 'delete_picture');
 $views_actions = array('switch_article', 'switch_home', 'switch_sign_in', 'switch_sign_up');
 $manage_jobs = array(
@@ -57,7 +57,7 @@ $manage_jobs = array(
     'manage_picture'=>$rep.$tViews['view_test_picture']
 );
 
-$admin_actions = array('add_news', 'delete_news');
+$admin_actions = array('add_news', 'delete_news', 'add_user');
 
 //Var
 $nbNewsPerPage = 1;

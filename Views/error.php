@@ -8,7 +8,7 @@
 
       <main class="px-3">
         <p></br></br></p>
-        <img height="35%" src="<?php echo $rep . $tViews['pictures'] . "error.png"?>" />
+        <img height="35%" src="<?php echo $tViews['pictures'] . DIRECTORY_SEPARATOR . "error.png"?>" />
 
         <p class="lead">
           <?php
@@ -19,8 +19,8 @@
             }
           ?>
         </p>
-            <!-- <a href="<?=$tViews['home']?>"> -->
-            <a href="index.php">
+        
+            <a href=".">
 		          <button class="btn btn-secondary me-md-2" type="button">Home</button>
 		        </a>
       </main>

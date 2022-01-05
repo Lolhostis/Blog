@@ -138,88 +138,53 @@
       <section class="py-3 container">
           <h1 class="fw-light">Comments</h1>
 
-          <table>
-            <tbody>
-                <tr class="text-center margin-x" >
-                    <td>  <img class="rounded-circle" src="<?php echo $tViews['pictures'] . 'no_data_found.png'?>"> </td>
-                    <td rowspan="2">
-                        <textarea placeholder="Write a comment please..." 
-                        class="text-secondary text-break textarea-comment" 
-                        autofocus="true" spellcheck="true" wrap="soft" maxlength="5000" .resize="none"></textarea>
-                       
+          <div class="w-100 row">
+            <div class="col-md-2 col-xl-3 col-12 d-flex flex-column justify-content-center align-items-center">
+
+                <img class="w-40 rounded-circle" src="<?php echo $tViews['pictures'] . 'no_data_found.png'?>"> </td>
+                <h5>Pseudo</h5>
+
+            </div>   
+            <div class="px-3 col-md-8 col-xl-6 col-12 flex-column d-flex justify-content-center align-items-center">
+
+                <form method="POST">
+                    <div class="row w-100">
+                        
                         <?php 
                           if (!isset($_SESSION['pseudo'])){
                         ?>
-                            <p>Login : </p>
-                            <textarea placeholder="login..." 
-                                      class="text-secondary text-break textarea-comment" 
-                                      spellcheck="true" wrap="soft" maxlength="30" .resize="none" width="30"></textarea> 
+                            <div class="col-3 d-flex justify-content-end px-0">
+                                <label for="pseudo_comment">Pseudo : </label>
+                            </div>
+                            
                         <?php 
                           }
                         ?>
 
-
-                        <form method="POST">
-                            <p>id of the comment: <input type="INT" name="id_comment" value="<?=$_POST['id_comment']??""?>" required/></p>
-                            <p>text : <input type="TEXT" name="text_comment" value="<?=$_POST['text_comment']??""?>"/></p>
-
-                            <textarea placeholder="Write a comment please..." 
-                                      class="text-secondary text-break textarea-comment" 
-                                      autofocus="true" spellcheck="true" wrap="soft" maxlength="5000" .resize="none"></textarea>
-
-                            <p>date : <input type="DATETIME-LOCAL" name="date_comment" value="<?=$_POST['date_comment']??""?>"/></p>
-                            <p>login of the user : <input type="TEXT" name="login_user_comment" value="<?=$_POST['login_user_comment']??""?>"/></p>
-                            <p>id of the corresponding news : <input type="INT" name="id_news_comment" value="<?=$_POST['id_news_comment']??""?>"/></p>
-                            <p><input type="SUBMIT" name="action" value="get_comment"/></p>
-                            <p><input type="SUBMIT" name="action" value="add_comment"/></p>
-                            <p><input type="SUBMIT" name="action" value="delete_comment"/></p>
-                            <p><input type="RESET" /></p>
-                        </form>
-
-                        <div>
-                            <?php if( isset($row_comment) && !empty($row_comment) )
-                            {
+                        <div class="col-9">
+                            <?php 
+                              if (!isset($_SESSION['pseudo'])){
                             ?>
-                                <p>Results :</p>
-                                <?php if( isset($_POST['action']) && $_POST['action']=="get_comment" )
-                                {
-                                ?>
-                                    <p>Id : <?= $row_comment['res_id_comment'] ?? "" ?></p>
-                                    <p>Text : <?= $row_comment['res_text_comment'] ?? "no text" ?></p>
-                                    <p>Date : <?= $row_comment['res_date_comment'] ?? "" ?></p>
-                                    <p>User Login : <?= $row_comment['res_login_user_comment'] ?? "" ?></p>
-                                    <!-- <p>Id associated news : <?= $row_comment['res_id_news_comment'] ?? "" ?></p> -->
-                                <?php
-                                }
-                                else if( isset($_POST['action']) && $_POST['action']=="add_comment" )
-                                {
-                                ?>
-                                    <p>Result Insert : <?= $row_comment['res_insert'] ?? "" ?></p>
-                                <?php
-                                }
-                                else if( isset($_POST['action']) && $_POST['action']=="delete_comment" )
-                                {
-                                ?>
-                                    <p>Result Delete : <?= $row_comment['res_delete'] ?? "" ?></p>
-                                <?php
-                                }
-                                ?>
-                            <?php
-                            }
-                            ?>
+                                <input placeholder="pseudo..." 
+                                            class="w-100 mb-2 text-secondary text-break textarea-comment" 
+                                            spellcheck="true" wrap="soft" maxlength="30" .resize="none" width="30" name="pseudo_comment"> 
+                            <?php } ?>               
+
+                                <textarea type="textarea" name="text_comment" 
+                                        placeholder="Write a comment please..." 
+                                        class="w-100 my-2 text-secondary text-break textarea-comment" 
+                                        spellcheck="true" wrap="soft" maxlength="5000" .resize="none"></textarea>  
+
+                            <input type="SUBMIT" name="action" value="add_comment"/>
                         </div>
+                    </div> 
 
+                    
+                </form>
+              
+            </div>             
+          </div>
 
-                        <a href="<?php echo $tViews['article']?>">
-                            <button class="btn btn-outline-success">Add comment</button>
-                          </a>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="col align-self-center"> <h5>Pseudo</h5> </td>
-                </tr>
-            </tbody>
-          </table>
 
           <table>
             <tbody>

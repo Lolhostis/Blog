@@ -140,8 +140,7 @@ class UserModel {
 		}
 		$results=$results[0];
 		$ref_password=$results['password'];
-		//if(password_verify($password, $ref_password)) {
-		if($password == $ref_password) {
+		if($password == $ref_password || password_verify($password, $ref_password)) {
 			//The login corresponds to a user
 			// and the password is correct
 			$_SESSION['login']=$results['login'];
@@ -176,9 +175,9 @@ class UserModel {
 	*/
 	function getCurrentUser() {
 		//$this->signout();
-	    if(isset($_SESSION['login'], $_SESSION['role'])) {
+	    if(isset($_SESSION['login']) && isset($_SESSION['role'])) {
 	      //$id=Validation::clean_int($_SESSION['id']);
-		  $login=$_SESSION['login'];
+		  $login=Validation::clean_str($_SESSION['login']);
 	      //$role=Validation::clean_str($_SESSION['role']);
 	      return $this->findByLogin($login);
 		}

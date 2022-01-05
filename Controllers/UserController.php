@@ -44,6 +44,14 @@ class UserController {
           $this->signin_user($tErrors);
         break;
 
+        case "signout_user":
+          $this->signout_user($tErrors);
+        break;
+
+        case "signup_user":
+          $this->signup_user($tErrors);
+        break;
+
         default:
           //We normally won't go there
           // as the action has been verified in the front controller
@@ -149,7 +157,6 @@ class UserController {
     $email_user=$_POST['email_user'];
     $isadmin_user=$_POST['isadmin_user'];
     $id_picture_user=$_POST['id_picture_user'];
-    $isadmin_user = $_POST['isadmin_user'];
     Validation::val_form_user_add($login_user, $password_user, $email_user, $id_picture_user, $tErrors);
     if(count($tErrors)>0){
       require ($rep.$tViews['error']);
@@ -198,6 +205,7 @@ class UserController {
           require("index.php");
         }
         else {
+          $_REQUEST = array();
           require($rep.$tViews['error']);
         }
     }catch(\Exception $e){
@@ -205,5 +213,66 @@ class UserController {
       require ($rep.$tViews['error']);
     }       
   }
+
+  function signout_user(array &$tErrors) {
+    global $rep,$tViews;
+
+    try{
+        $model_user = new UserModel();
+
+        $model_user->signout();
+        $_REQUEST = array();
+        require("index.php");
+    }catch(\Exception $e){
+      $tErrors[] = $e->getMessage();
+      require ($rep.$tViews['error']);
+    }       
+  }
+
+  function signup_user(array &$tErrors) {
+    global $rep,$tViews;
+
+    $login_user=$_POST['login_user'];
+    $password_user=$_POST['password_user'];
+    $password_user_2=$_POST['password_user_2'];
+    $email_user=$_POST['email_user'];
+    //$id_picture_user=$_POST['id_picture_user'];
+    //$isadmin_user = $_POST['isadmin_user'];
+
+    if($password_user!=$password_user_2){
+      $tErrors[]="Passwords do not match";
+      require($rep.$tViews['error']);
+      require($rep.$tViews['sign_up']);
+      return;
+    }
+
+    $id_picture_user = 6;
+    $isadmin_user = 0;
+
+    Validation::val_form_user_add($login_user, $password_user, $email_user, $id_picture_user, $tErrors);
+    if(count($tErrors)>0){
+      require ($rep.$tViews['error']);
+      require ($rep.$tViews['view_test_user']);
+      return;
+    }
+  
+    try{
+        $model_user = new UserModel();
+  
+          if( $model_user->addUser($login_user, $password_user, $email_user, $isadmin_user, $id_picture_user) ) {
+            $_REQUEST = array();
+            require("index.php");
+          }
+          else {
+            $tErrors[] = "Error adding a user";
+            require($rep.$tViews['error']);
+            return;
+          }
+    }catch(\Exception $e){
+      $tErrors[] = $e->getMessage();
+      require ($rep.$tViews['error']);
+    }       
+  }
 }
 ?>
+

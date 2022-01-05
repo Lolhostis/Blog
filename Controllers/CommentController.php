@@ -157,29 +157,32 @@ class CommentController {
 
     $id_comment=$_POST['id_comment'];
     $text_comment=$_POST['text_comment'];
-    $date_comment=$_POST['date_comment'];
+    $date_comment=date("d-m-Y", null);
     $login_user_comment=$_POST['login_user_comment'];
-    $id_news_comment = $_POST['id_news_comment'];
+    $id_news_comment = $_GET['id'];
     Validation::val_form_comment_add($id_comment, $text_comment, $date_comment, $login_user_comment, $id_news_comment, $tErrors);
     if(count($tErrors)>0){
       require ($rep.$tViews['error']);
       require ($rep.$tViews['view_test_comment']);
       return;
     }
-    
-    $model_comment = new CommentModel();
 
     try{
-      $result_insert=$model_comment->addComment($id_comment, $text_comment, $date_comment, $login_user_comment, $id_news_comment);
 
-      $row_comment = array (
-        'res_insert' => "Comment added"
-      );
+      $model_comment = new CommentModel();
+
+      if($model_comment->addComment($id_comment, $text_comment, $date_comment, $login_user_comment, $id_news_comment)) {
+        $_REQUEST[];
+        require("index.php");
+      }
+      else {
+        $_REQUEST = array();
+        require($rep.$tViews['error']);
+      }
     }catch(\Exception $e){
       $tErrors[] = $e->getMessage();
       require ($rep.$tViews['error']);
     }        
-    require ($rep.$tViews['view_test_comment']);
   }
 }
 ?>

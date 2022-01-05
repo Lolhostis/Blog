@@ -33,6 +33,7 @@ class FrontController {
     try {
       /* Getting the current connected user from the session cookies */
       $cur_user = $this->user_mdl->getCurrentUser();
+      var_dump($cur_user);
 
       $action = isset($_REQUEST['action']) ? $_REQUEST['action'] : NULL;
 

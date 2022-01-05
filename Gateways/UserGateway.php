@@ -47,7 +47,7 @@ use \Jobs\User;
         $query="INSERT INTO TUser(login, password, email, is_admin, id_picture) VALUES(:login, :password, :email, :is_admin, :id_picture);";
 
         $params[':login']=array($login, \PDO::PARAM_STR);
-        $params[':password']=array(password_hash($password, 'BCRYPT'), \PDO::PARAM_STR);
+        $params[':password']=array(password_hash($password, PASSWORD_BCRYPT), \PDO::PARAM_STR);
         $params[':email']=array($email, \PDO::PARAM_STR);
         $params[':is_admin']=array($is_admin, \PDO::PARAM_INT);
         $params[':id_picture']=array($id_picture, \PDO::PARAM_INT);

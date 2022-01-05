@@ -21,26 +21,26 @@
 
       <h1 class="h1 mb-3 fw-normal">Sign up</h1>
 
-      <form class="form-signin">
+      <form class="form-signin" method="POST">
 
         <div class="form-floating">
-          <input type="text" class="form-control" id="floatingInput" placeholder="Login">
+          <input type="text" class="form-control" id="floatingInput" placeholder="Login" name="login_user">
           <label for="floatingInput">Login</label>
         </div>
         <div class="form-floating">
-          <input type="password" class="form-control" id="floatingPassword" placeholder="Password">
+          <input type="password" class="form-control" id="floatingPassword" placeholder="Password" name="password_user">
           <label for="floatingPassword">Password</label>
         </div>
          <div class="form-floating">
-          <input type="password" class="form-control" id="floatingPassword" placeholder="Password">
+          <input type="password" class="form-control" id="floatingPassword" placeholder="Password" name="password_user_2">
           <label for="floatingPassword">Confirm password</label>
         </div>
         <div class="form-floating">
-          <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com">
+          <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com" name="email_user">
           <label for="floatingInput">Email address</label>
         </div>
 
-        <button class="btn btn-success" type="submit">Sign up</button>
+        <button class="btn btn-success" type="submit" name="action" value="signup_user">Sign up</button>
         <p class="mt-5 mb-3 text-muted">&copy; 2021</p>
       </form>
     </main>
