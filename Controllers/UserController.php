@@ -201,6 +201,8 @@ class UserController {
         $model_user = new UserModel();
 
         if( $model_user->signin($login_user, $password_user, $tErrors) ) {
+          setcookie("cookieCpt", $_COOKIE['cookieCpt'] = $_COOKIE['cookieCpt']+1, time()+365*24*3600, '/');
+          var_dump($_COOKIE);
           $_REQUEST = array();
           require("index.php");
         }

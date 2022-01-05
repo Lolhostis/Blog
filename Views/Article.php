@@ -151,7 +151,7 @@
                     <div class="row w-100">
                         
                         <?php 
-                          if (!isset($_SESSION['pseudo'])){
+                          if (isset($_SESSION['pseudo'])){
                         ?>
                             <div class="col-3 d-flex justify-content-end px-0">
                                 <label for="pseudo_comment">Pseudo : </label>
@@ -165,7 +165,7 @@
                             <?php 
                               if (!isset($_SESSION['pseudo'])){
                             ?>
-                                <input placeholder="pseudo..." 
+                                <input placeholder="Pseudo..." 
                                             class="w-100 mb-2 text-secondary text-break textarea-comment" 
                                             spellcheck="true" wrap="soft" maxlength="30" .resize="none" width="30" name="pseudo_comment"> 
                             <?php } ?>               

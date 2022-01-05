@@ -27,6 +27,13 @@ class FrontController {
       session_start();
     }
 
+    if (!isset($_COOKIE['cookieCpt'])) {
+      setcookie("cookieCpt", 0, time()+365*24*3600, '/'); //DIRECTORY_SEPARATOR
+    }
+    //var_dump($_COOKIE);
+
+    
+
     //initialization of an array of errors
     $tErrors = array();
 
