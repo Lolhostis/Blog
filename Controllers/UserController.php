@@ -202,7 +202,6 @@ class UserController {
 
         if( $model_user->signin($login_user, $password_user, $tErrors) ) {
           setcookie("cookieCpt", $_COOKIE['cookieCpt'] = $_COOKIE['cookieCpt']+1, time()+365*24*3600, '/');
-          var_dump($_COOKIE);
           $_REQUEST = array();
           require("index.php");
         }
@@ -254,7 +253,7 @@ class UserController {
     Validation::val_form_user_add($login_user, $password_user, $email_user, $id_picture_user, $tErrors);
     if(count($tErrors)>0){
       require ($rep.$tViews['error']);
-      require ($rep.$tViews['view_test_user']);
+      require ($rep.$tViews['sign_up']);
       return;
     }
   
